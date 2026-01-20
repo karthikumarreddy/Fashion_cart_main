@@ -16,21 +16,26 @@ public class AddToCartCommand implements Command {
 
 	@Override
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
-
+		HttpSession session=null;
 		List<Product> cartList = null;
 		ProductDAO product = new ProductDAO();
 		String product_id = req.getParameter("id");
+		System.out.println(product_id);
 		Product cartProduct = product.getProductById(product_id);
 		if (cartList == null) {
 			cartList = new ArrayList<Product>();
 
 		}
-		HttpSession session=req.getSession();
+		if(session==null) {
+			session=req.getSession();
+		}
 		
+	
 		cartList.add(cartProduct);
 		session.setAttribute("cartList", cartList);
 		Gson gson=new Gson();
 		String json=gson.toJson(cartList);
+		System.out.println(json);
 		try {
 			res.getWriter().print(json);
 		} catch (IOException e) {

@@ -25,9 +25,9 @@ public class ListProductCommand implements Command {
 	    try {
 	        String json = null;
 
-	        if ("ALL".equals(category)) {
+	        if ("ALL".equalsIgnoreCase(category)) {
 	            json = product.getAllProducts();
-	        } else if ("MEN".equalsIgnoreCase(category) || "WOMEN".equalsIgnoreCase(category) ||"children".equalsIgnoreCase(category)) {
+	        } else if ("MENS".equalsIgnoreCase(category) || "WOMEN".equalsIgnoreCase(category) ||"children".equalsIgnoreCase(category)) {
 	            json = product.getProductsByCategory(category);
 	        }
 
