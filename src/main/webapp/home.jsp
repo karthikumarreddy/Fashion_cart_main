@@ -86,6 +86,7 @@ function addToCart(id) {
         console.log("Cart:", data);
     })
     .catch(err => console.error(err));
+    alert("Product " + id + " added to cart");
 }
 </script>
 
