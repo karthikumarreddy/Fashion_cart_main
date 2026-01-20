@@ -15,9 +15,12 @@ public class ViewCartCommand implements Command {
 	@Override
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 		Gson gson=new Gson();
+		res.setContentType("application/json");
+		
 		HttpSession session =req.getSession();
 		List<Product>cartList=(List<Product>) session.getAttribute("cartList");
 		String json=gson.toJson(cartList);
+		System.out.println("returned from view cart command == "+json);
 		try {
 			res.getWriter().print(json);
 			res.getWriter().flush();

@@ -20,11 +20,11 @@ public class AddToCartCommand implements Command {
 		List<Product> cartList = null;
 		ProductDAO product = new ProductDAO();
 		String product_id = req.getParameter("id");
-		System.out.println(product_id);
+		System.out.println("from add to cart"+product_id);
 		Product cartProduct = product.getProductById(product_id);
 		if (cartList == null) {
 			cartList = new ArrayList<Product>();
-
+			
 		}
 		if(session==null) {
 			session=req.getSession();
@@ -32,6 +32,7 @@ public class AddToCartCommand implements Command {
 		
 	
 		cartList.add(cartProduct);
+		System.out.println(cartList);
 		session.setAttribute("cartList", cartList);
 		Gson gson=new Gson();
 		String json=gson.toJson(cartList);

@@ -45,6 +45,7 @@
 <a onclick="loadProducts('mens')">Men</a>
 <a onclick="loadProducts('women')">Women</a>
 <a onclick="loadProducts('children')">Children</a>
+<a href="<%=request.getContextPath()%>/controller?command=viewCart" onclick="cartProoducts()">view cart</a>
 
 <div id="productSection"></div>
 
@@ -82,13 +83,38 @@ function addToCart(id) {
 	fetch('<%= request.getContextPath() %>/controller?command=addToCart&id=' + id)
     .then(res => res.json())
     .then(data => {
-        alert("Product added to cart!");
-        console.log("Cart:", data);
+    	window.location.href = '<%= request.getContextPath() %>/cart.jsp';
     })
     .catch(err => console.error(err));
     alert("Product " + id + " added to cart");
 }
-</script>
 
+function cartProducts() {
+    fetch('<%=request.getContextPath()%>/controller?command=viewCart')
+        .then(res => res.json())
+        .then(products => {
+
+            let html = "";
+
+            products.forEach(p => {
+                html += `
+                    <div class="product-card">
+                        <img src="\${p.imagePath}" alt="\${p.name}">
+                        <h4>Product Name: \${p.name}</h4>
+                        <p>Price: $ \${p.price}</p>
+                        <p class="\${p.availability === 'Available' ? 'available' : 'unavailable'}">
+                            \${p.availability}
+                        </p>
+                        
+                    </div>
+                `;
+            });
+
+            document.getElementById("ViewCartSection").innerHTML = html;
+        })
+        .catch(err => console.error(err));
+}
+
+</script>
 </body>
 </html>
