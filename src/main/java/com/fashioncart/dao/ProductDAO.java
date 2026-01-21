@@ -18,7 +18,7 @@ import util.Product;
 
 public class ProductDAO {
 
-	List<Product> productList = null;
+	
 
 	public String getAllProducts() {
 		Context ctx;

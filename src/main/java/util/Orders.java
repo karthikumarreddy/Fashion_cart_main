@@ -1,10 +1,14 @@
 package util;
 
+import java.sql.Timestamp;
+
 public class Orders {
 	private String orderId;
 	private double totalAmount;
+	private Timestamp orderDate;
+	
 	private String paymentMode;
-	private String stats;
+	private String status;
 	public String getOrderId() {
 		return orderId;
 	}
@@ -24,10 +28,22 @@ public class Orders {
 		this.paymentMode = paymentMode;
 	}
 	public String getStats() {
-		return stats;
+		return status;
 	}
-	public void setStats(String stats) {
-		this.stats = stats;
+	public void setStats(String status) {
+		this.status = status;
+	}
+	
+	public Orders(double totalAmount, Timestamp orderDate, String paymentMode, String status) {
+		super();
+		this.totalAmount = totalAmount;
+		this.orderDate = orderDate;
+		this.paymentMode = paymentMode;
+		this.status = status;
+	}
+	
+	public Orders() {
+	
 	}
 	
 	
