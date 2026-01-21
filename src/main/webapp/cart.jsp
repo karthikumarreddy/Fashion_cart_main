@@ -5,45 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>My Cart</title>
-
-<style>
-body {
-	font-family: Arial, sans-serif;
-}
-
-table {
-	width: 80%;
-	border-collapse: collapse;
-	margin-top: 20px;
-}
-
-th, td {
-	border: 1px solid #ccc;
-	padding: 10px;
-	text-align: center;
-}
-
-th {
-	background-color: #f2f2f2;
-}
-
-.total {
-	font-size: 18px;
-	font-weight: bold;
-	margin-top: 20px;
-}
-
-.buttons {
-	margin-top: 30px;
-}
-
-button {
-	padding: 10px 20px;
-	margin-right: 15px;
-	font-size: 16px;
-	cursor: pointer;
-}
-</style>
+<link rel="stylesheet" href="/fashioncart/cssFiles/cart.css">
 </head>
 
 <body>
@@ -63,68 +25,22 @@ button {
 		<tbody id="cartBody"></tbody>
 	</table>
 
-	<div class="total" id="totalAmount"></div>
+	<div class="total">
+		<p>TotalCartAmount:</p>
+		<p id="totalAmount"><p>
+	
+	</div>
 
 	<div class="buttons">
 		<button onclick="continueShopping()">Continue Shopping</button>
 		<button onclick="buyNow()">Buy Now</button>
 	</div>
 
+	
+	</body>
 	<script>
-window.onload = function () {
-    fetch('<%=request.getContextPath()%>/controller?command=viewCart')
-        .then(res => res.json())
-        .then(data => {
-
-            const products = data.cartList;
-            let result = [];
-
-            products.forEach(p => {
-                let found = false;
-
-                for (let i = 0; i < result.length; i++) {
-                    if (result[i].id === p.id) {
-                        result[i].quantity++;
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (!found) {
-                    p.quantity = 1;
-                    result.push(p);
-                }
-            });
-
-            let html = "";
-
-            result.forEach(p => {
-                let subtotal = p.price * p.quantity;
-
-                html += `
-                    <tr>
-                        <td>"\${p.name}"</td>
-                        <td>"\${p.category}"</td>
-                        <td>"\${p.price}"</td>
-                        <td>"\${p.quantity}"</td>
-                        <td>"\${subtotal}"</td>
-                    </tr>
-                `;
-            });
-
-            document.getElementById("cartBody").innerHTML = html;
-        });
-};
-
-
-function continueShopping() {
-    window.location.href = '<%=request.getContextPath()%>/home.jsp';
-}
-
-function buyNow() {
-    window.location.href = '<%=request.getContextPath()%>/payment.jsp';
-}
-</script>
-
-</body>
+		const contextPath = '<%=request.getContextPath()%>';
+	</script>
+	
+	<script type="text/javascript" src="/fashioncart/jsFiles/cart.js"></script>
 </html>

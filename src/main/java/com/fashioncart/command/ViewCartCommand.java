@@ -21,11 +21,12 @@ public class ViewCartCommand implements Command {
 		res.setContentType("application/json");
 
 		HttpSession session = req.getSession();
-		List<Product> cartList = (List<Product>) session.getAttribute("cartList");
-
+		List<Product> cartList = (List<Product>)session.getAttribute("cartList");
+		System.out.println("cartList:  "+cartList);
 		double total = 0.0;
 		for (Product p : cartList) {
-			total += p.getPrice(); // quantity = 1
+			System.out.println("Product :"+p);
+			total += p.getPrice(); //quantity = 1
 		}
 
 		// Wrap both cart + total into ONE object
@@ -35,6 +36,7 @@ public class ViewCartCommand implements Command {
 
 		try {
 			res.getWriter().print(gson.toJson(responseData));
+			System.out.println(responseData);
 			res.getWriter().flush();
 			return true;
 		} catch (IOException e) {

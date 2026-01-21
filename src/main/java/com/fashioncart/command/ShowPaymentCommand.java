@@ -15,6 +15,8 @@ public class ShowPaymentCommand implements Command {
 	@Override
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 
+	
+
 	    res.setContentType("application/json");
 	    res.setCharacterEncoding("UTF-8");
 
