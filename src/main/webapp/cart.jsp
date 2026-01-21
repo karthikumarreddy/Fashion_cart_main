@@ -28,7 +28,9 @@ th {
 }
 
 .total {
-	font-size: 18px;
+	display:flex;
+	
+	font-size: 15px;
 	font-weight: bold;
 	margin-top: 20px;
 }
@@ -63,7 +65,10 @@ button {
 		<tbody id="cartBody"></tbody>
 	</table>
 
-	<div class="total" id="totalAmount"></div>
+	<div class="total" >
+		<p>TotalCartAmount: </p>
+		<p id="totalAmount" ><p>
+	</div>
 
 	<div class="buttons">
 		<button onclick="continueShopping()">Continue Shopping</button>
@@ -75,8 +80,8 @@ window.onload = function () {
     fetch('<%=request.getContextPath()%>/controller?command=viewCart')
         .then(res => res.json())
         .then(data => {
-
             const products = data.cartList;
+            const total=data.total;
             let result = [];
 
             products.forEach(p => {
@@ -113,8 +118,12 @@ window.onload = function () {
             });
 
             document.getElementById("cartBody").innerHTML = html;
+            document.getElementById("totalAmount").innerHTML=total;
+            
         });
 };
+
+
 
 
 function continueShopping() {
