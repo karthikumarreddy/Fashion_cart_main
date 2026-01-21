@@ -7,33 +7,43 @@ import com.google.gson.Gson;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import util.Product;
 
 public class ShowPaymentCommand implements Command {
 
 	@Override
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
-		res.setContentType("application/json");
-		List<Product> cartList = (List<Product>) req.getAttribute("cartList");
 
-		double total = 0.0;
-		if (cartList != null) {
+	    res.setContentType("application/json");
+	    res.setCharacterEncoding("UTF-8");
 
-			for (Product p : cartList) {
-				total += p.getPrice();
-			}
-		}
-		Gson gson = new Gson();
-		String json = gson.toJson(total);
-		try {
-			res.getWriter().print(json);
-			return true;
-		} catch (IOException e) {
+	    HttpSession session = req.getSession(false);
 
-			e.printStackTrace();
-			return false;
-		}
+	    List<Product> cartList = null;
+	    if (session != null) {
+	        cartList = (List<Product>) session.getAttribute("cartList");
+	    }
 
+	    double total = 0.0;
+
+	    if (cartList != null) {
+	        for (Product p : cartList) {
+	            total += p.getPrice();
+	        }
+	    }
+	    Gson gson=new Gson();
+	    String json=gson.toJson(total);
+
+	    try {
+	    	System.out.println(json);
+	        res.getWriter().print(json);
+	        res.getWriter().flush();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	    return true;
 	}
 
 }
