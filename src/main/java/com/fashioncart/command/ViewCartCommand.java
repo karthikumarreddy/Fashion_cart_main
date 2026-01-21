@@ -26,7 +26,7 @@ public class ViewCartCommand implements Command {
 		double total = 0.0;
 		for (Product p : cartList) {
 			System.out.println("Product :"+p);
-			total += p.getPrice(); // quantity = 1
+			total += p.getPrice(); //quantity = 1
 		}
 
 		// Wrap both cart + total into ONE object
