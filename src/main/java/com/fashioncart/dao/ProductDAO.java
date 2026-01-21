@@ -17,9 +17,6 @@ import com.google.gson.Gson;
 import util.Product;
 
 public class ProductDAO {
-
-	
-
 	public String getAllProducts() {
 		Context ctx;
 		List<Product> allProducts = new ArrayList<Product>();

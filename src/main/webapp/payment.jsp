@@ -13,7 +13,7 @@
 
 <h3>Total Amount: ₹ <span id="totalAmount">0</span></h3>
 
-<form action="<%=request.getContextPath()%>/controller" method="post">
+<form action="<%=request.getContextPath()%>/controller?command=showPayment" method="post">
 
     <input type="hidden" name="command" value="processPayment">
 
@@ -35,17 +35,11 @@
     <button type="submit">Pay & Continue</button>
 </form>
 
-<script>
-window.onload = function () {
-    fetch('<%=request.getContextPath()%>/controller?command=showPayment')
-        .then(res => res.json())
-        .then(total => {
-            console.log("Total from server:", total);
-            document.getElementById("totalAmount").innerText = total;
-        })
-        .catch(err => console.error(err));
-};
-</script>
+
 
 </body>
+<script>
+	const contextPath='<%=request.getContextPath()%>';
+</script>
+<script type="text/javascript" src="/fashioncart/jsFiles/payment.js"></script>
 </html>

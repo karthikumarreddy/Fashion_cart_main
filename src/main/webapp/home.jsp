@@ -23,7 +23,10 @@
         </div>
 
 <div id="viewcart">
-<a href="<%=request.getContextPath()%>/cart.jsp">View Cart</a>
+
+<form action="<%=request.getContextPath()%>/cart.jsp">
+	<button type="submit">viewCart</button>
+</form>
 </div>
 </nav>
 

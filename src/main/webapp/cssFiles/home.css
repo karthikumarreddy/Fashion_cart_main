@@ -12,14 +12,20 @@ a {
 }
 
 .navbar {
-	height: 90px;
+	height: 10%;
 	width: 100%;
-	background-color: grey;
+	background-color:brown;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 }
 
+#logoname h2{
+	color:white;
+}
+.dropdown{
+	color:white;
+}
 #productSection {
 	display: flex;
 	flex-wrap: wrap;
@@ -96,7 +102,9 @@ a {
 
 /* viewcart styles*/
 
-#viewcart a{
-	color:white;
+#viewcart form button{
+	color:green;
+	padding:8px 12px;
+	font-weight:bold;
 	
 }
