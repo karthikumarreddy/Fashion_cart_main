@@ -45,7 +45,8 @@
 <a onclick="loadProducts('mens')">Men</a>
 <a onclick="loadProducts('women')">Women</a>
 <a onclick="loadProducts('children')">Children</a>
-<a href="<%=request.getContextPath()%>/controller?command=viewCart" onclick="cartProoducts()">view cart</a>
+<a href="<%=request.getContextPath()%>/cart.jsp">View Cart</a>
+
 
 <div id="productSection"></div>
 
