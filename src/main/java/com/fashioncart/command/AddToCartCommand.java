@@ -17,21 +17,6 @@ public class AddToCartCommand implements Command {
 	@Override
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 
-		List<Product> cartList = null;
-		ProductDAO product = new ProductDAO();
-		String product_id = req.getParameter("product_id");
-		Product cartProduct = product.getProductById(product_id);
-		if (cartList == null) {
-			cartList = new ArrayList<Product>();
-
-		}
-		HttpSession session=req.getSession();
-		
-		cartList.add(cartProduct);
-		session.setAttribute("cartList", cartList);
-		Gson gson=new Gson();
-		String json=gson.toJson(cartList);
-
 		HttpSession session = req.getSession(); // always get session
 
 		// 1. Read cart from session
