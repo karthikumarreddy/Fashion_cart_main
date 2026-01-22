@@ -6,6 +6,7 @@ import com.fashioncart.dao.ProductDAO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import util.Product;
 
 public class ListProductCommand implements Command {
@@ -17,7 +18,6 @@ public class ListProductCommand implements Command {
         String category = request.getParameter("category");
         
         
-
         ProductDAO productDAO = new ProductDAO();
         List<Product> products;
 
@@ -26,15 +26,14 @@ public class ListProductCommand implements Command {
         } else {
             products = productDAO.getProductsByCategoryList(category);
         }
-
         if (products == null || products.isEmpty()) {
             return false; // → error.jsp
         }
 
-        // Send data to JSP
-        request.setAttribute("productList", products);
-        request.setAttribute("category", category);
+        HttpSession session=request.getSession();
+        session.setAttribute("productList", products);
 
+      
         return true; // → Home.jsp
     }
 }

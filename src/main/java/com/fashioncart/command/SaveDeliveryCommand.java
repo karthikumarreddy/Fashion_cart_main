@@ -32,7 +32,7 @@ public class SaveDeliveryCommand implements Command {
             return false;
         }
 
-        // Get session
+  
         HttpSession session = req.getSession(false);
         if (session == null) {
         	System.out.println("session==null");
@@ -50,7 +50,7 @@ public class SaveDeliveryCommand implements Command {
             return false;
         }
 
-        // Calculate quantity + total
+    
         Map<String, Integer> qtyMap = new HashMap<>();
         Map<String, Product> productMap = new HashMap<>();
         double totalAmount = 0;
@@ -61,7 +61,6 @@ public class SaveDeliveryCommand implements Command {
             totalAmount += p.getPrice();
         }
 
-        // Create order
         Orders order = new Orders(
             totalAmount,
             new Timestamp(System.currentTimeMillis()),
@@ -73,7 +72,7 @@ public class SaveDeliveryCommand implements Command {
         int orderId = ordersDAO.saveOrders(order);
         
 
-        //  Save order items
+     
         OrderItemDAO itemDAO = new OrderItemDAO();
         for (String productId : qtyMap.keySet()) {
             itemDAO.saveOrderItem(
@@ -83,7 +82,7 @@ public class SaveDeliveryCommand implements Command {
             );
         }
 
-        //  (Optional) Save delivery address
+      
         // deliveryDAO.save(orderId, name, address1, address2, city, pincode, mobile);
 
         // Clear session

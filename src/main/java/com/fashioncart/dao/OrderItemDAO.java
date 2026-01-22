@@ -11,13 +11,6 @@ import util.Product;
 
 public class OrderItemDAO {
 
-    /**
-     * Save a product as an order item with quantity
-     *
-     * @param orderId ID of the order
-     * @param product Product object
-     * @param quantity Quantity of the product
-     */
     public void saveOrderItem(int orderId, Product product, int quantity) {
     	Context ctx;
         String sql = "INSERT INTO order_item (order_id, product_id, purchase_price, quantity) VALUES (?, ?, ?, ?)";

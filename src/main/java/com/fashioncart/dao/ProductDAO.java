@@ -17,71 +17,39 @@ import com.google.gson.Gson;
 import util.Product;
 
 public class ProductDAO {
-	public String getAllProducts() {
-		Context ctx;
-		List<Product> allProducts = new ArrayList<Product>();
-		try {
-			ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
-			Connection conn = ds.getConnection();
-			String sql = "select * from product";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
+	public List<Product> getAllProductsList() {
 
-			while (rs.next()) {
-				String id = rs.getString("product_id");
-				String name = rs.getString("Product_name");
-				String category = rs.getString("category");
-				double price = rs.getDouble("price");
-				String image = rs.getString("image_path");
-				String available = rs.getString("availability");
-				Product p = new Product(id, name, category, price, image, available);
-				allProducts.add(p);
-			}
+	    List<Product> allProducts = new ArrayList<>();
 
-		} catch (NamingException | SQLException e) {
+	    try {
+	        Context ctx = new InitialContext();
+	        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
+	        Connection conn = ds.getConnection();
 
-			e.printStackTrace();
-		}
+	        String sql = "select * from product";
+	        PreparedStatement ps = conn.prepareStatement(sql);
+	        ResultSet rs = ps.executeQuery();
 
-		Gson gson = new Gson();
-		String json = gson.toJson(allProducts);
-		return json;
+	        while (rs.next()) {
+	            Product p = new Product(
+	                rs.getString("product_id"),
+	                rs.getString("Product_name"),
+	                rs.getString("category"),
+	                rs.getDouble("price"),
+	                rs.getString("image_path"),
+	                rs.getString("availability")
+	            );
+	            allProducts.add(p);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return allProducts;
 	}
 
-	public String getProductsByCategory(String category) {
-		Context ctx;
-		List<Product> allProducts = new ArrayList<Product>();
-		try {
-			ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
-			Connection conn = ds.getConnection();
-			String sql = "select * from product where category=?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, category);
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				String id = rs.getString("product_id");
-				String name = rs.getString("Product_name");
-				String category1 = rs.getString("category");
-				double price = rs.getDouble("price");
-				String image = rs.getString("image_path");
-				String available = rs.getString("availability");
-				Product p = new Product(id, name, category1, price, image, available);
-				allProducts.add(p);
-			}
-
-		} catch (NamingException | SQLException e) {
-
-			e.printStackTrace();
-		}
-
-		Gson gson = new Gson();
-		String json = gson.toJson(allProducts);
-		return json;
-	}
-
+	
 	public Product getProductById(String id) {
 		Context ctx;
 
@@ -147,36 +115,6 @@ public class ProductDAO {
 	    return products;
 	}
 
-	public List<Product> getAllProductsList() {
-
-	    List<Product> allProducts = new ArrayList<>();
-
-	    try {
-	        Context ctx = new InitialContext();
-	        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
-	        Connection conn = ds.getConnection();
-
-	        String sql = "select * from product";
-	        PreparedStatement ps = conn.prepareStatement(sql);
-	        ResultSet rs = ps.executeQuery();
-
-	        while (rs.next()) {
-	            Product p = new Product(
-	                rs.getString("product_id"),
-	                rs.getString("Product_name"),
-	                rs.getString("category"),
-	                rs.getDouble("price"),
-	                rs.getString("image_path"),
-	                rs.getString("availability")
-	            );
-	            allProducts.add(p);
-	        }
-
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-
-	    return allProducts;
-	}
+	
 
 }

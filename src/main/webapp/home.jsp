@@ -60,7 +60,7 @@
 <div style="margin-top:30px; text-align:center;">
 <%
     List<Product> products =
-        (List<Product>)request.getAttribute("productList");
+        (List<Product>)session.getAttribute("productList");
 
     if(products!=null)
         for (Product p : products) {

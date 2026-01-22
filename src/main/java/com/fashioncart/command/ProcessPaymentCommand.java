@@ -17,7 +17,7 @@ public class ProcessPaymentCommand implements Command {
         HttpSession session = req.getSession(false);
         if (session == null) return false;
 
-        // Store payment mode temporarily
+       
         session.setAttribute("paymentMode", paymentMode);
 
         return true; // → delivery.jsp

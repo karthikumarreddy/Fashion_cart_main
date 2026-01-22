@@ -17,8 +17,7 @@ public class AddToCartCommand implements Command {
 
 	    HttpSession session = req.getSession();
 
-	    List<Product> cartList =
-	        (List<Product>) session.getAttribute("cartList");
+	    List<Product> cartList =(List<Product>)session.getAttribute("cartList");
 
 	    if (cartList == null) {
 	        cartList = new ArrayList<>();
