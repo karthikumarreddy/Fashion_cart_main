@@ -13,9 +13,9 @@ public class DeliveryDAO {
 	public void saveDeliveryDetails(Delivery delivery) {
 		Context ctx;
 		String sql = """
-						    INSERT INTO
-						    (order_id, customer_name, address_line1,address_line2, city,pincode,mobiles)
-						    VALUES (?, ?, ?, ?,?,?)
+						    INSERT INTO delivery_address
+						    (order_id, customer_name, address_line1,address_line2, city,pincode,mobile)
+						    VALUES (?, ?, ?, ?, ?, ?, ?)
 
 						""";
 		try {

@@ -27,7 +27,7 @@ public class ViewCartCommand implements Command {
             return false;
         }
 
-        Map<String, ProductDTO> map = new LinkedHashMap<>();
+        Map<String, ProductDTO> map = new LinkedHashMap<>();//key=productId value=productDto used to calculate the quantity
 
         for (Product p : rawCart) {
             if (!map.containsKey(p.getId())) {
@@ -55,6 +55,6 @@ public class ViewCartCommand implements Command {
         req.setAttribute("cartList", cartDTOList);
         req.setAttribute("totalAmount", totalAmount);
 
-        return true; // → cart.jsp
+        return true; //cart.jsp
     }
 }

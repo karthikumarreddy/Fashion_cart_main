@@ -24,16 +24,16 @@ public class ListProductCommand implements Command {
         if (category == null || category.equalsIgnoreCase("ALL")) {
             products = productDAO.getAllProductsList();
         } else {
-            products = productDAO.getProductsByCategoryList(category);
+            products = productDAO.getProductsByCategoryList(category);//getting the product base on category from db and stored to an list
         }
         if (products == null || products.isEmpty()) {
-            return false; // → error.jsp
+            return false; //error.jsp
         }
 
         HttpSession session=request.getSession();
         session.setAttribute("productList", products);
 
       
-        return true; // → Home.jsp
+        return true; //Home.jsp
     }
 }

@@ -14,13 +14,13 @@ public class ShowPaymentCommand implements Command {
 
         HttpSession session = req.getSession(false);
         if (session == null) {
-            return false; // → cart.jsp
+            return false; //cart.jsp
         }
         List<Product> cartList =
             (List<Product>) session.getAttribute("cartList");
 
         if (cartList == null || cartList.isEmpty()) {
-            return false; // → cart.jsp
+            return false; //cart.jsp
         }
         double totalAmount = 0.0;
 
@@ -29,6 +29,6 @@ public class ShowPaymentCommand implements Command {
         }
  
         req.setAttribute("totalAmount", totalAmount);
-        return true;
+        return true;//payment.jsp
     }
 }

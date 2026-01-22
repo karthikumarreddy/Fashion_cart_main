@@ -14,12 +14,14 @@ public class ProcessPaymentCommand implements Command {
             return false;
         }
 
-        HttpSession session = req.getSession(false);
-        if (session == null) return false;
+        HttpSession session = req.getSession(false);//gets the existing session it will not create a new session
+        if (session == null) {
+        	return false;//payment.jsp
+        }
 
        
         session.setAttribute("paymentMode", paymentMode);
 
-        return true; // → delivery.jsp
+        return true; //delivery.jsp
     }
 }

@@ -12,109 +12,84 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.google.gson.Gson;
-
 import util.Product;
 
 public class ProductDAO {
 	public List<Product> getAllProductsList() {
+		String sql = "select * from product";
+		List<Product> allProducts = new ArrayList<>();
 
-	    List<Product> allProducts = new ArrayList<>();
+		try {
+			Context ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
+			try (Connection conn = ds.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+				ResultSet rs = ps.executeQuery();
 
-	    try {
-	        Context ctx = new InitialContext();
-	        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
-	        Connection conn = ds.getConnection();
-
-	        String sql = "select * from product";
-	        PreparedStatement ps = conn.prepareStatement(sql);
-	        ResultSet rs = ps.executeQuery();
-
-	        while (rs.next()) {
-	            Product p = new Product(
-	                rs.getString("product_id"),
-	                rs.getString("Product_name"),
-	                rs.getString("category"),
-	                rs.getDouble("price"),
-	                rs.getString("image_path"),
-	                rs.getString("availability")
-	            );
-	            allProducts.add(p);
-	        }
-
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-
-	    return allProducts;
+				while (rs.next()) {
+					Product p = new Product(rs.getString("product_id"), rs.getString("Product_name"),
+							rs.getString("category"), rs.getDouble("price"), rs.getString("image_path"),
+							rs.getString("availability"));
+					allProducts.add(p);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return allProducts;
 	}
 
-	
 	public Product getProductById(String id) {
 		Context ctx;
 
 		try {
 			ctx = new InitialContext();
 			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
-			Connection conn = ds.getConnection();
 			String sql = "select * from product where product_id=" + id;
-			PreparedStatement ps = conn.prepareStatement(sql);
+			try (Connection conn = ds.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
-			ResultSet rs = ps.executeQuery();
+				ResultSet rs = ps.executeQuery();
 
-			while (rs.next()) {
-				String id1 = rs.getString("product_id");
-				String name = rs.getString("Product_name");
-				String category = rs.getString("category");
-				double price = rs.getDouble("price");
-				String image = rs.getString("image_path");
-				String available = rs.getString("availability");
-				return new Product(id1, name, category, price, image, available);
-
+				while (rs.next()) {
+					String id1 = rs.getString("product_id");
+					String name = rs.getString("Product_name");
+					String category = rs.getString("category");
+					double price = rs.getDouble("price");
+					String image = rs.getString("image_path");
+					String available = rs.getString("availability");
+					return new Product(id1, name, category, price, image, available);
+				}
 			}
-
 		} catch (NamingException | SQLException e) {
-
 			e.printStackTrace();
 		}
 		return null;
-
 	}
-	
+
 	public List<Product> getProductsByCategoryList(String category) {
 
-	    List<Product> products = new ArrayList<>();
+		List<Product> products = new ArrayList<>();
 
-	    try {
-	        Context ctx = new InitialContext();
-	        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
-	        Connection conn = ds.getConnection();
+		try {
+			Context ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
+			String sql = "select * from product where category=?";
+			try (Connection conn = ds.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
-	        String sql = "select * from product where category=?";
-	        PreparedStatement ps = conn.prepareStatement(sql);
-	        ps.setString(1, category);
+				ps.setString(1, category);
 
-	        ResultSet rs = ps.executeQuery();
+				ResultSet rs = ps.executeQuery();
 
-	        while (rs.next()) {
-	            Product p = new Product(
-	                rs.getString("product_id"),
-	                rs.getString("Product_name"),
-	                rs.getString("category"),
-	                rs.getDouble("price"),
-	                rs.getString("image_path"),
-	                rs.getString("availability")
-	            );
-	            products.add(p);
-	        }
+				while (rs.next()) {
+					Product p = new Product(rs.getString("product_id"), rs.getString("Product_name"),
+							rs.getString("category"), rs.getDouble("price"), rs.getString("image_path"),
+							rs.getString("availability"));
+					products.add(p);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return products;
 
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-
-	    return products;
 	}
-
-	
-
 }

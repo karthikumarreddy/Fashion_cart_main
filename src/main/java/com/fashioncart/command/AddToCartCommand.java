@@ -25,16 +25,16 @@ public class AddToCartCommand implements Command {
 
 	    String productId = req.getParameter("id");
 	    ProductDAO productDAO = new ProductDAO();
-	    Product cartProduct = productDAO.getProductById(productId);
+	    Product cartProduct = productDAO.getProductById(productId);//getting the products from db
 
 	    if (cartProduct == null) {
-	        return false; // failure → home.jsp
+	        return false; //home.jsp
 	    }
 
 	    cartList.add(cartProduct);
-	    session.setAttribute("cartList", cartList);
+	    session.setAttribute("cartList", cartList);//cartlist is now present in the session 
 
-	    return true; // success → cart.jsp
+	    return true; //cart.jsp
 	}
 
 }
