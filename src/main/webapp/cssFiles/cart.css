@@ -1,39 +1,135 @@
-@charset "UTF-8";
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* ===== PAGE ===== */
 body {
-	font-family: Arial, sans-serif;
+    background: #f5f6fa;
+    color: #333;
+    padding: 30px 0;
 }
 
+/* Page Title */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #111;
+}
+
+/* Empty cart message */
+h3 {
+    text-align: center;
+    margin-top: 40px;
+    color: #666;
+}
+
+/* ===== TABLE ===== */
 table {
-	width: 80%;
-	border-collapse: collapse;
-	margin-top: 20px;
+    width: 85%;
+    margin: auto;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-th, td {
-	border: 1px solid #ccc;
-	padding: 10px;
-	text-align: center;
-}
-
+/* Header */
 th {
-	background-color: #f2f2f2;
+    background: #111;
+    color: #fff;
+    padding: 15px;
+    font-size: 15px;
 }
 
+/* Cells */
+td {
+    padding: 14px;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Row hover */
+tbody tr:hover {
+    background: #f9f9f9;
+}
+
+/* Price highlight */
+td:nth-child(3),
+td:nth-child(5) {
+    font-weight: 600;
+    color: #ff3f6c;
+}
+
+/* ===== TOTAL ===== */
 .total {
-	display:flex;
-	
-	font-size: 15px;
-	font-weight: bold;
-	margin-top: 20px;
+    margin-top: 25px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #111;
 }
 
+/* ===== BUTTONS ===== */
 .buttons {
-	margin-top: 30px;
+    text-align: center;
+    margin-top: 30px;
 }
 
+/* Common button style */
 button {
-	padding: 10px 20px;
-	margin-right: 15px;
-	font-size: 16px;
-	cursor: pointer;
+    padding: 12px 22px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Continue Shopping */
+.buttons a button {
+    background: #eee;
+    color: #333;
+}
+
+.buttons a button:hover {
+    background: #ddd;
+}
+
+/* Buy Now */
+form button {
+    background: linear-gradient(135deg, #ff3f6c, #e7335d);
+    color: white;
+}
+
+form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Remove underline from links */
+.buttons a {
+    text-decoration: none;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    table {
+        width: 95%;
+        font-size: 13px;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    .total {
+        font-size: 18px;
+    }
 }

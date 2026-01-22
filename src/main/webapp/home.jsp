@@ -10,23 +10,7 @@
 <meta charset="UTF-8">
 <title>FashionCart</title>
 
-<link rel="stylesheet"
-    href="<%=request.getContextPath()%>/cssFiles/home.css">
-
-<style>
-.product-card {
-    border: 1px solid #ccc;
-    padding: 15px;
-    margin: 15px;
-    width: 220px;
-    float: left;
-    text-align: center;
-}
-.product-card img {
-    width: 150px;
-    height: 150px;
-}
-</style>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/cssFiles/home.css">
 
 </head>
 
@@ -54,11 +38,10 @@
             <button type="submit">View Cart</button>
         </form>
     </div>
-
 </nav>
 
-<div style="margin-top:30px; text-align:center;">
-<%
+	<div id="products1" style="display:flex;gap:20px;margin-top:10px">
+		<%
     List<Product> products =
         (List<Product>)session.getAttribute("productList");
 
@@ -66,24 +49,35 @@
         for (Product p : products) {
 %>
 
-    <div class="product-card">
-        <img src="<%= p.getImagePath() %>" alt="<%= p.getName() %>">
-        <h4><%= p.getName() %></h4>
-        <p>₹ <%= p.getPrice() %></p>
-        <p><%= p.isAvailability() %></p>
+		<div class="product-card">
+			<img src="<%=p.getImagePath()%>" alt="<%=p.getName()%>">
+			<h4><%=p.getName()%></h4>
+			<p>
+				₹
+				<%=p.getPrice()%></p>
+			<p><%=p.isAvailability()%></p>
 
-        <a href="<%=request.getContextPath()%>/controller?command=addToCart&id=<%=p.getId()%>&category=<%=request.getAttribute("category")%>">
-    <button>Add to Cart</button>
-</a>
-    </div>
+			
+			<a href="<%=request.getContextPath()%>/controller?command=addToCart&id=<%=p.getId()%>">
+				<button onclick="addtocart('<%=p.getId()%>')">Add to Cart</button>	
+			</a>
+		</div>
 
-<%
-        }
-    
-%>
-</div>
+		<%
+		}
+		%>
+	</div>
 
-<div style="clear:both;"></div>
+	
 
 </body>
+
+<script>
+	
+	function addtocart(id){
+		console.log(id);
+		alert("Product " + id + " added to cart");
+	}
+	
+</script>
 </html>
