@@ -25,6 +25,7 @@ public class CommandConfig {
 	}
 	
 	public static Map<String,CommandConfig>loadConfiguration(Properties commandProperties){
+		
 		Map<String, CommandConfig> configMap = new HashMap<String, CommandConfig>();
 		if(commandProperties !=null) {
 			for(String key:commandProperties.stringPropertyNames()) {
@@ -43,9 +44,9 @@ public class CommandConfig {
 				}
 				CommandConfig cmdConfig=new CommandConfig(commandClass, success, failure);
 				configMap.put(key, cmdConfig);
-				System.out.println("ConfigMap: "+configMap.get(key).getSuccessPage());
+				
 			}
-			
+			System.out.println("ConfigMap: "+configMap.get("listProducts").getSuccessPage());
 		}
 		return configMap;
 	}

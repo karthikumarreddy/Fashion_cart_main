@@ -52,10 +52,7 @@ public class FrontControllerServlet extends HttpServlet {
     		    boolean flag = cmd.execute(request, response);
     		    System.out.println("Command executed, flag=" + flag);
 
-    		    // THIS LINE FIXES EVERYTHING
-    		    if (response.isCommitted()) {
-    		        return; // JSON already sent → STOP
-    		    }
+    		  
 
     		    CommandConfig cmdConfig = CommandFactory.configMap.get(action);
     		    String forwardPage = flag
