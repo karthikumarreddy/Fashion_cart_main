@@ -43,6 +43,7 @@ public class CommandConfig {
 				}
 				CommandConfig cmdConfig=new CommandConfig(commandClass, success, failure);
 				configMap.put(key, cmdConfig);
+				System.out.println("ConfigMap: "+configMap.get(key).getSuccessPage());
 			}
 			
 		}

@@ -9,39 +9,20 @@
 <body>
 	<h2>Delivery page</h2>
 	<div class="delivery">
-	<form action="">
-			<div>
-				<label for="name"></label> 
-				<input type="text" placeholder="Enter your name" required> <br>
-			</div>
+	<form action="<%=request.getContextPath()%>/controller" method="post">
 
-			<div>
-				<label for="addressline 1"></label> 
-				<input type="text" placeholder="Enter address line1"> <br>
-			</div>
-			
-			<div>
-				<label for="addressline 2"></label> 
-				<input type="text" placeholder="Enter address line2" required> <br>
-			</div>
-			
-			<div>
-				<label for="city"></label> 
-				<input type="text" placeholder="Enter your city" required> <br>
-			</div>
-			
-			<div>
-				<label for="pincode"></label> 
-				<input type="number" placeholder="Enter your pincode" required> <br>
-			</div>
-			
-			<div>
-				<label for="phone number"></label> 
-				<input type="number" placeholder="enter your mobible number" required> <br>
-			</div>
-			
-			<input type="submit">
-		</form>
+    <input type="hidden" name="command" value="saveDelivery">
+
+    <input type="text" name="fullname" placeholder="Full Name" required><br>
+    <input type="text" name="address1" placeholder="Address Line 1" required><br>
+    <input type="text" name="address2" placeholder="Address Line 2"><br>
+    <input type="text" name="city" placeholder="City" required><br>
+    <input type="number" name="pincode" placeholder="Pincode" required><br>
+    <input type="number" name="mobile" placeholder="Mobile Number" required><br>
+
+    <button type="submit">Submit Delivery Details</button>
+</form>
+	
 	</div>
 </body>
 </html>

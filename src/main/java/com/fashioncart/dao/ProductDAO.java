@@ -112,4 +112,71 @@ public class ProductDAO {
 		return null;
 
 	}
+	
+	public List<Product> getProductsByCategoryList(String category) {
+
+	    List<Product> products = new ArrayList<>();
+
+	    try {
+	        Context ctx = new InitialContext();
+	        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
+	        Connection conn = ds.getConnection();
+
+	        String sql = "select * from product where category=?";
+	        PreparedStatement ps = conn.prepareStatement(sql);
+	        ps.setString(1, category);
+
+	        ResultSet rs = ps.executeQuery();
+
+	        while (rs.next()) {
+	            Product p = new Product(
+	                rs.getString("product_id"),
+	                rs.getString("Product_name"),
+	                rs.getString("category"),
+	                rs.getDouble("price"),
+	                rs.getString("image_path"),
+	                rs.getString("availability")
+	            );
+	            products.add(p);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return products;
+	}
+
+	public List<Product> getAllProductsList() {
+
+	    List<Product> allProducts = new ArrayList<>();
+
+	    try {
+	        Context ctx = new InitialContext();
+	        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
+	        Connection conn = ds.getConnection();
+
+	        String sql = "select * from product";
+	        PreparedStatement ps = conn.prepareStatement(sql);
+	        ResultSet rs = ps.executeQuery();
+
+	        while (rs.next()) {
+	            Product p = new Product(
+	                rs.getString("product_id"),
+	                rs.getString("Product_name"),
+	                rs.getString("category"),
+	                rs.getDouble("price"),
+	                rs.getString("image_path"),
+	                rs.getString("availability")
+	            );
+	            allProducts.add(p);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return allProducts;
+	}
+
 }

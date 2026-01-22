@@ -1,50 +1,37 @@
 package com.fashioncart.command;
 
-import java.io.IOException;
+import java.util.List;
 
 import com.fashioncart.dao.ProductDAO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import util.Product;
 
 public class ListProductCommand implements Command {
 
-	@Override
-	public boolean execute(HttpServletRequest request, HttpServletResponse response) {
+    @Override
+    public boolean execute(HttpServletRequest request,
+                           HttpServletResponse response) {
 
-	    response.setContentType("application/json");
-	    response.setCharacterEncoding("UTF-8");
+        String category = request.getParameter("category");
 
-	    String category = request.getParameter("category");
-	    ProductDAO product = new ProductDAO();
+        ProductDAO productDAO = new ProductDAO();
+        List<Product> products;
 
-	    if (category == null) {
-	        return false;
-	    }
+        if (category == null || category.equalsIgnoreCase("ALL")) {
+            products = productDAO.getAllProductsList();
+        } else {
+            products = productDAO.getProductsByCategoryList(category);
+        }
 
-	    try {
-	        String json = null;
+        if (products == null || products.isEmpty()) {
+            return false; // → error.jsp
+        }
 
-	        if ("ALL".equalsIgnoreCase(category)) {
-	            json = product.getAllProducts();
-	        } else if ("MENS".equalsIgnoreCase(category) || "WOMEN".equalsIgnoreCase(category) ||"children".equalsIgnoreCase(category)) {
-	            json = product.getProductsByCategory(category);
-	        }
+        // Send data to JSP
+        request.setAttribute("productList", products);
 
-	        if (json != null) {
-	            System.out.println("JSON SENT: " + json);
-	            System.out.println(category);// console
-	            response.getWriter().print(json);   // browser
-	            response.getWriter().flush();
-	            return true;
-	        }
-
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	    return false;
-	}
-
-
+        return true; // → Home.jsp
+    }
 }
-

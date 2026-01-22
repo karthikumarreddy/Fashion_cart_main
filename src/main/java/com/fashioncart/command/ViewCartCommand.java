@@ -1,11 +1,11 @@
 package com.fashioncart.command;
 
-import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.gson.Gson;
+import com.fashioncart.dto.ProductDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,35 +14,47 @@ import util.Product;
 
 public class ViewCartCommand implements Command {
 
-	@Override
-	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
+    @Override
+    public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 
-		Gson gson = new Gson();
-		res.setContentType("application/json");
+        HttpSession session = req.getSession(false);
+        if (session == null) return false;
 
-		HttpSession session = req.getSession();
-		List<Product> cartList = (List<Product>)session.getAttribute("cartList");
-		System.out.println("cartList:  "+cartList);
-		double total = 0.0;
-		for (Product p : cartList) {
-			System.out.println("Product :"+p);
-			total += p.getPrice(); //quantity = 1
-		}
+        List<Product> rawCart =
+            (List<Product>) session.getAttribute("cartList");
 
-		// Wrap both cart + total into ONE object
-		Map<String, Object> responseData = new HashMap<>();
-		responseData.put("cartList", cartList);
-		responseData.put("total", total);
+        if (rawCart == null || rawCart.isEmpty()) {
+            return false;
+        }
 
-		try {
-			res.getWriter().print(gson.toJson(responseData));
-			System.out.println(responseData);
-			res.getWriter().flush();
-			return true;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
+        Map<String, ProductDTO> map = new LinkedHashMap<>();
 
+        for (Product p : rawCart) {
+            if (!map.containsKey(p.getId())) {
+                map.put(p.getId(),
+                    new ProductDTO(
+                        p.getId(),
+                        p.getName(),
+                        p.getCategory(),
+                        p.getPrice()
+                    )
+                );
+            } else {
+                map.get(p.getId()).incrementQuantity();
+            }
+        }
+
+        List<ProductDTO> cartDTOList =
+            new ArrayList<>(map.values());
+
+        double totalAmount = 0;
+        for (ProductDTO dto : cartDTOList) {
+            totalAmount += dto.getPrice() * dto.getQuantity();
+        }
+
+        req.setAttribute("cartList", cartDTOList);
+        req.setAttribute("totalAmount", totalAmount);
+
+        return true; // → cart.jsp
+    }
 }

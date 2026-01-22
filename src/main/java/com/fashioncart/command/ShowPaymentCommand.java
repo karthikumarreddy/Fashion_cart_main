@@ -1,9 +1,6 @@
 package com.fashioncart.command;
 
-import java.io.IOException;
 import java.util.List;
-
-import com.google.gson.Gson;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,40 +9,34 @@ import util.Product;
 
 public class ShowPaymentCommand implements Command {
 
-	@Override
-	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
+    @Override
+    public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 
-	
+        // 1️⃣ Get existing session
+        HttpSession session = req.getSession(false);
+        if (session == null) {
+            return false; // → cart.jsp
+        }
 
-	    res.setContentType("application/json");
-	    res.setCharacterEncoding("UTF-8");
+        // 2️⃣ Get cart from session
+        List<Product> cartList =
+            (List<Product>) session.getAttribute("cartList");
 
-	    HttpSession session = req.getSession(false);
+        if (cartList == null || cartList.isEmpty()) {
+            return false; // → cart.jsp
+        }
 
-	    List<Product> cartList = null;
-	    if (session != null) {
-	        cartList = (List<Product>) session.getAttribute("cartList");
-	    }
+        // 3️⃣ Calculate total amount
+        double totalAmount = 0.0;
 
-	    double total = 0.0;
+        for (Product p : cartList) {
+            totalAmount += p.getPrice();
+        }
 
-	    if (cartList != null) {
-	        for (Product p : cartList) {
-	            total += p.getPrice();
-	        }
-	    }
-	    Gson gson=new Gson();
-	    String json=gson.toJson(total);
+        // 4️⃣ Set total amount for JSP
+        req.setAttribute("totalAmount", totalAmount);
 
-	    try {
-	    	System.out.println(json);
-	        res.getWriter().print(json);
-	        res.getWriter().flush();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-
-	    return true;
-	}
-
+        // 5️⃣ Forward to payment.jsp (via CommandFactory)
+        return true;
+    }
 }
