@@ -20,11 +20,7 @@ public class OrderItemDAO {
      */
     public void saveOrderItem(int orderId, Product product, int quantity) {
     	Context ctx;
-        String sql = """
-            INSERT INTO order_items
-            (order_id, product_id, price, quantity)
-            VALUES (?, ?, ?, ?)
-        """;
+        String sql = "INSERT INTO order_item (order_id, product_id, purchase_price, quantity) VALUES (?, ?, ?, ?)";
 
         try  {
         	ctx = new InitialContext();

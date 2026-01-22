@@ -42,7 +42,6 @@
         <a href="#" class="dropbtn">Category ▾</a>
         <div class="dropdown-content">
 
-            <a href="<%=request.getContextPath()%>/controller?command=listProducts&category=ALL">All</a>
             <a href="<%=request.getContextPath()%>/controller?command=listProducts&category=mens">Men</a>
             <a href="<%=request.getContextPath()%>/controller?command=listProducts&category=women">Women</a>
             <a href="<%=request.getContextPath()%>/controller?command=listProducts&category=children">Children</a>
@@ -61,17 +60,9 @@
 <div style="margin-top:30px; text-align:center;">
 <%
     List<Product> products =
-        (List<Product>) request.getAttribute("productList");
+        (List<Product>)request.getAttribute("productList");
 
-    if (products == null) {
-%>
-        <h3>Select a category to view products</h3>
-<%
-    } else if (products.isEmpty()) {
-%>
-        <h3>No products available</h3>
-<%
-    } else {
+    if(products!=null)
         for (Product p : products) {
 %>
 
@@ -81,14 +72,14 @@
         <p>₹ <%= p.getPrice() %></p>
         <p><%= p.isAvailability() %></p>
 
-        <a href="<%=request.getContextPath()%>/controller?command=addToCart&id=<%=p.getId()%>">
-            <button>Add to Cart</button>
-        </a>
+        <a href="<%=request.getContextPath()%>/controller?command=addToCart&id=<%=p.getId()%>&category=<%=request.getAttribute("category")%>">
+    <button>Add to Cart</button>
+</a>
     </div>
 
 <%
         }
-    }
+    
 %>
 </div>
 

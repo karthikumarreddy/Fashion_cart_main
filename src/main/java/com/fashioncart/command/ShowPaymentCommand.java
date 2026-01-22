@@ -12,13 +12,13 @@ public class ShowPaymentCommand implements Command {
     @Override
     public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 
-        // 1️⃣ Get existing session
+        //  Get existing session
         HttpSession session = req.getSession(false);
         if (session == null) {
             return false; // → cart.jsp
         }
 
-        // 2️⃣ Get cart from session
+        // 2 Get cart from session
         List<Product> cartList =
             (List<Product>) session.getAttribute("cartList");
 
@@ -26,17 +26,17 @@ public class ShowPaymentCommand implements Command {
             return false; // → cart.jsp
         }
 
-        // 3️⃣ Calculate total amount
+        //  Calculate total amount
         double totalAmount = 0.0;
 
         for (Product p : cartList) {
             totalAmount += p.getPrice();
         }
 
-        // 4️⃣ Set total amount for JSP
+        //  Set totalamount for JSP
         req.setAttribute("totalAmount", totalAmount);
 
-        // 5️⃣ Forward to payment.jsp (via CommandFactory)
+        // Forward to payment.jsp (via CommandFactory)
         return true;
     }
 }

@@ -31,7 +31,7 @@ public class OrdersDAO {
 			ps.executeUpdate();
 			 ResultSet rs = ps.getGeneratedKeys();
 	            if (rs.next()) {
-	                orderId = rs.getInt(1);
+	                orderId = rs.getInt("order_id");
 	            }
 
 		} catch (NamingException | SQLException e) {

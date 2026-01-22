@@ -61,7 +61,7 @@ public class FrontControllerServlet extends HttpServlet {
 
     		    System.out.println("Forwardpage: "+forwardPage);
     		    request.getRequestDispatcher(forwardPage)
-    		           .include(request, response);
+    		           .forward(request, response);
 //    		    response.sendRedirect(forwardPage);
     		}
 

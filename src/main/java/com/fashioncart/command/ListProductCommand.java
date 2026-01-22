@@ -15,6 +15,8 @@ public class ListProductCommand implements Command {
                            HttpServletResponse response) {
 
         String category = request.getParameter("category");
+        
+        
 
         ProductDAO productDAO = new ProductDAO();
         List<Product> products;
@@ -31,6 +33,7 @@ public class ListProductCommand implements Command {
 
         // Send data to JSP
         request.setAttribute("productList", products);
+        request.setAttribute("category", category);
 
         return true; // → Home.jsp
     }
