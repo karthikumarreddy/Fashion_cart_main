@@ -5,12 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fashioncart.dao.DeliveryDAO;
 import com.fashioncart.dao.OrderItemDAO;
 import com.fashioncart.dao.OrdersDAO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import util.Delivery;
 import util.Orders;
 import util.Product;
 
@@ -83,7 +85,9 @@ public class SaveDeliveryCommand implements Command {
         }
 
       
-        // deliveryDAO.save(orderId, name, address1, address2, city, pincode, mobile);
+        Delivery delivery=new Delivery(orderId, name, address1, address2, city, pincode, mobile);
+        DeliveryDAO deliveryDAO=new DeliveryDAO();
+         deliveryDAO.saveDeliveryDetails(delivery);
 
         // Clear session
         session.removeAttribute("cartList");
