@@ -46,7 +46,6 @@
             <a href="<%=request.getContextPath()%>/controller?command=listProducts&category=mens">Men</a>
             <a href="<%=request.getContextPath()%>/controller?command=listProducts&category=women">Women</a>
             <a href="<%=request.getContextPath()%>/controller?command=listProducts&category=children">Children</a>
-
         </div>
     </div>
 

@@ -62,9 +62,10 @@ public class FrontControllerServlet extends HttpServlet {
     		            ? cmdConfig.getSuccessPage()
     		            : cmdConfig.getFailurePage();
 
-//    		    request.getRequestDispatcher(forwardPage)
-//    		           .include(request, response);
-    		    response.sendRedirect(forwardPage);
+    		    System.out.println("Forwardpage: "+forwardPage);
+    		    request.getRequestDispatcher(forwardPage)
+    		           .include(request, response);
+//    		    response.sendRedirect(forwardPage);
     		}
 
 	/**
