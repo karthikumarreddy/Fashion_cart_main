@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/fashioncart/cssFiles/delivery.css">
 </head>
 <body>
-	<h2>Delivery page</h2>
+	<h2>Enter your details</h2>
 	<div class="delivery">
 	<form action="<%=request.getContextPath()%>/controller" method="post">
 

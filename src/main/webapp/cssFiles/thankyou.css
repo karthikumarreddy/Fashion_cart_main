@@ -1,0 +1,74 @@
+@charset "UTF-8";
+  /* Page reset */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: linear-gradient(135deg, #f9fafb, #e9ecf1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Main heading */
+h2 {
+    font-size: 28px;
+    color: #222;
+    margin-bottom: 8px;
+}
+
+/* Subtitle text */
+p {
+    font-size: 15px;
+    color: #555;
+    margin: 6px 0;
+}
+
+/* Order details card */
+.order-details {
+    background: #ffffff;
+    margin: 25px 0;
+    padding: 22px 28px;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* Order info text */
+.order-details p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    margin: 10px 0;
+    color: #333;
+}
+
+/* Highlight amount */
+.order-details p:last-child {
+    font-size: 17px;
+    font-weight: 600;
+    color: #e5533d;
+}
+
+/* Button link */
+a {
+    text-decoration: none;
+    margin-top: 15px;
+    padding: 12px 28px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #111, #333);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect */
+a:hover {
+    background: linear-gradient(135deg, #333, #555);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}

@@ -9,59 +9,21 @@
 <head>
 <meta charset="UTF-8">
 <title>My Cart</title>
-
-<link rel="stylesheet" href="<%=request.getContextPath()%>/cssFiles/cart.css">
-
-<style>
-table {
-    width: 80%;
-    margin: auto;
-    border-collapse: collapse;
-}
-tr,th{
-	color:black;
-}
-th, td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-}
-th {
-    background-color: #f4f4f4;
-}
-.total {
-    text-align: center;
-    font-size: 20px;
-    margin-top: 20px;
-}
-.buttons {
-    text-align: center;
-    margin-top: 20px;
-}
-button {
-    padding: 10px 20px;
-    margin: 10px;
-}
-</style>
-
+	<link rel="stylesheet" href="/fashioncart/cssFiles/cart.css">
 </head>
-
 <body>
 
 <h1 style="text-align:center;">Shopping Cart</h1>
 
 <%
-    List<ProductDTO> cartList =
-        (List<ProductDTO>) request.getAttribute("cartList");
+    List<ProductDTO> cartList =(List<ProductDTO>) request.getAttribute("cartList");
 
     Double totalAmount =
         (Double) session.getAttribute("totalAmount");
 
     if (cartList == null || cartList.isEmpty()) {
 %>
-
     <h3 style="text-align:center;">Your cart is empty</h3>
-
 <%
     } else {
 %>
@@ -121,4 +83,3 @@ button {
 
 </body>
 </html>
-s

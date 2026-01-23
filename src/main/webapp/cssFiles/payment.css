@@ -1,0 +1,93 @@
+@charset "UTF-8";
+/* Page base */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: linear-gradient(135deg, #f9fafb, #e9ecf1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Card container */
+.container {
+    width: 100%;
+    max-width: 420px;
+    background: #ffffff;
+    padding: 30px 32px;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Headings */
+h2 {
+    text-align: center;
+    font-size: 26px;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+h3 {
+    text-align: center;
+    font-size: 16px;
+    color: #444;
+    margin: 15px 0;
+}
+
+/* Payment options */
+.payment-options {
+    margin-top: 20px;
+}
+
+.payment-options label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Hover + active feel */
+.payment-options label:hover {
+    border-color: #111;
+    background-color: #f8f9fb;
+}
+
+/* Radio button */
+.payment-options input[type="radio"] {
+    accent-color: #111;
+}
+
+/* Button wrapper */
+.buttons {
+    text-align: center;
+    margin-top: 25px;
+}
+
+/* Pay button */
+button {
+    width: 100%;
+    padding: 13px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #111, #333);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover */
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}

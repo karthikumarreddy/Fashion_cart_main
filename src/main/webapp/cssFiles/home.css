@@ -32,6 +32,7 @@ body {
 /* Dropdown */
 .dropdown {
     position: relative;
+    display:inline-block;
 }
 
 .dropbtn {
@@ -66,11 +67,11 @@ body {
 .dropdown-content a:hover {
     background-color: #f1f1f1;
 }
+.show{
+	display:block;
+}
 
 /* Show dropdown on hover */
-.dropdown:hover .dropdown-content {
-    display:block;
-}
 
 /* View cart button */
 #viewcart button {

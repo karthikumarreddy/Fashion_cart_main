@@ -4,18 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Thank you</title>
+<link rel="stylesheet" href="/fashioncart/cssFiles/thankyou.css">
 </head>
 <body>
 
 <h2>Thank you for your purchase!</h2>
 
 <p>Your order will be delivered soon.</p>
-
+<div class="order-details">
 <p><b>Order ID:</b> <%=request.getAttribute("orderId")%></p>
 <p><b>Delivery City:</b> <%=request.getAttribute("city")%></p>
 <p><b>Total Amount:</b> ₹ <%=session.getAttribute("totalAmount")%></p>
-
+</div>
 <a href="<%=request.getContextPath()%>/home.jsp">Continue Shopping</a>
 
 </body>

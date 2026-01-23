@@ -7,35 +7,7 @@
 <meta charset="UTF-8">
 <title>Payment</title>
 
-<style>
-body {
-    font-family: Arial, sans-serif;
-}
-.container {
-    width: 40%;
-    margin: auto;
-    margin-top: 50px;
-    border: 1px solid #ccc;
-    padding: 20px;
-}
-h2, h3 {
-    text-align: center;
-}
-.payment-options {
-    margin-top: 20px;
-}
-.payment-options label {
-    display: block;
-    margin: 10px 0;
-}
-.buttons {
-    text-align: center;
-    margin-top: 20px;
-}
-button {
-    padding: 10px 20px;
-}
-</style>
+	<link rel="stylesheet" href="/fashioncart/cssFiles/payment.css">
 
 </head>
 

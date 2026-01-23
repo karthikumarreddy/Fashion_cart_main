@@ -1,92 +1,76 @@
-@charset "UTF-8";
-
-/* Page background */
+/* Page base */
 body {
     margin: 0;
     padding: 0;
-    font-family: "Segoe UI", Tahoma, sans-serif;
-    background: linear-gradient(120deg, #f6f9fc, #e9eff5);
+    min-height: 100vh;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: linear-gradient(135deg, #f9fafb, #e9ecf1); 
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Page heading */
+/* Card */
+.delivery {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 520px;
+    padding: 32px 36px;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Title */
 h2 {
     text-align: center;
-    margin-top: 30px;
-    color: #333;
+    font-size: 25px;
+    color: #222;
+    margin-bottom: 25px;
 }
 
-/* Form container */
-.delivery {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-}
-
-/* Form box */
-.delivery form {
-    background: #ffffff;
-    width: 420px;
-    padding: 30px 35px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-}
-
-/* Input wrapper */
+/* Inputs row */
 .delivery-input {
     display: flex;
     flex-direction: column;
     margin-bottom: 18px;
     font-size: 14px;
-    color: #555;
+    color: #444;
 }
 
 /* Input fields */
 .delivery-input input {
-    margin-top: 6px;
     padding: 12px 14px;
     border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 15px;
-    outline: none;
-    transition: all 0.3s ease;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Input focus effect */
+/* Focus */
 .delivery-input input:focus {
-    border-color: #4a90e2;
-    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+    border-color: #111; /* SAME DARK COLOR */
+    box-shadow: 0 0 0 2px rgba(17, 17, 17, 0.08);
+    outline: none;
 }
 
-/* Submit button */
-button[type="submit"] {
+/* Button */
+button {
+    margin-top: 20px;
     width: 100%;
-    margin-top: 10px;
-    padding: 14px;
-    border: none;
+    padding: 13px;
     border-radius: 10px;
-    background: linear-gradient(135deg, #4a90e2, #357abd);
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
+    border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #111, #333); /* SAME BUTTON */
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Button hover */
-button[type="submit"]:hover {
-    background: linear-gradient(135deg, #357abd, #2a65a0);
+/* Hover */
+button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
 }
-
-/* Mobile responsive */
-@media (max-width: 480px) {
-    .delivery form {
-        width: 90%;
-        padding: 25px;
-    }
-}
-
-
-
