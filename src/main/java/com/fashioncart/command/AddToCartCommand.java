@@ -23,7 +23,7 @@ public class AddToCartCommand implements Command {
 	        cartList = new ArrayList<>();
 	    }
 
-	    String productId = req.getParameter("id");
+	    String productId = req.getParameter("id");//gets the product id
 	    ProductDAO productDAO = new ProductDAO();
 	    Product cartProduct = productDAO.getProductById(productId);//getting the products from db
 

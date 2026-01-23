@@ -33,7 +33,7 @@ public class FrontControllerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     		        throws ServletException, IOException {
 
-    		    String action = request.getParameter("command");
+    		    String action = request.getParameter("command");//getting the command from index.jsp/home.jsp
     		    System.out.println("Action: " + action);
 
     		    if (action == null) {
@@ -41,7 +41,7 @@ public class FrontControllerServlet extends HttpServlet {
     		        return;
     		    }
 
-    		    Command cmd = CommandFactory.getCommand(action);
+    		    Command cmd = CommandFactory.getCommand(action);//creates the object for the command
 
     		    if (cmd == null) {
     		        response.sendError(HttpServletResponse.SC_NOT_FOUND,
