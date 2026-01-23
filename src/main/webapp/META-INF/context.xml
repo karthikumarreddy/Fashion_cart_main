@@ -24,7 +24,7 @@
     	driverClassName="org.postgresql.Driver"
     	url="jdbc:postgresql://localhost:5432/fashion_cart_db"
     	username="postgres"
-    	password="12345"
+    	password="postgres"
     	
     	maxTotal="10"
     	maxIdle="5"

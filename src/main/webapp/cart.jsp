@@ -18,6 +18,9 @@ table {
     margin: auto;
     border-collapse: collapse;
 }
+tr,th{
+	color:black;
+}
 th, td {
     border: 1px solid #ccc;
     padding: 10px;
@@ -52,18 +55,12 @@ button {
         (List<ProductDTO>) request.getAttribute("cartList");
 
     Double totalAmount =
-        (Double) request.getAttribute("totalAmount");
+        (Double) session.getAttribute("totalAmount");
 
     if (cartList == null || cartList.isEmpty()) {
 %>
 
     <h3 style="text-align:center;">Your cart is empty</h3>
-
-    <div class="buttons">
-        <a href="<%=request.getContextPath()%>/home.jsp">
-            <button>Continue Shopping</button>
-        </a>
-    </div>
 
 <%
     } else {
@@ -76,7 +73,7 @@ button {
             <th>Category</th>
             <th>Price</th>
             <th>Quantity</th>
-            <th>Subtotal</th>
+            <th>SubTotal</th>
         </tr>
     </thead>
 

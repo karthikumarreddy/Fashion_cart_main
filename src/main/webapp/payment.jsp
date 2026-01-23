@@ -46,7 +46,7 @@ button {
 <h2>Payment</h2>
 
 <%
-    Double totalAmount = (Double) request.getAttribute("totalAmount");
+    Double totalAmount = (Double) session.getAttribute("totalAmount");
     if (totalAmount == null) {
         totalAmount = 0.0;
     }
