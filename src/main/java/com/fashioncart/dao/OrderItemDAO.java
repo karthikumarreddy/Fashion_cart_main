@@ -10,15 +10,16 @@ import javax.sql.DataSource;
 import util.Product;
 
 public class OrderItemDAO {
+	
+	private DataSource getDataSource() throws Exception {
+        Context ctx = new InitialContext();
+        return (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
+    }
 
 	public void saveOrderItem(int orderId, Product product, int quantity) {
 
 		String sql = "INSERT INTO order_item(order_id,product_id, purchase_price, quantity) VALUES (?, ?, ?, ?)";
-
-		try {
-			Context ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
-			try (Connection c = ds.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+			try (Connection c = getDataSource().getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
 
 				ps.setInt(1, orderId);
 				ps.setInt(2, Integer.parseInt(product.getId()));
@@ -27,9 +28,8 @@ public class OrderItemDAO {
 
 				ps.executeUpdate();
 
+			}catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 }

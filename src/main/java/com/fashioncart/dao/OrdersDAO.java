@@ -11,6 +11,11 @@ import javax.sql.DataSource;
 import util.Orders;
 
 public class OrdersDAO {
+	
+	private DataSource getDataSource() throws Exception {
+        Context ctx = new InitialContext();
+        return (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
+    }
 
 	public int saveOrders(Orders orders) {
 
@@ -22,10 +27,8 @@ public class OrdersDAO {
 				    VALUES (?, ?, ?, ?)
 				    RETURNING order_id
 				""";
-		try {
-			Context ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
-			try (Connection conn = ds.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+		
+			try (Connection conn = getDataSource().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 				ps.setDouble(1, orders.getTotalAmount());
 				ps.setTimestamp(2, orders.getOrderDate());
 				ps.setString(3, orders.getPaymentMode());
@@ -36,10 +39,9 @@ public class OrdersDAO {
 					orderId = rs.getInt("order_id");
 				}
 
+			}catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return orderId;
+			return orderId;
 	}
 }
