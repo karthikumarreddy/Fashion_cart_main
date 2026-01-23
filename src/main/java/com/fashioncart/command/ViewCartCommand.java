@@ -53,7 +53,7 @@ public class ViewCartCommand implements Command {
         }
 
         req.setAttribute("cartList", cartDTOList);
-        req.setAttribute("totalAmount", totalAmount);
+        session.setAttribute("totalAmount", totalAmount);
 
         return true; //cart.jsp
     }

@@ -14,7 +14,7 @@
 
 <p><b>Order ID:</b> <%=request.getAttribute("orderId")%></p>
 <p><b>Delivery City:</b> <%=request.getAttribute("city")%></p>
-<p><b>Total Amount:</b> ₹ <%=request.getAttribute("totalAmount")%></p>
+<p><b>Total Amount:</b> ₹ <%=session.getAttribute("totalAmount")%></p>
 
 <a href="<%=request.getContextPath()%>/home.jsp">Continue Shopping</a>
 

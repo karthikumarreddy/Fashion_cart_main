@@ -22,13 +22,7 @@ public class ShowPaymentCommand implements Command {
         if (cartList == null || cartList.isEmpty()) {
             return false; //cart.jsp
         }
-        double totalAmount = 0.0;
-
-        for (Product p : cartList) {
-            totalAmount += p.getPrice();
-        }
- 
-        req.setAttribute("totalAmount", totalAmount);
+        
         return true;//payment.jsp
     }
 }

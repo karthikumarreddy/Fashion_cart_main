@@ -41,9 +41,9 @@ public class SaveDeliveryCommand implements Command {
 		}
 
 		List<Product> cartList = (List<Product>) session.getAttribute("cartList");
-
+		System.out.println("cartList: "+cartList);		
+		
 		String paymentMode = (String) session.getAttribute("paymentMode");
-
 		if (cartList == null || paymentMode == null) {
 			System.out.println("Inside cartlist==null");
 			return false;
@@ -56,7 +56,6 @@ public class SaveDeliveryCommand implements Command {
 		for (Product p : cartList) {
 			qtyMap.put(p.getId(), qtyMap.getOrDefault(p.getId(), 0) + 1);
 			productMap.put(p.getId(), p);
-			totalAmount += p.getPrice();
 		}
 
 		Orders order = new Orders(totalAmount, new Timestamp(System.currentTimeMillis()), paymentMode, "ORDERED");
@@ -80,7 +79,7 @@ public class SaveDeliveryCommand implements Command {
 		
 		req.setAttribute("orderId", orderId);//request sent to thakyou.jsp
 		req.setAttribute("city", city);//request sent to thakyou.jsp
-		req.setAttribute("totalAmount", totalAmount);//request sent to thakyou.jsp
+		
 
 		return true; // thankyou.jsp
 	}
