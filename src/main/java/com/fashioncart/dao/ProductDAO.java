@@ -15,14 +15,16 @@ import javax.sql.DataSource;
 import util.Product;
 
 public class ProductDAO {
+	
+	private DataSource getDataSource() throws Exception {
+        Context ctx = new InitialContext();
+        return (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
+    }
 	public List<Product> getAllProductsList() {
 		String sql = "select * from product";
 		List<Product> allProducts = new ArrayList<>();
 
-		try {
-			Context ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
-			try (Connection conn = ds.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+			try (Connection conn = getDataSource().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 				ResultSet rs = ps.executeQuery();
 
 				while (rs.next()) {
@@ -31,21 +33,18 @@ public class ProductDAO {
 							rs.getString("availability"));
 					allProducts.add(p);
 				}
+			}catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return allProducts;
-	}
+			return allProducts;
+	} 
+		
+	
 
-	public Product getProductById(String id) {
-		Context ctx;
+	public Product getProductById(String id) throws Exception {
 
-		try {
-			ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
 			String sql = "select * from product where product_id=" + id;
-			try (Connection conn = ds.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+			try (Connection conn = getDataSource().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
 				ResultSet rs = ps.executeQuery();
 
@@ -58,22 +57,18 @@ public class ProductDAO {
 					String available = rs.getString("availability");
 					return new Product(id1, name, category, price, image, available);
 				}
+			}catch (NamingException | SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (NamingException | SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+			return null;
+		} 
+	
 
 	public List<Product> getProductsByCategoryList(String category) {
 
 		List<Product> products = new ArrayList<>();
-
-		try {
-			Context ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
 			String sql = "select * from product where category=?";
-			try (Connection conn = ds.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+			try (Connection conn = getDataSource().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
 				ps.setString(1, category);
 
@@ -85,11 +80,9 @@ public class ProductDAO {
 							rs.getString("availability"));
 					products.add(p);
 				}
+			}catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return products;
-
+			return products;
 	}
 }

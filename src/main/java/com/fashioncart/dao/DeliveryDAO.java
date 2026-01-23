@@ -10,6 +10,11 @@ import javax.sql.DataSource;
 import util.Delivery;
 
 public class DeliveryDAO {
+
+	private DataSource getDataSource() throws Exception {
+        Context ctx = new InitialContext();
+        return (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
+    }
 	public void saveDeliveryDetails(Delivery delivery) {
 		Context ctx;
 		String sql = """
@@ -18,12 +23,9 @@ public class DeliveryDAO {
 						    VALUES (?, ?, ?, ?, ?, ?, ?)
 
 						""";
-		try {
-			ctx = new InitialContext();
+		
 
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
-
-			try (Connection c = ds.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+			try (Connection c = getDataSource().getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
 				ps.setInt(1,delivery.getOrder_id());
 				ps.setString(2, delivery.getCustomer_name());
 				ps.setString(3, delivery.getAddress_line1());
@@ -32,9 +34,8 @@ public class DeliveryDAO {
 				ps.setString(6, delivery.getPincode());
 				ps.setString(7, delivery.getMoile());
 				ps.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 }

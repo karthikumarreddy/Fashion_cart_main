@@ -49,8 +49,8 @@ public class SaveDeliveryCommand implements Command {
 			return false;
 		}
 
-		Map<String, Integer> qtyMap = new HashMap<>();
-		Map<String, Product> productMap = new HashMap<>();
+		Map<String, Integer> qtyMap = new HashMap<>();//counting dupplicates pproduct quantity increasing
+		Map<String, Product> productMap = new HashMap<>();//storing key a product id and value as product
 		double totalAmount = 0;
 
 		for (Product p : cartList) {

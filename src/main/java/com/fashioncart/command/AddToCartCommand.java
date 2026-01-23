@@ -14,27 +14,40 @@ public class AddToCartCommand implements Command {
 
 	@Override
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
+		try {
+			
+			
+			HttpSession session = req.getSession();
+			if (session.getAttribute("loggedUser") == null) {
 
-	    HttpSession session = req.getSession();
+	          
+	            req.setAttribute("error", "Please login to add items to cart");
 
-	    List<Product> cartList =(List<Product>)session.getAttribute("cartList");
+	            return false; // login.jsp
+	        }
 
-	    if (cartList == null) {
-	        cartList = new ArrayList<>();
-	    }
+			List<Product> cartList = (List<Product>) session.getAttribute("cartList");
 
-	    String productId = req.getParameter("id");
-	    ProductDAO productDAO = new ProductDAO();
-	    Product cartProduct = productDAO.getProductById(productId);//getting the products from db
+			if (cartList == null) {
+				cartList = new ArrayList<>();
+			}
 
-	    if (cartProduct == null) {
-	        return false; //home.jsp
-	    }
+			String productId = req.getParameter("id");// gets the product id
+			ProductDAO productDAO = new ProductDAO();
+			Product cartProduct = productDAO.getProductById(productId);// getting the products from db
 
-	    cartList.add(cartProduct);
-	    session.setAttribute("cartList", cartList);//cartlist is now present in the session 
+			if (cartProduct == null) {
+				return false; // home.jsp
+			}
 
-	    return true; //cart.jsp
+			cartList.add(cartProduct);
+			session.setAttribute("cartList", cartList);// cartlist is now present in the session
+
+			return true; // cart.jsp
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }
