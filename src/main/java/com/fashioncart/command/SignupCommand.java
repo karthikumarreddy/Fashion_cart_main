@@ -15,11 +15,18 @@ public class SignupCommand implements Command{
 		String userName=req.getParameter("userName");
 		String email=req.getParameter("email");
 		String password=req.getParameter("password");
-		 password = BCrypt.hashpw(password, BCrypt.gensalt());
 		
+		System.out.println("Username = " + req.getParameter("userName"));
+		System.out.println("Email = " + req.getParameter("email"));
+
+		 
+		System.out.println("signup outside if..");
 		if(userName==null && email==null && password==null) {
+			System.out.println("inside signup cammand checking");
 			return false;
 		}
+		
+		password = BCrypt.hashpw(password, BCrypt.gensalt());
 		User user=new User(userName,email,password);
 		UserDAO userDao=new UserDAO();
 		return userDao.saveUser(user);

@@ -29,7 +29,17 @@
         <a href="<%=request.getContextPath()%>/controller?command=listProducts&category=children">Children</a>
     </div>
 </div>
-
+	<%
+ 	if(session.getAttribute("loggedUser")==null){
+ 		%>	
+ 		<div id="login-btn">
+		<form action="<%=request.getContextPath()%>/controller" method="get">
+            <input type="hidden" name="command" value="login">
+            <button type="submit">Login</button>
+        </form>
+	</div>	
+ 	<% }%>
+	
 
     <div id="viewcart">
         <form action="<%=request.getContextPath()%>/controller" method="get">
@@ -63,11 +73,18 @@
 </body>
 
 <script>
+
+const isLoggedIn = <%= (session.getAttribute("loggedUser") != null) %>;
+
+
+function addtocart(id) {
+    if (isLoggedIn) {
+        console.log(id);
+        alert("Product " + id + " added to cart");
+    }
+}
+
 	
-	function addtocart(id){
-		console.log(id);
-		alert("Product " + id + " added to cart");
-	}
 	
 	document.addEventListener("DOMContentLoaded", function () {
 

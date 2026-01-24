@@ -14,7 +14,7 @@
 <div class="signup-box">
     <h2 style="text-align:center;">Create Account</h2>
 
-    <form action="<%=request.getContextPath()%>/controller?command=signup" method="post">
+    <form action="<%=request.getContextPath()%>/controller" method="post">
         <input type="hidden" name="command" value="signup">
 
         <input type="text" name="userName"

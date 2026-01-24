@@ -19,7 +19,10 @@ public class UserDAO {
 	
 	public User findByUserName(String userName) throws SQLException, Exception {
 		String sql="select * from users where username=?";
-		try(Connection c=getDataSource().getConnection();PreparedStatement ps=c.prepareStatement(sql)){
+		
+		try(Connection c=getDataSource().getConnection();
+				PreparedStatement ps=c.prepareStatement(sql)){
+			
 			ps.setString(1, userName);
 			ResultSet rs=ps.executeQuery();
 			if(rs.next()) {
@@ -40,8 +43,9 @@ public class UserDAO {
 	
 	public String getPassword(String userName) throws SQLException, Exception {
 		String sql="select password from users where username=?";
-		try(Connection c=getDataSource().getConnection();PreparedStatement ps=c.prepareStatement(sql)){
-			ps.setString(1, userName);
+		try(Connection c=getDataSource().getConnection();
+				PreparedStatement ps=c.prepareStatement(sql)){
+			ps.setString(1, userName);			
 			ResultSet rs=ps.executeQuery();
 			if(rs.next()) {
 				return rs.getString("password");
@@ -59,10 +63,8 @@ public class UserDAO {
 	            VALUES (?, ?, ?)
 	        """;
 
-	        try (
-	            Connection conn = getDataSource().getConnection();
-	            PreparedStatement ps = conn.prepareStatement(sql)
-	        ) {
+	        try (Connection conn = getDataSource().getConnection();
+	        				PreparedStatement ps = conn.prepareStatement(sql)) {
 	            ps.setString(1, user.getUserName());
 	            ps.setString(2, user.getEmail());
 	            ps.setString(3, user.getPassword());

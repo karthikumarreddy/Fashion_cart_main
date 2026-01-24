@@ -20,7 +20,7 @@ public class LoginCommand implements Command {
 			String email = req.getParameter("email");
 			String password = req.getParameter("password");
 
-			if (userName.trim() == null || password.trim() == null || email.trim() == null) {
+			if (userName == null || password.trim() == null || email.trim() == null) {
 				return false;
 			}
 			UserDAO userDao = new UserDAO();
@@ -35,7 +35,6 @@ public class LoginCommand implements Command {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
 		return false;
