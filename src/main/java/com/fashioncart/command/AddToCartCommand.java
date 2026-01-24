@@ -11,18 +11,14 @@ import jakarta.servlet.http.HttpSession;
 import util.Product;
 
 public class AddToCartCommand implements Command {
-
+	
 	@Override
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
+		
 		try {
-			
-			
 			HttpSession session = req.getSession();
 			if (session.getAttribute("loggedUser") == null) {
-
-	          
 	            req.setAttribute("error", "Please login to add items to cart");
-
 	            return false; // login.jsp
 	        }
 
@@ -35,14 +31,15 @@ public class AddToCartCommand implements Command {
 			String productId = req.getParameter("id");// gets the product id
 			ProductDAO productDAO = new ProductDAO();
 			Product cartProduct = productDAO.getProductById(productId);// getting the products from db
-
+			
 			if (cartProduct == null) {
 				return false; // home.jsp
+			}else {
+				
+				cartList.add(cartProduct);
+				session.setAttribute("cartList", cartList);// cartlist is now present in the session
+				session.setAttribute("cartCount", cartList.size());
 			}
-
-			cartList.add(cartProduct);
-			session.setAttribute("cartList", cartList);// cartlist is now present in the session
-
 			return true; // cart.jsp
 		} catch (Exception e) {
 			e.printStackTrace();

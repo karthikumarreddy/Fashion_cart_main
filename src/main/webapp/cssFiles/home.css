@@ -86,6 +86,21 @@ body {
     background: #e7335d;
 }
 
+#logout-btn button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background: #ff3f6c;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#logout-btn button:hover {
+    background: #e7335d;
+}
+
 /* View cart button */
 #viewcart button {
     padding: 8px 16px;

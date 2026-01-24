@@ -9,8 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>FashionCart</title>
-<link rel=stylesheet href="/fashioncart/cssFiles/home.css">
 
+<link rel=stylesheet href="/fashioncart/cssFiles/home.css">
 </head>
 
 <body>
@@ -21,14 +21,14 @@
         <h2>FashionCart</h2>
     </div>
 
-    <div class="dropdown">
+  <div class="dropdown">
     <a href="#" class="dropbtn" onclick="toggleDropdown(event)">Category ▾</a>
     <div class="dropdown-content" id="dropdownMenu">
         <a href="<%=request.getContextPath()%>/controller?command=listProducts&category=mens">Men</a>
         <a href="<%=request.getContextPath()%>/controller?command=listProducts&category=women">Women</a>
         <a href="<%=request.getContextPath()%>/controller?command=listProducts&category=children">Children</a>
     </div>
-</div>
+  </div>
 	<%
  	if(session.getAttribute("loggedUser")==null){
  		%>	
@@ -38,13 +38,20 @@
             <button type="submit">Login</button>
         </form>
 	</div>	
- 	<% }%>
+ 	<% }else{%>
+		<div id="logout-btn">
+			<form action="<%=request.getContextPath()%>/controller" method="get">
+				<input type="hidden" name="command" value="logout">
+				<button type="submit">Logout</button>
+			</form>
+		</div>
+		<%}%>
 	
 
     <div id="viewcart">
         <form action="<%=request.getContextPath()%>/controller" method="get">
             <input type="hidden" name="command" value="viewCart">
-            <button type="submit">View Cart</button>
+            <button type="submit">View Cart <p>${sessionScope.cartCount}<p></button>
         </form>
     </div>
 </nav>
@@ -65,7 +72,7 @@
 			<p><%=p.isAvailability()%></p>
 			
 			<a href="<%=request.getContextPath()%>/controller?command=addToCart&id=<%=p.getId()%>">
-				<button onclick="addtocart('<%=p.getId()%>')">Add to Cart</button>	
+				<button>Add to Cart</button>	
 			</a>
 		</div>
 		<%}%>
@@ -76,16 +83,6 @@
 
 const isLoggedIn = <%= (session.getAttribute("loggedUser") != null) %>;
 
-
-function addtocart(id) {
-    if (isLoggedIn) {
-        console.log(id);
-        alert("Product " + id + " added to cart");
-    }
-}
-
-	
-	
 	document.addEventListener("DOMContentLoaded", function () {
 
 	    const dropdownMenu = document.getElementById("dropdownMenu");

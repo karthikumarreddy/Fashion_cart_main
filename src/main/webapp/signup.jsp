@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Signup</title>
-
+<link rel="stylesheet" href="/fashioncart/cssFiles/signup.css">
 </head>
 
 <body>

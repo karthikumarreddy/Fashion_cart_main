@@ -17,16 +17,15 @@ public class LoginCommand implements Command {
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 		try {
 			String userName = req.getParameter("userName");
-			String email = req.getParameter("email");
 			String password = req.getParameter("password");
 
-			if (userName == null || password.trim() == null || email.trim() == null) {
+			if (userName == null || password.trim() == null) {
 				return false;
 			}
 			UserDAO userDao = new UserDAO();
 			User user = userDao.findByUserName(userName);
 			String pwd = userDao.getPassword(userName);
-			if (user.getUserName().equals(userName) && user.getEmail().equals(email) && BCrypt.checkpw(password, pwd)) {
+			if (user.getUserName().equals(userName) && BCrypt.checkpw(password, pwd)) {
 				HttpSession session = req.getSession();
 				session.setAttribute("loggedUser", user);
 				return true;

@@ -72,7 +72,7 @@ public class SaveDeliveryCommand implements Command {
 		DeliveryDAO deliveryDAO = new DeliveryDAO();
 		deliveryDAO.saveDeliveryDetails(delivery);
 
-		
+		session.removeAttribute("cartCount");
 		session.removeAttribute("cartList");//removed from the session so cart is empty now
 		session.removeAttribute("paymentMode");//removed from the session paymentmode is empty 
 

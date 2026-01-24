@@ -33,8 +33,8 @@ public class UserDAO {
 				user.setPassword(rs.getString("password"));
 				return user;
 			}
-			
 
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

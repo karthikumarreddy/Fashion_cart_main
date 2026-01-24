@@ -1,5 +1,4 @@
 
-
 <style>
 body {
     margin: 0;
@@ -95,7 +94,6 @@ p[style*="color:red"] {
     font-weight: bold;
 }
 
-
 </style>
 <h2>Login Page</h2><br>
 <div id="login-page">
@@ -103,9 +101,8 @@ p[style*="color:red"] {
 <form action="<%=request.getContextPath()%>/controller" method="post">
     <input type="hidden" name="command" value="login">
 
-   Username: <input type="text" name="userName" placeholder="userName" required>
-   Email: <input type="text" name="email" placeholder="email" required>
-   Password: <input type="password" name="password" placeholder="password" required>
+  	 Username: <input type="text" name="userName" placeholder="userName" required>
+   	 Password: <input type="password" name="password" placeholder="password" required>
    
     <button type="submit">Login</button>
     <p>New user?<a href="<%=request.getContextPath()%>/controller?command=signup">Signup</a></p>
