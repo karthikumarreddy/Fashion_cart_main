@@ -28,20 +28,28 @@ public class SaveDeliveryCommand implements Command {
         String pincode = req.getParameter("pincode");
         String mobile = req.getParameter("mobile");
 
-        if (name == null || city == null || mobile == null) return false;
+        if (name == null || city == null || mobile == null) {
+        	return false;
+        }
 
         HttpSession session = req.getSession(false);
-        if (session == null) return false;
+        if (session == null) {
+        	return false;
+        }
 
         User user = (User) session.getAttribute("loggedUser");
         String paymentMode = (String) session.getAttribute("paymentMode");
 
-        if (user == null || paymentMode == null) return false;
+        if (user == null || paymentMode == null) {
+        	return false;
+        }
 
         CartDAO cartDAO = new CartDAO();
         List<CartItem> cartItems = cartDAO.getCartItems(user.getUserId());
 
-        if (cartItems == null || cartItems.isEmpty()) return false;
+        if (cartItems == null || cartItems.isEmpty()) {
+        	return false;
+        }
 
         double totalAmount = 0;
         for (CartItem item : cartItems) {
@@ -72,7 +80,7 @@ public class SaveDeliveryCommand implements Command {
         );
         new DeliveryDAO().saveDeliveryDetails(delivery);
 
-        // ✅ CLEAR CART FROM DB
+        //CLEAR CART FROM DB
         cartDAO.clearCart(user.getUserId());
 
         session.removeAttribute("paymentMode");
