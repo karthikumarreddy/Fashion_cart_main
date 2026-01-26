@@ -33,13 +33,6 @@ public class Orders {
 		this.status = status;
 	}
 	
-	public Orders(double totalAmount, Timestamp orderDate, String paymentMode, String status) {
-		super();
-		this.totalAmount = totalAmount;
-		this.setOrderDate(orderDate);
-		this.paymentMode = paymentMode;
-		this.status = status;
-	}
 	
 	public Orders() {
 	
@@ -49,6 +42,14 @@ public class Orders {
 	}
 	public void setOrderDate(Timestamp orderDate) {
 		this.orderDate = orderDate;
+	}
+	
+	public Orders(double totalAmount, Timestamp orderDate, String paymentMode, String status) {
+		super();
+		this.totalAmount = totalAmount;
+		this.setOrderDate(orderDate);
+		this.paymentMode = paymentMode;
+		this.status = status;
 	}
 	
 	
