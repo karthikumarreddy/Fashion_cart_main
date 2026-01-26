@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="GitSelectRepositoryPage.lastRepository" value="C:\Users\Vastpro-4\git\Fashion_cart_main\.git"/>
+	<list key="RepositorySelectionPage.UsedUris">
+		<item value="https://github.com/karthikumarreddy/Fashion_cart_main.git"/>
+	</list>
+	<list key="EGit.KnownHosts">
+		<item value="git.eclipse.org"/>
+		<item value="github.com"/>
+		<item value="bitbucket.org"/>
+	</list>
+	<section name="org.eclipse.egit.ui.internal.pull.PullResultDialog.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="493"/>
+		<item key="DIALOG_Y_ORIGIN" value="212"/>
+	</section>
+</section>
