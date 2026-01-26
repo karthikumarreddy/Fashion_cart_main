@@ -9,14 +9,15 @@
 <head>
 <meta charset="UTF-8">
 <title>My Cart</title>
-	<link rel="stylesheet" href="/fashioncart/cssFiles/cart.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/cssFiles/cart.css">
 </head>
 <body>
 
 <h1 style="text-align:center;">Shopping Cart</h1>
 
 <%
-    List<ProductDTO> cartList =(List<ProductDTO>) request.getAttribute("cartList");
+    List<ProductDTO> cartList =
+        (List<ProductDTO>) request.getAttribute("cartList");
 
     Double totalAmount =
         (Double) session.getAttribute("totalAmount");
@@ -64,7 +65,6 @@
 </div>
 
 <div class="buttons">
-
     <a href="<%=request.getContextPath()%>/home.jsp">
         <button>Continue Shopping</button>
     </a>
@@ -74,7 +74,6 @@
         <input type="hidden" name="command" value="showPayment">
         <button type="submit">Buy Now</button>
     </form>
-
 </div>
 
 <%

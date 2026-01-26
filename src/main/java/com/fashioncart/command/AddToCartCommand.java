@@ -1,50 +1,37 @@
 package com.fashioncart.command;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.fashioncart.dao.ProductDAO;
+import com.fashioncart.dao.CartDAO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import util.Product;
+import util.User;
 
 public class AddToCartCommand implements Command {
 	
 	@Override
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
-		
-		try {
-			HttpSession session = req.getSession();
-			if (session.getAttribute("loggedUser") == null) {
-	            req.setAttribute("error", "Please login to add items to cart");
-	            return false; // login.jsp
-	        }
 
-			List<Product> cartList = (List<Product>) session.getAttribute("cartList");
+	    HttpSession session = req.getSession();
+	    User user = (User) session.getAttribute("loggedUser");
 
-			if (cartList == null) {
-				cartList = new ArrayList<>();
-			}
+	    if (user == null) {
+	        req.setAttribute("error", "Please login to add items to cart");
+	        return false; // login.jsp
+	    }
 
-			String productId = req.getParameter("id");// gets the product id
-			ProductDAO productDAO = new ProductDAO();
-			Product cartProduct = productDAO.getProductById(productId);// getting the products from db
-			
-			if (cartProduct == null) {
-				return false; // home.jsp
-			}else {
-				
-				cartList.add(cartProduct);
-				session.setAttribute("cartList", cartList);// cartlist is now present in the session
-				session.setAttribute("cartCount", cartList.size());
-			}
-			return true; // cart.jsp
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+
+	    int productId = Integer.parseInt(req.getParameter("id"));
+
+	    CartDAO cartDAO = new CartDAO();
+	    cartDAO.addToCart(user.getUserId(), productId);
+	    
+	    int count = cartDAO.getCartCount(user.getUserId());
+	    session.setAttribute("cartCount", count);
+
+
+	    return true; // cart.jsp
 	}
+
 
 }

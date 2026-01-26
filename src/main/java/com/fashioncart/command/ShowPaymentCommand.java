@@ -2,10 +2,13 @@ package com.fashioncart.command;
 
 import java.util.List;
 
+import com.fashioncart.dao.CartDAO;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import util.Product;
+import util.CartItem;
+import util.User;
 
 public class ShowPaymentCommand implements Command {
 
@@ -13,14 +16,16 @@ public class ShowPaymentCommand implements Command {
     public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 
         HttpSession session = req.getSession(false);
-        if (session == null) {
-            return false; //cart.jsp
+        User user = (User) session.getAttribute("loggedUser");
+        if (user == null) {
+        	return false;
         }
-        List<Product> cartList =
-            (List<Product>) session.getAttribute("cartList");
 
-        if (cartList == null || cartList.isEmpty()) {
-            return false; //cart.jsp
+        CartDAO cartDAO = new CartDAO();
+        List<CartItem> cartItems = cartDAO.getCartItems(user.getUserId());
+
+        if (cartItems == null || cartItems.isEmpty()) {
+            return false; // cart.jsp
         }
         
         return true;//payment.jsp

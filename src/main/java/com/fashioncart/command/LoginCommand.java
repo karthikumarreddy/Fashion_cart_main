@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import com.fashioncart.dao.CartDAO;
 import com.fashioncart.dao.UserDAO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,11 +29,14 @@ public class LoginCommand implements Command {
 			if (user.getUserName().equals(userName) && BCrypt.checkpw(password, pwd)) {
 				HttpSession session = req.getSession();
 				session.setAttribute("loggedUser", user);
+				CartDAO cartDAO = new CartDAO();
+				int cartCount = cartDAO.getCartCount(user.getUserId());
+				session.setAttribute("cartCount", cartCount);
 				return true;
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			e.printStackTrace();	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

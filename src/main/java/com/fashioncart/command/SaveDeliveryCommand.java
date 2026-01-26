@@ -1,10 +1,9 @@
 package com.fashioncart.command;
 
 import java.sql.Timestamp;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import com.fashioncart.dao.CartDAO;
 import com.fashioncart.dao.DeliveryDAO;
 import com.fashioncart.dao.OrderItemDAO;
 import com.fashioncart.dao.OrdersDAO;
@@ -12,76 +11,76 @@ import com.fashioncart.dao.OrdersDAO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import util.CartItem;
 import util.Delivery;
 import util.Orders;
-import util.Product;
+import util.User;
 
 public class SaveDeliveryCommand implements Command {
 
-	@Override
-	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
+    @Override
+    public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 
-		
-		String name = req.getParameter("fullname");
-		String address1 = req.getParameter("address1");
-		String address2 = req.getParameter("address2");
-		String city = req.getParameter("city");
-		String pincode = req.getParameter("pincode");
-		String mobile = req.getParameter("mobile");
+        String name = req.getParameter("fullname");
+        String address1 = req.getParameter("address1");
+        String address2 = req.getParameter("address2");
+        String city = req.getParameter("city");
+        String pincode = req.getParameter("pincode");
+        String mobile = req.getParameter("mobile");
 
-		if (name == null || city == null || mobile == null) {
-			System.out.println("name==null");
-			return false;
-		}
+        if (name == null || city == null || mobile == null) return false;
 
-		HttpSession session = req.getSession(false);
-		if (session == null) {
-			System.out.println("session==null");
-			return false;
-		}
+        HttpSession session = req.getSession(false);
+        if (session == null) return false;
 
-		List<Product> cartList = (List<Product>) session.getAttribute("cartList");
-		System.out.println("cartList: "+cartList);		
-		
-		String paymentMode = (String) session.getAttribute("paymentMode");
-		if (cartList == null || paymentMode == null) {
-			System.out.println("Inside cartlist==null");
-			return false;
-		}
+        User user = (User) session.getAttribute("loggedUser");
+        String paymentMode = (String) session.getAttribute("paymentMode");
 
-		Map<String, Integer> qtyMap = new HashMap<>();//counting dupplicates pproduct quantity increasing
-		Map<String, Product> productMap = new HashMap<>();//storing key a product id and value as product
-		double totalAmount = 0;
+        if (user == null || paymentMode == null) return false;
 
-		for (Product p : cartList) {
-			qtyMap.put(p.getId(), qtyMap.getOrDefault(p.getId(), 0) + 1);
-			productMap.put(p.getId(), p);
-		}
+        CartDAO cartDAO = new CartDAO();
+        List<CartItem> cartItems = cartDAO.getCartItems(user.getUserId());
 
-		Orders order = new Orders(totalAmount, new Timestamp(System.currentTimeMillis()), paymentMode, "ORDERED");
+        if (cartItems == null || cartItems.isEmpty()) return false;
 
-		OrdersDAO ordersDAO = new OrdersDAO();
-		int orderId = ordersDAO.saveOrders(order);//storing order and getting the order id from the db using RETURNING order_id
+        double totalAmount = 0;
+        for (CartItem item : cartItems) {
+            totalAmount += item.getProduct().getPrice() * item.getQuantity();
+        }
 
-		OrderItemDAO oitemDAO = new OrderItemDAO();
-		for (String productId : qtyMap.keySet()) {
-			oitemDAO.saveOrderItem(orderId, productMap.get(productId), qtyMap.get(productId));
-		}
+        Orders order = new Orders(
+            totalAmount,
+            new Timestamp(System.currentTimeMillis()),
+            paymentMode,
+            "ORDERED"
+        );
 
-		Delivery delivery = new Delivery(orderId, name, address1, address2, city, pincode, mobile);
-		DeliveryDAO deliveryDAO = new DeliveryDAO();
-		deliveryDAO.saveDeliveryDetails(delivery);
+        OrdersDAO ordersDAO = new OrdersDAO();
+        int orderId = ordersDAO.saveOrders(order);
 
-		session.removeAttribute("cartCount");
-		session.removeAttribute("cartList");//removed from the session so cart is empty now
-		session.removeAttribute("paymentMode");//removed from the session paymentmode is empty 
+        OrderItemDAO orderItemDAO = new OrderItemDAO();
+        for (CartItem item : cartItems) {
+            orderItemDAO.saveOrderItem(
+                orderId,
+                item.getProduct(),
+                item.getQuantity()
+            );
+        }
 
-		
-		req.setAttribute("orderId", orderId);//request sent to thakyou.jsp
-		req.setAttribute("city", city);//request sent to thakyou.jsp
-		
+        Delivery delivery = new Delivery(
+            orderId, name, address1, address2, city, pincode, mobile
+        );
+        new DeliveryDAO().saveDeliveryDetails(delivery);
 
-		return true; // thankyou.jsp
-	}
+        // ✅ CLEAR CART FROM DB
+        cartDAO.clearCart(user.getUserId());
 
+        session.removeAttribute("paymentMode");
+        session.removeAttribute("cartCount");
+
+        req.setAttribute("orderId", orderId);
+        req.setAttribute("city", city);
+
+        return true; // thankyou.jsp
+    }
 }

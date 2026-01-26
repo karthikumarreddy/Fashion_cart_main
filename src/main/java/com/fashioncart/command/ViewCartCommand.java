@@ -1,60 +1,60 @@
 package com.fashioncart.command;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
+import com.fashioncart.dao.CartDAO;
 import com.fashioncart.dto.ProductDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import util.Product;
+import util.CartItem;
+import util.User;
 
 public class ViewCartCommand implements Command {
 
-    @Override
-    public boolean execute(HttpServletRequest req, HttpServletResponse res) {
+	@Override
+	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 
-        HttpSession session = req.getSession(false);
-        if (session == null) return false;
+	    HttpSession session = req.getSession(false);
+	    if (session == null) return false;
 
-        List<Product> rawCart =
-            (List<Product>) session.getAttribute("cartList");
+	    User user = (User) session.getAttribute("loggedUser");
+	    if (user == null) return false;
 
-        if (rawCart == null || rawCart.isEmpty()) {
-            return false;
-        }
+	    CartDAO cartDAO = new CartDAO();
+	    List<CartItem> cartItems = cartDAO.getCartItems(user.getUserId());
 
-        Map<String, ProductDTO> map = new LinkedHashMap<>();//key=productId value=productDto used to calculate the quantity
+	    if (cartItems == null || cartItems.isEmpty()) {
+	        req.setAttribute("cartList", new ArrayList<>());
+	        req.setAttribute("totalAmount", 0.0);   // ✅ IMPORTANT
+	        session.setAttribute("cartCount", 0);
+	        return true;
+	    }
 
-        for (Product p : rawCart) {
-            if (!map.containsKey(p.getId())) {
-                map.put(p.getId(),
-                    new ProductDTO(
-                        p.getId(),
-                        p.getName(),
-                        p.getCategory(),
-                        p.getPrice()
-                    )
-                );
-            } else {
-                map.get(p.getId()).incrementQuantity();
-            }
-        }
+	    List<ProductDTO> cartDTOList = new ArrayList<>();
+	    double totalAmount = 0;
 
-        List<ProductDTO> cartDTOList =
-            new ArrayList<>(map.values());
+	    for (CartItem item : cartItems) {
+	        ProductDTO dto = new ProductDTO(
+	            item.getProduct().getId(),
+	            item.getProduct().getName(),
+	            item.getProduct().getCategory(),
+	            item.getProduct().getPrice()
+	        );
+	        dto.setQuantity(item.getQuantity());
 
-        double totalAmount = 0;
-        for (ProductDTO dto : cartDTOList) {
-            totalAmount += dto.getPrice() * dto.getQuantity();
-        }
+	        totalAmount += dto.getPrice() * dto.getQuantity();
+	        cartDTOList.add(dto);
+	    }
 
-        req.setAttribute("cartList", cartDTOList);
-        session.setAttribute("totalAmount", totalAmount);
+	    req.setAttribute("cartList", cartDTOList);
+	    session.setAttribute("totalAmount", totalAmount); // ✅ FIX
+	    session.setAttribute("cartCount",
+	        cartDAO.getCartCount(user.getUserId()));
 
-        return true; //cart.jsp
-    }
+	    return true; // cart.jsp
+	}
+
 }

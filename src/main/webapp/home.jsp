@@ -48,12 +48,17 @@
 		<%}%>
 	
 
-    <div id="viewcart">
-        <form action="<%=request.getContextPath()%>/controller" method="get">
-            <input type="hidden" name="command" value="viewCart">
-            <button type="submit">View Cart <p>${sessionScope.cartCount}<p></button>
-        </form>
-    </div>
+   <div id="viewcart">
+    <form action="<%=request.getContextPath()%>/controller" method="get">
+        <input type="hidden" name="command" value="viewCart">
+        <button type="submit">
+            View Cart (<%= session.getAttribute("cartCount") != null 
+                ? session.getAttribute("cartCount") 
+                : 0 %>)
+        </button>
+    </form>
+</div>
+   
 </nav>
 
 	<div id="products1" style="display:flex;gap:20px;margin-top:10px">
