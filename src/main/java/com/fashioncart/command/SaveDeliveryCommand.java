@@ -82,10 +82,10 @@ public class SaveDeliveryCommand implements Command {
 
         //CLEAR CART FROM DB
         cartDAO.clearCart(user.getUserId());
-
+        
+		int cartCount = cartDAO.getCartCount(user.getUserId());
+		session.setAttribute("cartCount", cartCount);
         session.removeAttribute("paymentMode");
-        session.removeAttribute("cartCount");
-
         req.setAttribute("orderId", orderId);
         req.setAttribute("city", city);
 
