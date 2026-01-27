@@ -27,7 +27,8 @@ public class SaveDeliveryCommand implements Command {
         String city = req.getParameter("city");
         String pincode = req.getParameter("pincode");
         String mobile = req.getParameter("mobile");
-
+        
+        // checking if any value is null 
         if (name == null || city == null || mobile == null) {
         	return false;
         }
@@ -36,14 +37,17 @@ public class SaveDeliveryCommand implements Command {
         if (session == null) {
         	return false;
         }
-
+        // getting the logged in user from session 
         User user = (User) session.getAttribute("loggedUser");
+        
+        //getting the paymenyMode setted in  processPaymenCommand
         String paymentMode = (String) session.getAttribute("paymentMode");
 
         if (user == null || paymentMode == null) {
         	return false;
         }
 
+        // it is used to get the cart items d=from db 
         CartDAO cartDAO = new CartDAO();
         List<CartItem> cartItems = cartDAO.getCartItems(user.getUserId());
 
@@ -51,11 +55,14 @@ public class SaveDeliveryCommand implements Command {
         	return false;
         }
 
+        //calculating the total amount using cartList 
         double totalAmount = 0;
         for (CartItem item : cartItems) {
             totalAmount += item.getProduct().getPrice() * item.getQuantity();
         }
-
+        
+        
+        // saving the order details in orders table 
         Orders order = new Orders(
             totalAmount,
             new Timestamp(System.currentTimeMillis()),
@@ -63,9 +70,11 @@ public class SaveDeliveryCommand implements Command {
             "ORDERED"
         );
 
+        // getting the order id (saveOrder will return the order id)
         OrdersDAO ordersDAO = new OrdersDAO();
         int orderId = ordersDAO.saveOrders(order);
-
+        
+        //saving the orders in order_item table 
         OrderItemDAO orderItemDAO = new OrderItemDAO();
         for (CartItem item : cartItems) {
             orderItemDAO.saveOrderItem(
@@ -74,15 +83,17 @@ public class SaveDeliveryCommand implements Command {
                 item.getQuantity()
             );
         }
-
+        
+        // saving the delivery details to the delivery table 
         Delivery delivery = new Delivery(
             orderId, name, address1, address2, city, pincode, mobile
         );
         new DeliveryDAO().saveDeliveryDetails(delivery);
 
-        //CLEAR CART FROM DB
+        //clearing the cart from db
         cartDAO.clearCart(user.getUserId());
         
+        // it gets the cart count after updation 
 		int cartCount = cartDAO.getCartCount(user.getUserId());
 		session.setAttribute("cartCount", cartCount);
         session.removeAttribute("paymentMode");
