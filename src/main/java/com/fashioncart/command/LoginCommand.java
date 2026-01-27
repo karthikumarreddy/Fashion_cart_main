@@ -2,6 +2,8 @@ package com.fashioncart.command;
 
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.fashioncart.dao.CartDAO;
@@ -13,13 +15,14 @@ import jakarta.servlet.http.HttpSession;
 import util.User;
 
 public class LoginCommand implements Command {
-
+private static final Logger logger=LogManager.getLogger(LoginCommand.class);
 	@Override
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 		try {
 			String userName = req.getParameter("userName");
 			String password = req.getParameter("password");
-
+			logger.debug("user name = "+userName);
+			logger.debug("password = "+password);
 			if (userName == null || password.trim() == null) {
 				return false;
 			}
