@@ -20,16 +20,16 @@ public class ViewCartCommand implements Command {
 	@Override
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 		try {
-		// gtes the existing system 
+		// gets the existing system 
 	    HttpSession session = req.getSession(false);
 	    if (session == null) {
-	    	return false;
+	    	return false;//home.jsp
 	    }
 
-	    // geting the user from the session 
+	    // getting the user from the session
 	    User user = (User) session.getAttribute("loggedUser");
 	    if (user == null) {
-	    	return false;
+	    	return false; //home.jsp
 	    }
 
 	    // geting all the items from cart_item table
@@ -38,8 +38,6 @@ public class ViewCartCommand implements Command {
 	    
 	    
 	    if (cartItems == null || cartItems.isEmpty()) {
-	        req.setAttribute("cartList", new ArrayList<>());
-	        req.setAttribute("totalAmount", 0.0);   
 	        session.setAttribute("cartCount", 0);
 	        return true;
 	    }
@@ -59,10 +57,11 @@ public class ViewCartCommand implements Command {
 	        dto.setQuantity(item.getQuantity());
 
 	        totalAmount += dto.getPrice() * dto.getQuantity();
+	        
 	        // adding the productdto to cartDtolist
 	        cartDTOList.add(dto);
 	    }
-
+	    
 	    req.setAttribute("cartList", cartDTOList);
 	    session.setAttribute("totalAmount", totalAmount); 
 	    session.setAttribute("cartCount",cartDAO.getCartCount(user.getUserId()));
@@ -71,7 +70,7 @@ public class ViewCartCommand implements Command {
 	}catch (Exception e) {
 		e.printStackTrace();
 		logger.error(e.getMessage());
-		return false;
+		return false; //home.jsp
 	}
 	}
 

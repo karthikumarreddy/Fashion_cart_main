@@ -16,11 +16,9 @@
 <h1 style="text-align:center;">Shopping Cart</h1>
 
 <%
-List<ProductqtyDTO> cartList =
-        (List<ProductqtyDTO>) request.getAttribute("cartList");
+List<ProductqtyDTO> cartList = (List<ProductqtyDTO>) request.getAttribute("cartList");
 
-    Double totalAmount =
-        (Double) session.getAttribute("totalAmount");
+    Double totalAmount = (Double) session.getAttribute("totalAmount");
 
     if (cartList == null || cartList.isEmpty()) {
 %>

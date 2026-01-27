@@ -76,11 +76,11 @@ public class SaveDeliveryCommand implements Command {
         
         // saving the order details in orders table 
         Orders order = new Orders(
-            totalAmount,
-            new Timestamp(System.currentTimeMillis()),
-            paymentMode,
-            "ORDERED"
-        );
+        					totalAmount,
+        					new Timestamp(System.currentTimeMillis()),
+        					paymentMode,
+        					"ORDERED"
+        					);
 
         // getting the order id (saveOrder will return the order id)
         OrdersDAO ordersDAO = new OrdersDAO();

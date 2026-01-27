@@ -37,16 +37,13 @@ public class ListProductCommand implements Command {
         if (products == null || products.isEmpty()) {
             return false; //error.jsp
         }
-        
-        
-        
         /*setting the list of products in session 
          * and it will be accessed in home.jsp to display products
          */
         HttpSession session=request.getSession();
         session.setAttribute("productList", products);
-
         return true; //Home.jsp
+        
     }catch (Exception e) {
 		e.printStackTrace();
 		logger.error(e.getMessage());

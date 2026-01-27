@@ -44,6 +44,7 @@ public class CommandConfig {
 				String value=commandProperties.getProperty(key);
 				String[] tokens=value.split(",");
 				String commandClass=tokens[0];
+				System.out.println("CommandClass: "+commandClass);
 				String success="";
 				String failure="";
 				for(int i=0;i<tokens.length;i++) {

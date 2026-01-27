@@ -34,7 +34,7 @@ public class ShowPaymentCommand implements Command {
         HttpSession session = req.getSession(false);
         User user = (User) session.getAttribute("loggedUser");
         if (user == null) {
-        	return false;
+        	return false; //cart.jsp
         }
 
         CartDAO cartDAO = new CartDAO();

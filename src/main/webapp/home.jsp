@@ -54,7 +54,7 @@
         <button type="submit">
             View Cart (<%= session.getAttribute("cartCount") != null 
                 ? session.getAttribute("cartCount") 
-                : 0 %>)
+                : "" %>)
         </button>
     </form>
 </div>
@@ -63,8 +63,7 @@
 
 	<div id="products1" style="display:flex;gap:20px;margin-top:10px">
 		<%
-    List<Product> products =
-        (List<Product>)session.getAttribute("productList");
+    List<Product> products = (List<Product>)session.getAttribute("productList");
 
     if(products!=null)
         for (Product p : products) {
@@ -94,10 +93,11 @@
 
 <script>
 
+
+
 const isLoggedIn = <%= (session.getAttribute("loggedUser") != null) %>;
 
 	document.addEventListener("DOMContentLoaded", function () {
-
 	    const dropdownMenu = document.getElementById("dropdownMenu");
 
 	    window.toggleDropdown = function (event) {
