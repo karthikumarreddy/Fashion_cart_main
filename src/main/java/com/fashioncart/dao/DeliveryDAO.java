@@ -15,6 +15,7 @@ public class DeliveryDAO {
         Context ctx = new InitialContext();
         return (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
     }
+	
 	public void saveDeliveryDetails(Delivery delivery) {
 		
 		String sql = "INSERT INTO delivery_address(order_id, customer_name, address_line1,address_line2,city,pincode,mobile)VALUES (?, ?, ?, ?, ?, ?, ?)";

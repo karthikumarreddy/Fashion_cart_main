@@ -8,13 +8,15 @@ public class ProcessPaymentCommand implements Command {
 
     @Override
     public boolean execute(HttpServletRequest req, HttpServletResponse res) {
+
     		//getting input from payment.jsp
+
         String paymentMode = req.getParameter("paymentMode");
         if (paymentMode == null || paymentMode.isEmpty()) {
             return false;
         }
-
-        HttpSession session = req.getSession(false);//gets the existing session it will not create a new session
+      //gets the existing session it will not create a new session
+        HttpSession session = req.getSession(false);
         if (session == null) {
         	return false;//payment.jsp
         }
