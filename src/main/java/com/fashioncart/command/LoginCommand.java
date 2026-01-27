@@ -1,12 +1,8 @@
 package com.fashioncart.command;
-<<<<<<< HEAD
-
-import java.sql.SQLException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-=======
->>>>>>> branch 'master' of https://github.com/karthikumarreddy/Fashion_cart_main.git
+
 import org.mindrot.jbcrypt.BCrypt;
 import com.fashioncart.dao.CartDAO;
 import com.fashioncart.dao.UserDAO;

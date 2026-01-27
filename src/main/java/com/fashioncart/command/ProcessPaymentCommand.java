@@ -10,7 +10,6 @@ public class ProcessPaymentCommand implements Command {
     public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 
     		//getting input from payment.jsp
-
         String paymentMode = req.getParameter("paymentMode");
         if (paymentMode == null || paymentMode.isEmpty()) {
             return false;

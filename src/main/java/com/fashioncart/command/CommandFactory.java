@@ -5,6 +5,10 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
 
+
+/*
+ * command factory is used to create the object for specific class
+ */
 public class CommandFactory {
 	private CommandFactory() {
 
@@ -12,6 +16,10 @@ public class CommandFactory {
 
 	public static Map<String, CommandConfig> configMap = null;
 	static Properties commandProperties = new Properties();
+	
+	/*
+	 * loading the properties file into property
+	 */
 	static {
 		try (InputStream is = CommandFactory.class
 				.getClassLoader()
@@ -23,18 +31,22 @@ public class CommandFactory {
 
 			if (commandProperties != null) {
 				configMap = CommandConfig.loadConfiguration(commandProperties);
-
 			}
-			System.out.println("Loaded commands: " + configMap.keySet());
+		
 		} catch (IOException e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			throw new RuntimeException("Failed to load command mappings", e);
 
 		}
-
 	}
 
+	
+	/*
+	 * getting the action from the controller 
+	 * here creating the object for particular commandclass
+	 * and returning the command type of object
+	 */
 	public static Command getCommand(String action) {
 		try {
 			if (action == null) {

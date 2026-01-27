@@ -24,6 +24,18 @@ public class CommandConfig {
 		return failurePage;
 	}
 	
+	
+	/*
+	 * splitting the properties file as
+	 * commandClass
+	 * successPage
+	 * failurePage
+	 * 
+	 * and creating the commandConfig object();
+	 * putting that in the Map key-propertyName,value - commandConfig
+	 * 
+	 * returning the map
+	 */
 	public static Map<String,CommandConfig>loadConfiguration(Properties commandProperties){
 		
 		Map<String, CommandConfig> configMap = new HashMap<String, CommandConfig>();

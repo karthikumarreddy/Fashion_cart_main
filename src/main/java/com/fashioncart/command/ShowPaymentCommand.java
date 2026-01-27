@@ -12,9 +12,15 @@ import jakarta.servlet.http.HttpSession;
 
 public class ShowPaymentCommand implements Command {
 
+	
+	/*
+	 * getting the user object
+	 * getting the cartitems from the cartDAO using userID
+	 * and returning  true if cartItems not null
+	 */
     @Override
     public boolean execute(HttpServletRequest req, HttpServletResponse res) {
-
+    		
         HttpSession session = req.getSession(false);
         User user = (User) session.getAttribute("loggedUser");
         if (user == null) {
