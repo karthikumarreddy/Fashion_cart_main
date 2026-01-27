@@ -64,7 +64,7 @@ public class ViewCartCommand implements Command {
 	    }
 
 	    req.setAttribute("cartList", cartDTOList);
-	    req.setAttribute("totalAmount", totalAmount); 
+	    session.setAttribute("totalAmount", totalAmount); 
 	    session.setAttribute("cartCount",cartDAO.getCartCount(user.getUserId()));
 
 	    return true; // cart.jsp

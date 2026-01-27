@@ -19,7 +19,7 @@ public class ProcessPaymentCommand implements Command {
         if (paymentMode == null || paymentMode.isEmpty()) {
             return false;
         }
-      //gets the existing session it will not create a new session
+        //gets the existing session it will not create a new session
         HttpSession session = req.getSession(false);
         if (session == null) {
         	return false;//payment.jsp
