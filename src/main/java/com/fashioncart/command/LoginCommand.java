@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import org.mindrot.jbcrypt.BCrypt;
+
 import com.fashioncart.dao.CartDAO;
 import com.fashioncart.dao.UserDAO;
 import com.fashioncart.dto.User;
@@ -49,6 +50,7 @@ private static final Logger logger=LogManager.getLogger(LoginCommand.class);
 
 		}catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 		return false;
 
