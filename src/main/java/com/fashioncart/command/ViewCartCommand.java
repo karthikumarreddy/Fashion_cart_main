@@ -67,7 +67,7 @@ public class ViewCartCommand implements Command {
 	    session.setAttribute("totalAmount", totalAmount); 
 	    session.setAttribute("cartCount",cartDAO.getCartCount(user.getUserId()));
 
-	    return true; // cart.jsp
+	    return true; //cart.jsp
 	}catch (Exception e) {
 		e.printStackTrace();
 		logger.error(e.getMessage());
