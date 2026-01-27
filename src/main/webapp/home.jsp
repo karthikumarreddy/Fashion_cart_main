@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="java.util.*" %>
-<%@ page import="util.Product" %>
+<%@ page import="com.fashioncart.dto.Product" %>
 
 <!DOCTYPE html>
 <html>
@@ -76,9 +76,17 @@
 			<p>₹<%=p.getPrice()%></p>
 			<p><%=p.isAvailability()%></p>
 			
+			
+			<%if(p.isAvailability().equalsIgnoreCase("IN_STOCK")){ %>
 			<a href="<%=request.getContextPath()%>/controller?command=addToCart&id=<%=p.getId()%>">
 				<button>Add to Cart</button>	
 			</a>
+			<%}else{ %>
+				<a href="<%=request.getContextPath()%>/controller?command=addToCart&id=<%=p.getId()%>">
+				<button style="cursor:not-allowed;background-color:grey">Add to Cart</button>	
+				</a>
+			<% }%>
+			
 		</div>
 		<%}%>
 	</div>
@@ -109,7 +117,6 @@ const isLoggedIn = <%= (session.getAttribute("loggedUser") != null) %>;
 	    });
 
 	});
-	
 
 </script>
 </html>

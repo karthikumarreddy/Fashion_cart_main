@@ -1,4 +1,4 @@
-package util;
+package com.fashioncart.dto;
 
 
 public class CartItem {
@@ -6,6 +6,7 @@ public class CartItem {
     private int cartId;
     private Product product;
     private int quantity;
+    
 	public int getCartItemId() {
 		return cartItemId;
 	}

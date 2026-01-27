@@ -1,4 +1,4 @@
-package util;
+package com.fashioncart.dto;
 
 public class Product {
 	private String id;
@@ -8,6 +8,7 @@ public class Product {
 	private String imagePath;
 	private String availability;
 
+	
 	public Product() {
 	};
 

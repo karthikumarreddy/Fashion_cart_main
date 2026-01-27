@@ -7,20 +7,20 @@ import com.fashioncart.dao.CartDAO;
 import com.fashioncart.dao.DeliveryDAO;
 import com.fashioncart.dao.OrderItemDAO;
 import com.fashioncart.dao.OrdersDAO;
+import com.fashioncart.dto.CartItem;
+import com.fashioncart.dto.Delivery;
+import com.fashioncart.dto.Orders;
+import com.fashioncart.dto.User;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import util.CartItem;
-import util.Delivery;
-import util.Orders;
-import util.User;
 
 public class SaveDeliveryCommand implements Command {
 
     @Override
     public boolean execute(HttpServletRequest req, HttpServletResponse res) {
-
+    		 
         String name = req.getParameter("fullname");
         String address1 = req.getParameter("address1");
         String address2 = req.getParameter("address2");
@@ -97,6 +97,8 @@ public class SaveDeliveryCommand implements Command {
 		int cartCount = cartDAO.getCartCount(user.getUserId());
 		session.setAttribute("cartCount", cartCount);
         session.removeAttribute("paymentMode");
+
+
         req.setAttribute("orderId", orderId);
         req.setAttribute("city", city);
 

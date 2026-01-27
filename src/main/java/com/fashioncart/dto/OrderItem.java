@@ -1,4 +1,4 @@
-package util;
+package com.fashioncart.dto;
 
 public class OrderItem {
 

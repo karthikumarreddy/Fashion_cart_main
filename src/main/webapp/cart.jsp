@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="java.util.*" %>
-<%@ page import="com.fashioncart.dto.ProductDTO" %>
+<%@ page import="com.fashioncart.dto.ProductqtyDTO" %>
 
 <!DOCTYPE html>
 <html>
@@ -16,8 +16,8 @@
 <h1 style="text-align:center;">Shopping Cart</h1>
 
 <%
-    List<ProductDTO> cartList =
-        (List<ProductDTO>) request.getAttribute("cartList");
+List<ProductqtyDTO> cartList =
+        (List<ProductqtyDTO>) request.getAttribute("cartList");
 
     Double totalAmount =
         (Double) session.getAttribute("totalAmount");
@@ -26,7 +26,7 @@
 %>
     <h3 style="text-align:center;">Your cart is empty</h3>
 <%
-    } else {
+} else {
 %>
 
 <table>
@@ -42,7 +42,7 @@
 
     <tbody>
 <%
-        for (ProductDTO item : cartList) {
+for (ProductqtyDTO item : cartList) {
             double subtotal = item.getPrice() * item.getQuantity();
 %>
         <tr>

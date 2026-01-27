@@ -8,7 +8,9 @@ public class ProcessPaymentCommand implements Command {
 
     @Override
     public boolean execute(HttpServletRequest req, HttpServletResponse res) {
-    	// grtting the paymentmode from request
+
+    		//getting input from payment.jsp
+
         String paymentMode = req.getParameter("paymentMode");
         if (paymentMode == null || paymentMode.isEmpty()) {
             return false;
@@ -18,8 +20,7 @@ public class ProcessPaymentCommand implements Command {
         if (session == null) {
         	return false;//payment.jsp
         }
-
-       
+        
         session.setAttribute("paymentMode", paymentMode);
 
         return true; //delivery.jsp

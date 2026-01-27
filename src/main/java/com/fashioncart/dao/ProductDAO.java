@@ -12,14 +12,21 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import util.Product;
+import com.fashioncart.dto.Product;
 
 public class ProductDAO {
 	
+	//return the DataSource by getting from the context.xml to get the connection db
 	private DataSource getDataSource() throws Exception {
         Context ctx = new InitialContext();
         return (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
     }
+	
+	
+	/*getting the product from product table in db
+	 * and add each product in list 
+	 * and return list of product to ListProductsCommand
+	 */
 	public List<Product> getAllProductsList() {
 		String sql = "select * from product";
 		List<Product> allProducts = new ArrayList<>();
@@ -40,28 +47,8 @@ public class ProductDAO {
 	} 
 		
 	
-
-	public Product getProductById(String id) throws Exception {
-
-			String sql = "select * from product where product_id=" + id;
-			try (Connection conn = getDataSource().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-
-				ResultSet rs = ps.executeQuery();
-
-				while (rs.next()) {
-					String id1 = rs.getString("product_id");
-					String name = rs.getString("Product_name");
-					String category = rs.getString("category");
-					double price = rs.getDouble("price");
-					String image = rs.getString("image_path");
-					String available = rs.getString("availability");
-					return new Product(id1, name, category, price, image, available);
-				}
-			}catch (NamingException | SQLException e) {
-				e.printStackTrace();
-			}
-			return null;
-		} 
+	
+	
 	
 
 	public List<Product> getProductsByCategoryList(String category) {
@@ -71,7 +58,6 @@ public class ProductDAO {
 			try (Connection conn = getDataSource().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
 				ps.setString(1, category);
-
 				ResultSet rs = ps.executeQuery();
 
 				while (rs.next()) {

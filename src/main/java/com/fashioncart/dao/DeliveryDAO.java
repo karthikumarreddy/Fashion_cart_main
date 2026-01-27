@@ -7,7 +7,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import util.Delivery;
+import com.fashioncart.dto.Delivery;
 
 public class DeliveryDAO {
 

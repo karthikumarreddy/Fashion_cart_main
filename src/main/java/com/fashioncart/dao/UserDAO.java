@@ -9,7 +9,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import util.User;
+import com.fashioncart.dto.User;
 
 public class UserDAO {
 	private DataSource getDataSource() throws Exception {
@@ -26,7 +26,7 @@ public class UserDAO {
 			ps.setString(1, userName);
 			ResultSet rs=ps.executeQuery();
 			if(rs.next()) {
-				User user=new User();
+				User user=new User();		
 				user.setUserId(rs.getInt("user_id"));
 				user.setUserName(rs.getString("username"));
 				user.setEmail(rs.getString("email"));

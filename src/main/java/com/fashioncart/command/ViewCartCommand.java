@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fashioncart.dao.CartDAO;
-import com.fashioncart.dto.ProductDTO;
+import com.fashioncart.dto.CartItem;
+import com.fashioncart.dto.ProductqtyDTO;
+import com.fashioncart.dto.User;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import util.CartItem;
-import util.User;
 
 public class ViewCartCommand implements Command {
 
@@ -41,11 +41,12 @@ public class ViewCartCommand implements Command {
 	    }
 
 	    // calculating the total amount 
-	    List<ProductDTO> cartDTOList = new ArrayList<>();
+	    List<ProductqtyDTO> cartDTOList = new ArrayList<>();
+
 	    double totalAmount = 0;
 
 	    for (CartItem item : cartItems) {
-	        ProductDTO dto = new ProductDTO(
+	        ProductqtyDTO dto = new ProductqtyDTO(
 	            item.getProduct().getId(),
 	            item.getProduct().getName(),
 	            item.getProduct().getCategory(),

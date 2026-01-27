@@ -1,11 +1,10 @@
-package util;
+package com.fashioncart.dto;
 
 public class User {
 	private int userId;
 	private String userName;
 	private String email;
 	private String password;
-	
 	
 	
 	public User(String userName, String email, String password) {
