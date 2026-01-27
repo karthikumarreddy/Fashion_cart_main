@@ -3,10 +3,10 @@ package com.fashioncart.command;
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.fashioncart.dao.UserDAO;
+import com.fashioncart.dto.User;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import util.User;
 
 public class SignupCommand implements Command{
 

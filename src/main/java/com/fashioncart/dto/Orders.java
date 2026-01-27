@@ -1,4 +1,4 @@
-package util;
+package com.fashioncart.dto;
 
 import java.sql.Timestamp;
 

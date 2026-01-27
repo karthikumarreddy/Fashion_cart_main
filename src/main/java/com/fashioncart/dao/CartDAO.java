@@ -10,16 +10,24 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import util.CartItem;
-import util.Product;
+import com.fashioncart.dto.CartItem;
+import com.fashioncart.dto.Product;
 
+
+/*
+ *in this class four methods   
+ *addtcart-adding the userId and product to the DB
+ *getCartItems-
+ *
+ * 
+ */
 public class CartDAO {
 	private DataSource getDataSource() throws Exception {
         Context ctx = new InitialContext();
         return (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
     }
 	
-	public void addToCart(int userId, int productId) {
+	public void addToCart(int userId, int productId){
 
 	    String sql = """
 	        INSERT INTO cart_items (user_id, product_id, quantity)
@@ -44,13 +52,13 @@ public class CartDAO {
 
 	    String sql = """
 	        SELECT ci.quantity,
-	               p.product_id, p.product_name, p.price, p.image_path
+	               p.product_id, p.product_name, p.price,p.category
 	        FROM cart_items ci
 	        JOIN product p ON ci.product_id = p.product_id
 	        WHERE ci.user_id = ?
 	    """;
 
-	    List<CartItem> list = new ArrayList<>();
+	    List<CartItem> cartList = new ArrayList<>();
 
 	    try (
 	        Connection conn = getDataSource().getConnection();
@@ -63,9 +71,9 @@ public class CartDAO {
 	            Product p = new Product(
 	                rs.getString("product_id"),
 	                rs.getString("product_name"),
-	                null,
+	                rs.getString("category"),
 	                rs.getDouble("price"),
-	                rs.getString("image_path"),
+	                null,
 	                null
 	            );
 
@@ -73,12 +81,12 @@ public class CartDAO {
 	            item.setProduct(p);
 	            item.setQuantity(rs.getInt("quantity"));
 
-	            list.add(item);
+	            cartList.add(item);
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-	    return list;
+	    return cartList;
 	}
 
 	public void clearCart(int userId) {
@@ -95,10 +103,10 @@ public class CartDAO {
 	        e.printStackTrace();
 	    }
 	}
-
+	
 	public int getCartCount(int userId) {
 
-	    String sql = "SELECT COALESCE(SUM(quantity),0) FROM cart_items WHERE user_id = ?";
+	    String sql = "SELECT SUM(quantity) FROM cart_items WHERE user_id = ?";
 
 	    try (
 	        Connection conn = getDataSource().getConnection();
