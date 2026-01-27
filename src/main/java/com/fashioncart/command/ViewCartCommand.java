@@ -3,6 +3,9 @@ package com.fashioncart.command;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.fashioncart.dao.CartDAO;
 import com.fashioncart.dto.CartItem;
 import com.fashioncart.dto.ProductqtyDTO;
@@ -13,9 +16,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class ViewCartCommand implements Command {
-
+	private static final Logger logger=LogManager.getLogger(ViewCartCommand.class);
 	@Override
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
+		try {
 		// gtes the existing system 
 	    HttpSession session = req.getSession(false);
 	    if (session == null) {
@@ -64,6 +68,11 @@ public class ViewCartCommand implements Command {
 	    session.setAttribute("cartCount",cartDAO.getCartCount(user.getUserId()));
 
 	    return true; // cart.jsp
+	}catch (Exception e) {
+		e.printStackTrace();
+		logger.error(e.getMessage());
+		return false;
+	}
 	}
 
 }
