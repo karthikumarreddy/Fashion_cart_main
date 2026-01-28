@@ -51,12 +51,12 @@ public class CartDAO {
 	public List<CartItem> getCartItems(int userId) {
 
 	    String sql = """
-	        SELECT ci.quantity,
-	               p.product_id, p.product_name, p.price,p.category
-	        FROM cart_items ci
-	        JOIN product p ON ci.product_id = p.product_id
-	        WHERE ci.user_id = ?
-	    """;
+	    				    SELECT ci.quantity,
+	    		            p.product_id, p.product_name, p.price,p.category
+	    				    FROM cart_items ci
+	    				    JOIN product p ON ci.product_id = p.product_id
+	    				    WHERE ci.user_id = ?
+	    					""";
 
 	    List<CartItem> cartList = new ArrayList<>();
 

@@ -42,6 +42,7 @@ public class ListProductCommand implements Command {
          */
         HttpSession session=request.getSession();
         session.setAttribute("productList", products);
+        session.setAttribute("category", category);
         return true; //Home.jsp
         
     }catch (Exception e) {

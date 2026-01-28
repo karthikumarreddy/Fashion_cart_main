@@ -27,14 +27,19 @@ public class SaveDeliveryCommand implements Command {
     		 
         String name = req.getParameter("fullname");
         logger.debug("name : "+name);
+        
         String address1 = req.getParameter("address1");
         logger.debug("address 1 : "+ address1);
+        
         String address2 = req.getParameter("address2");
         logger.debug("address 2 : "+address2);
+        
         String city = req.getParameter("city");
         logger.debug("city : "+city);
+        
         String pincode = req.getParameter("pincode");
         logger.debug("pincode : "+pincode);
+        
         String mobile = req.getParameter("mobile");
         logger.debug("mobile : "+mobile);
         
@@ -102,7 +107,7 @@ public class SaveDeliveryCommand implements Command {
         );
         new DeliveryDAO().saveDeliveryDetails(delivery);
 
-        //clearing the cart from db
+        //clearing the cartitems from db
         cartDAO.clearCart(user.getUserId());
         
         // it gets the cart count after updation 
