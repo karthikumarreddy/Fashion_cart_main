@@ -56,6 +56,7 @@ public class CartDAO {
 	    				    FROM cart_items ci
 	    				    JOIN product p ON ci.product_id = p.product_id
 	    				    WHERE ci.user_id = ?
+	    				    ORDER BY p.product_name;
 	    					""";
 
 	    List<CartItem> cartList = new ArrayList<>();
