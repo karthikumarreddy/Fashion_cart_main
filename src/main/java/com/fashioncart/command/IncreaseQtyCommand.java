@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.fashioncart.dao.CartDAO;
 import com.fashioncart.dto.CartItem;
-import com.fashioncart.dto.ProductqtyDTO;
+import com.fashioncart.dto.CartItemView;
 import com.fashioncart.dto.User;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,12 +34,12 @@ public class IncreaseQtyCommand implements Command {
 				
 				List<CartItem> cartItems = cartDao.getCartItems(user.getUserId());
 				// calculating the total amount 
-			    List<ProductqtyDTO> cartDTOList = new ArrayList<>();
+			    List<CartItemView> cartDTOList = new ArrayList<>();
 
 			    double totalAmount = 0;
 
 			    for (CartItem item : cartItems) {
-			        ProductqtyDTO dto = new ProductqtyDTO(
+			        CartItemView dto = new CartItemView(
 			            item.getProduct().getId(),
 			            item.getProduct().getName(),
 			            item.getProduct().getCategory(),

@@ -1,6 +1,6 @@
 package com.fashioncart.dto;
 
-public class ProductqtyDTO {
+public class CartItemView {
 
 	private String id;
 	private String name;
@@ -8,7 +8,7 @@ public class ProductqtyDTO {
 	private double price;
 	private int quantity;
 
-	public ProductqtyDTO(String id, String name, String category, double price) {
+	public CartItemView(String id, String name, String category, double price) {
 		this.id = id;
 		this.name = name;
 		this.category = category;
