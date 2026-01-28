@@ -54,7 +54,7 @@ p {
 }
 
 /* Button link */
-a {
+button {
     text-decoration: none;
     margin-top: 15px;
     padding: 12px 28px;
@@ -67,8 +67,10 @@ a {
 }
 
 /* Hover effect */
-a:hover {
+button:hover {
     background: linear-gradient(135deg, #333, #555);
     transform: translateY(-2px);
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
 }
+
+

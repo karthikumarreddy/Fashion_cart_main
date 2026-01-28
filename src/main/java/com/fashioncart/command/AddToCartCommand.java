@@ -35,7 +35,6 @@ public class AddToCartCommand implements Command {
 	    session.setAttribute("cartCount", count);
 	    logger.debug("cart count : "+count);
 
-
 	    return true; // cart.jsp
 	}catch (Exception e) {
 		e.printStackTrace();

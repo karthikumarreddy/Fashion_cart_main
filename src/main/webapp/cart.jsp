@@ -22,7 +22,16 @@ List<ProductqtyDTO> cartList = (List<ProductqtyDTO>) request.getAttribute("cartL
 
     if (cartList == null || cartList.isEmpty()) {
 %>
+
     <h3 style="text-align:center;">Your cart is empty</h3>
+    <div style="margin-left:42.5%">
+    <form action="<%=request.getContextPath()%>/controller" method="post"
+          style="display:inline;">
+        <input type="hidden" name="command" value="listProducts">
+        <button type="submit">continueShopping</button>
+    </form>
+    </div>
+    
 <%
 } else {
 %>
@@ -75,14 +84,14 @@ for (ProductqtyDTO item : cartList) {
 						method="post" style="display: inline;">
 						<input type="hidden" name="command" value="decreaseQty"> <input
 							type="hidden" name="productId" value="<%=item.getId()%>">
-						<button type="submit">➖</button>
+						<button type="submit">-</button>
 					</form> <strong><%=item.getQuantity()%></strong>
 
 					<form action="<%=request.getContextPath()%>/controller"
 						method="post" style="display: inline;">
 						<input type="hidden" name="command" value="increaseQty"> <input
 							type="hidden" name="productId" value="<%=item.getId()%>">
-						<button type="submit">➕</button>
+						<button type="submit">+</button>
 					</form>
 				</td>
 
@@ -115,11 +124,13 @@ for (ProductqtyDTO item : cartList) {
 </div>
 
 <div class="buttons">
-    <a href="<%=request.getContextPath()%>/home.jsp">
-        <button>Continue Shopping</button>
-    </a>
+     <form action="<%=request.getContextPath()%>/controller" method="post"
+          style="display:inline;">
+        <input type="hidden" name="command" value="listProducts">
+        <button type="submit">continueShopping</button>
+    </form>
 
-    <form action="<%=request.getContextPath()%>/controller" method="get"
+    <form action="<%=request.getContextPath()%>/controller" method="post"
           style="display:inline;">
         <input type="hidden" name="command" value="showPayment">
         <button type="submit">Buy Now</button>
