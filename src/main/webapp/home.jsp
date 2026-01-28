@@ -74,8 +74,8 @@
 			<img src="<%= request.getContextPath()%>/images/<%= p.getImagePath()%>">
 			<h4><%=p.getName()%></h4>
 			<p>₹<%=p.getPrice()%></p>
-			<p><%=p.isAvailability()%></p>
-			
+			<p><%=p.isAvailability().equalsIgnoreCase("IN_STOCk")?"Available":"Currently UnAvailable"%></p>
+		
 			
 			<%if(p.isAvailability().equalsIgnoreCase("IN_STOCK")){ %>
 			<a href="<%=request.getContextPath()%>/controller?command=addToCart&id=<%=p.getId()%>">
@@ -90,7 +90,7 @@
 		</div>
 		<%}%>
 		
-			<jsp:include page="/footer.jsp"></jsp:include>
+				
 	</div>
 </body>
 
