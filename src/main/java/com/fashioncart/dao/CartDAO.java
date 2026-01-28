@@ -123,6 +123,87 @@ public class CartDAO {
 	    }
 	    return 0;
 	}
+	
+	
+	public void increaseQuantity(int userId, int productId) {
+
+	    String sql = """
+	        UPDATE cart_items
+	        SET quantity = quantity + 1
+	        WHERE user_id = ? AND product_id = ?
+	    """;
+
+	    try (Connection conn = getDataSource().getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+	        ps.setInt(1, userId);
+	        ps.setInt(2, productId);
+	        ps.executeUpdate();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	
+	public void decreaseQuantity(int userId, int productId) {
+
+		
+		
+	    String updateSql = """
+	        UPDATE cart_items
+	        SET quantity = quantity - 1
+	        WHERE user_id = ? AND product_id = ? AND quantity > 0
+	    """;
+
+	    String deleteSql = """
+	        DELETE FROM cart_items
+	        WHERE user_id = ? AND product_id = ? AND quantity <= 0
+	    """;
+
+	    try (Connection conn = getDataSource().getConnection()) {
+
+	        conn.setAutoCommit(false); //Transaction start
+
+	        try (PreparedStatement ps = conn.prepareStatement(updateSql)) {
+	            ps.setInt(1, userId);
+	            ps.setInt(2, productId);
+	            ps.executeUpdate();
+	        }
+
+	        try (PreparedStatement ps = conn.prepareStatement(deleteSql)) {
+	            ps.setInt(1, userId);
+	            ps.setInt(2, productId);
+	            ps.executeUpdate();
+	        }
+
+	        conn.commit(); // Success
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public void removeFromCart(int userId, int productId) {
+
+	    String sql = """
+	        DELETE FROM cart_items
+	        WHERE user_id = ? AND product_id = ?
+	    """;
+
+	    try (Connection conn = getDataSource().getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+	        ps.setInt(1, userId);
+	        ps.setInt(2, productId);
+	        ps.executeUpdate();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
+
 
 
 }

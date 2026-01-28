@@ -38,7 +38,7 @@ List<ProductqtyDTO> cartList = (List<ProductqtyDTO>) request.getAttribute("cartL
         </tr>
     </thead>
 
-    <tbody>
+   <%-- <tbody>
 <%
 for (ProductqtyDTO item : cartList) {
             double subtotal = item.getPrice() * item.getQuantity();
@@ -54,6 +54,60 @@ for (ProductqtyDTO item : cartList) {
         }
 %>
     </tbody>
+    --%> 
+    
+    
+    
+    
+    
+    <tbody>
+			<%
+			for (ProductqtyDTO item : cartList) {
+				double subtotal = item.getPrice() * item.getQuantity();
+				
+			%>
+			<tr>
+				<td><%=item.getName()%></td>
+				<td><%=item.getCategory()%></td>
+				<td>₹ <%=String.format("%.2f", item.getPrice())%></td>
+
+				<!-- Quantity buttons -->
+				<td>
+					<form action="<%=request.getContextPath()%>/controller"
+						method="post" style="display: inline;">
+						<input type="hidden" name="command" value="decreaseQty"> <input
+							type="hidden" name="productId" value="<%=item.getId()%>">
+						<button type="submit">➖</button>
+					</form> <strong><%=item.getQuantity()%></strong>
+
+					<form action="<%=request.getContextPath()%>/controller"
+						method="post" style="display: inline;">
+						<input type="hidden" name="command" value="increaseQty"> <input
+							type="hidden" name="productId" value="<%=item.getId()%>">
+						<button type="submit">➕</button>
+					</form>
+				</td>
+
+				<td>₹ <%=String.format("%.2f", subtotal)%></td>
+
+				<!-- Remove button -->
+				<td>
+					<form action="<%=request.getContextPath()%>/controller"
+						method="post">
+						<input type="hidden" name="command" value="removeFromCart">
+						<input type="hidden" name="productId" value="<%=item.getId()%>">
+						<button type="submit">Remove</button>
+					</form>
+				</td>
+			</tr>
+			<%
+			}
+			%>
+		</tbody>
+      
+    
+    
+    
 </table>
 
 <div class="total">

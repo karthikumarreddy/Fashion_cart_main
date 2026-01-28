@@ -59,7 +59,7 @@ public class SaveDeliveryCommand implements Command {
         	return false;
         }
 
-        // it is used to get the cart items d=from db 
+        // it is used to get the cart items from db 
         CartDAO cartDAO = new CartDAO();
         List<CartItem> cartItems = cartDAO.getCartItems(user.getUserId());
 

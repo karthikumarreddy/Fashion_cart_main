@@ -22,7 +22,7 @@ public class ListProductCommand implements Command {
         String category = request.getParameter("category");
         logger.debug("category : "+category);
         
-        //getting products and storing in List
+        //getting products and storing in List from db
         ProductDAO productDAO = new ProductDAO();
         List<Product> products;
 
