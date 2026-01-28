@@ -34,14 +34,14 @@
  	if(session.getAttribute("loggedUser")==null){
  		%>	
  		<div id="login-btn">
-		<form action="<%=request.getContextPath()%>/controller" method="get">
+		<form action="<%=request.getContextPath()%>/controller" method="post">
             <input type="hidden" name="command" value="login">
             <button type="submit">Login</button>
         </form>
 	</div>	
  	<% }else{%>
 		<div id="logout-btn">
-			<form action="<%=request.getContextPath()%>/controller" method="get">
+			<form action="<%=request.getContextPath()%>/controller" method="post">
 				<input type="hidden" name="command" value="logout">
 				<button type="submit">Logout</button>
 			</form>
@@ -50,7 +50,7 @@
 	
 
    <div id="viewcart">
-    <form action="<%=request.getContextPath()%>/controller" method="get">
+    <form action="<%=request.getContextPath()%>/controller" method="post">
         <input type="hidden" name="command" value="viewCart">
         <button type="submit">
             View Cart (<%= session.getAttribute("cartCount") != null 
@@ -89,7 +89,7 @@
 			
 		</div>
 		<%}%>
-		
+		<jsp:include page="footer.jsp"></jsp:include>
 				
 	</div>
 </body>

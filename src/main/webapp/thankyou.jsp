@@ -17,7 +17,12 @@
 <p><b>Delivery City:</b> <%=request.getAttribute("city")%></p>
 <p><b>Total Amount:</b> ₹ <%=session.getAttribute("totalAmount")%></p>
 </div>
-<a href="<%=request.getContextPath()%>/home.jsp">Continue Shopping</a>
+
+<form action="<%=request.getContextPath()%>/controller" method="post"
+          style="display:inline;">
+        <input type="hidden" name="command" value="listProducts">
+        <button type="submit">continueShopping</button>
+    </form>
 
 
 	<jsp:include page="/footer.jsp"></jsp:include>

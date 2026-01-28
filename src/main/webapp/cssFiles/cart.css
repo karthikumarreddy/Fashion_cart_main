@@ -63,10 +63,22 @@ tbody tr:hover {
 }
 
 /* Price highlight */
-
+td:nth-child(3),
 td:nth-child(5) {
     font-weight: 600;
     color: #1FCC4D;
+}
+td:nth-child(4) form:nth-child(1){
+	display:flex;
+	align-items:center;
+
+}
+td:nth-child(4) form button{
+	
+	border-radius:50%;
+	background-color:green;
+	color:black;
+	
 }
 
 /* ===== TOTAL ===== */
