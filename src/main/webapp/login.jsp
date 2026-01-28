@@ -2,7 +2,7 @@
 <style>
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+ 	
     background: linear-gradient(135deg, #667eea, #764ba2);
     height: 100vh;
     display: flex;
@@ -88,10 +88,11 @@ h2{
 }
 
 /* Error message */
-p[style*="color:red"] {
+p{
     margin-top: 15px;
     text-align: center;
     font-weight: bold;
+    color:red;
 }
 
 </style>

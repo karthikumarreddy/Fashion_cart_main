@@ -3,8 +3,9 @@
 body {
     margin: 0;
     padding: 0;
+    display:flex;
+    flex-direction:column;
     min-height: 100vh;
-    font-family: "Segoe UI", Roboto, Arial, sans-serif;
     background: linear-gradient(135deg, #f9fafb, #e9ecf1);
     display: flex;
     align-items: center;
@@ -13,6 +14,8 @@ body {
 
 /* Card container */
 .container {
+	display:flex;
+    flex-direction:column;
     width: 100%;
     max-width: 420px;
     background: #ffffff;

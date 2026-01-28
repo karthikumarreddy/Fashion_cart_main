@@ -6,15 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Payment</title>
-
 	<link rel="stylesheet" href="/fashioncart/cssFiles/payment.css">
-
 </head>
 
 <body>
 
 <div class="container">
-
 <h2>Payment</h2>
 
 <%
@@ -37,8 +34,7 @@
     <button type="submit">Pay</button>
 </form>
 
-
 </div>
-
+	<jsp:include page="/footer.jsp"></jsp:include>
 </body>
 </html>

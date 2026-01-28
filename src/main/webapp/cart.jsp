@@ -126,6 +126,8 @@ for (ProductqtyDTO item : cartList) {
         <input type="hidden" name="command" value="showPayment">
         <button type="submit">Buy Now</button>
     </form>
+    
+    <jsp:include page="/footer.jsp"></jsp:include>
 </div>
 
 <%

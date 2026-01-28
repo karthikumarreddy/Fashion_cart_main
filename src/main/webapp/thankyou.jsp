@@ -19,5 +19,7 @@
 </div>
 <a href="<%=request.getContextPath()%>/home.jsp">Continue Shopping</a>
 
+
+	<jsp:include page="/footer.jsp"></jsp:include>
 </body>
 </html>

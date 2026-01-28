@@ -24,6 +24,7 @@
   <div class="dropdown">
     <a href="#" class="dropbtn" onclick="toggleDropdown(event)">Category ▾</a>
     <div class="dropdown-content" id="dropdownMenu">
+    		<a href="<%=request.getContextPath()%>/controller?command=listProducts&category=All">All</a>
         <a href="<%=request.getContextPath()%>/controller?command=listProducts&category=mens">Men</a>
         <a href="<%=request.getContextPath()%>/controller?command=listProducts&category=women">Women</a>
         <a href="<%=request.getContextPath()%>/controller?command=listProducts&category=children">Children</a>
@@ -73,8 +74,8 @@
 			<img src="<%= request.getContextPath()%>/images/<%= p.getImagePath()%>">
 			<h4><%=p.getName()%></h4>
 			<p>₹<%=p.getPrice()%></p>
-			<p><%=p.isAvailability()%></p>
-			
+			<p><%=p.isAvailability().equalsIgnoreCase("IN_STOCk")?"Available":"Currently UnAvailable"%></p>
+		
 			
 			<%if(p.isAvailability().equalsIgnoreCase("IN_STOCK")){ %>
 			<a href="<%=request.getContextPath()%>/controller?command=addToCart&id=<%=p.getId()%>">
@@ -88,6 +89,8 @@
 			
 		</div>
 		<%}%>
+		
+				
 	</div>
 </body>
 
