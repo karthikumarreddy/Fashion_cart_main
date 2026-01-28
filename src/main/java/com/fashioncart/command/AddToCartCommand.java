@@ -15,7 +15,7 @@ public class AddToCartCommand implements Command {
 	@Override
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 	try {
-	    HttpSession session = req.getSession();
+	    HttpSession session = req.getSession(false);
 	    User user = (User) session.getAttribute("loggedUser");
 	    logger.debug("user :" + user);
 

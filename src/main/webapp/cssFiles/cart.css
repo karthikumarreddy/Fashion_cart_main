@@ -53,13 +53,17 @@ td {
     border-bottom: 1px solid #eee;
 }
 
+
+tbody tr {
+	text-align:center;
+}
 /* Row hover */
 tbody tr:hover {
     background: #f9f9f9;
 }
 
 /* Price highlight */
-td:nth-child(3),
+
 td:nth-child(5) {
     font-weight: 600;
     color: #1FCC4D;

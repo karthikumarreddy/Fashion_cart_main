@@ -96,8 +96,6 @@
 
 <script>
 
-
-
 const isLoggedIn = <%= (session.getAttribute("loggedUser") != null) %>;
 
 	document.addEventListener("DOMContentLoaded", function () {
