@@ -3,15 +3,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Segoe UI", Arial, sans-serif;
+   
 }
 
 /* Body */
 body {
-    background-color: #f5f6fa;
-    color: #333;
+    background-color:wrgb(128, 255, 255);    color:grey;
 }
-
 
 .navbar {
     display: flex;
@@ -24,8 +22,8 @@ body {
 
 /* Logo */
 #logoname h2 {
-    color: #ff3f6c;
-    font-size: 24px;
+    color:red;
+   
     font-weight: bold;
 }
 
@@ -57,7 +55,7 @@ body {
 }
 
 .dropdown-content a {
-    color: #333;
+    color:black;
     padding: 12px 15px;
     text-decoration: none;
     display: block;
@@ -65,7 +63,9 @@ body {
 }
 
 .dropdown-content a:hover {
-    background-color: #f1f1f1;
+    background-color: white;
+    color:grey;
+    
 }
 .show{
 	display:block;
@@ -75,7 +75,7 @@ body {
     padding: 8px 16px;
     border: none;
     border-radius: 6px;
-    background: #ff3f6c;
+    background:red;
     color: white;
     font-size: 14px;
     cursor: pointer;
@@ -83,14 +83,14 @@ body {
 }
 
 #login-btn button:hover {
-    background: #e7335d;
+    background:pink;
 }
 
 #logout-btn button {
     padding: 8px 16px;
     border: none;
     border-radius: 6px;
-    background: #ff3f6c;
+    background:red;
     color: white;
     font-size: 14px;
     cursor: pointer;
@@ -98,7 +98,7 @@ body {
 }
 
 #logout-btn button:hover {
-    background: #e7335d;
+    background:pink;
 }
 
 /* View cart button */
@@ -106,7 +106,7 @@ body {
     padding: 8px 16px;
     border: none;
     border-radius: 6px;
-    background: #ff3f6c;
+    background:red;
     color: white;
     font-size: 14px;
     cursor: pointer;
@@ -120,7 +120,8 @@ body {
 /* ================= PRODUCTS ================= */
 #products1 {
     padding: 30px;
-    flex-wrap: wrap;
+    flex-wrap:wrap;
+    align-items:center;
     justify-content: center;
 }
 
@@ -144,7 +145,6 @@ body {
 .product-card img {
     width: 100%;
     height: 220px;
-    object-fit: cover;
     border-radius: 10px;
 }
 
@@ -158,6 +158,7 @@ body {
 .product-card p {
     margin: 6px 0;
     font-size: 14px;
+    
 }
 
 .product-card p:nth-of-type(1) {

@@ -7,4 +7,9 @@
     
     
   </welcome-file-list>
+  
+  <context-param>
+  	<param-name>fashioncartEmail</param-name>
+  	<param-value>vastprofashioncart26@gmail.com</param-value>
+  </context-param>
 </web-app>

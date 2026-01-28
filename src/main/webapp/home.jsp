@@ -24,6 +24,7 @@
   <div class="dropdown">
     <a href="#" class="dropbtn" onclick="toggleDropdown(event)">Category ▾</a>
     <div class="dropdown-content" id="dropdownMenu">
+    		<a href="<%=request.getContextPath()%>/controller?command=listProducts&category=All">All</a>
         <a href="<%=request.getContextPath()%>/controller?command=listProducts&category=mens">Men</a>
         <a href="<%=request.getContextPath()%>/controller?command=listProducts&category=women">Women</a>
         <a href="<%=request.getContextPath()%>/controller?command=listProducts&category=children">Children</a>
@@ -88,6 +89,8 @@
 			
 		</div>
 		<%}%>
+		
+			<jsp:include page="/footer.jsp"></jsp:include>
 	</div>
 </body>
 

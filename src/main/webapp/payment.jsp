@@ -37,8 +37,8 @@
     <button type="submit">Pay</button>
 </form>
 
-
+	
 </div>
-
+	<jsp:include page="/footer.jsp"></jsp:include>
 </body>
 </html>
