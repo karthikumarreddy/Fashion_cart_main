@@ -94,6 +94,8 @@ List<ProductqtyDTO> cartList = (List<ProductqtyDTO>) request.getAttribute("cartL
 		</tbody>
 </table>
 
+
+
 <div class="total">
     <strong>
         Total Amount: ₹ <%= String.format("%.2f", totalAmount) %>

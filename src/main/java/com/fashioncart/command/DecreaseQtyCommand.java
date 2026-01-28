@@ -56,7 +56,9 @@ public class DecreaseQtyCommand implements Command {
 		    
 		    req.setAttribute("cartList", cartDTOList);
 		    session.setAttribute("totalAmount", totalAmount); 
-			
+		    
+		    int cartCount = cartDao.getCartCount(user.getUserId());
+			session.setAttribute("cartCount",cartCount);
 			return true;
 			
 		} catch (Exception e) {
