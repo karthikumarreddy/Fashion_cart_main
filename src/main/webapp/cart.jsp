@@ -35,15 +35,34 @@ List<ProductqtyDTO> cartList = (List<ProductqtyDTO>) request.getAttribute("cartL
             <th>Price</th>
             <th>Quantity</th>
             <th>SubTotal</th>
-            <th>DeleteItems</th>
         </tr>
     </thead>
 
     <tbody>
+<%
+for (ProductqtyDTO item : cartList) {
+            double subtotal = item.getPrice() * item.getQuantity();
+%>
+        <tr>
+            <td><%= item.getName() %></td>
+            <td><%= item.getCategory() %></td>
+            <td>₹ <%= String.format("%.2f", item.getPrice()) %></td>
+            <td><%= item.getQuantity() %></td>
+            <td>₹ <%= String.format("%.2f", subtotal) %></td>
+        </tr>
+<%
+        }
+%>
+    </tbody>
+    
+    
+    
+    
+    <%--
+    <tbody>
 			<%
 			for (ProductqtyDTO item : cartList) {
 				double subtotal = item.getPrice() * item.getQuantity();
-				
 			%>
 			<tr>
 				<td><%=item.getName()%></td>
@@ -83,6 +102,10 @@ List<ProductqtyDTO> cartList = (List<ProductqtyDTO>) request.getAttribute("cartL
 			}
 			%>
 		</tbody>
+      --%>
+    
+    
+    
 </table>
 
 <div class="total">
@@ -101,8 +124,6 @@ List<ProductqtyDTO> cartList = (List<ProductqtyDTO>) request.getAttribute("cartL
         <input type="hidden" name="command" value="showPayment">
         <button type="submit">Buy Now</button>
     </form>
-    
-    <jsp:include page="/footer.jsp"></jsp:include>
 </div>
 
 <%
