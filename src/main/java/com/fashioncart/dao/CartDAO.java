@@ -6,10 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
-
+import com.fashioncart.datasource.GetDataSource;
 import com.fashioncart.dto.CartItem;
 import com.fashioncart.dto.Product;
 
@@ -22,10 +19,7 @@ import com.fashioncart.dto.Product;
  * 
  */
 public class CartDAO {
-	private DataSource getDataSource() throws Exception {
-        Context ctx = new InitialContext();
-        return (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
-    }
+	
 	
 	public void addToCart(int userId, int productId){
 
@@ -37,7 +31,7 @@ public class CartDAO {
 	    """;
 
 	    try (
-	        Connection conn = getDataSource().getConnection();
+	        Connection conn =GetDataSource.getDataSource().getConnection();
 	        PreparedStatement ps = conn.prepareStatement(sql)
 	    ) {
 	        ps.setInt(1, userId);
@@ -62,7 +56,7 @@ public class CartDAO {
 	    List<CartItem> cartList = new ArrayList<>();
 
 	    try (
-	        Connection conn = getDataSource().getConnection();
+	        Connection conn = GetDataSource.getDataSource().getConnection();
 	        PreparedStatement ps = conn.prepareStatement(sql)
 	    ) {
 	        ps.setInt(1, userId);
@@ -95,7 +89,7 @@ public class CartDAO {
 	    String sql = "DELETE FROM cart_items WHERE user_id = ?";
 
 	    try (
-	        Connection conn = getDataSource().getConnection();
+	        Connection conn = GetDataSource.getDataSource().getConnection();
 	        PreparedStatement ps = conn.prepareStatement(sql)
 	    ) {
 	        ps.setInt(1, userId);
@@ -110,7 +104,7 @@ public class CartDAO {
 	    String sql = "SELECT SUM(quantity) FROM cart_items WHERE user_id = ?";
 
 	    try (
-	        Connection conn = getDataSource().getConnection();
+	        Connection conn = GetDataSource.getDataSource().getConnection();
 	        PreparedStatement ps = conn.prepareStatement(sql)
 	    ) {
 	        ps.setInt(1, userId);
@@ -134,7 +128,7 @@ public class CartDAO {
 	        WHERE user_id = ? AND product_id = ?
 	    """;
 
-	    try (Connection conn = getDataSource().getConnection();
+	    try (Connection conn = GetDataSource.getDataSource().getConnection();
 	         PreparedStatement ps = conn.prepareStatement(sql)) {
 
 	        ps.setInt(1, userId);
@@ -162,7 +156,7 @@ public class CartDAO {
 	        WHERE user_id = ? AND product_id = ? AND quantity <= 0
 	    """;
 
-	    try (Connection conn = getDataSource().getConnection()) {
+	    try (Connection conn = GetDataSource.getDataSource().getConnection()) {
 
 	        conn.setAutoCommit(false); //Transaction start
 
@@ -192,7 +186,7 @@ public class CartDAO {
 	        WHERE user_id = ? AND product_id = ?
 	    """;
 
-	    try (Connection conn = getDataSource().getConnection();
+	    try (Connection conn = GetDataSource.getDataSource().getConnection();
 	         PreparedStatement ps = conn.prepareStatement(sql)) {
 
 	        ps.setInt(1, userId);

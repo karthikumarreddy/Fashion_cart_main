@@ -8,14 +8,11 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.fashioncart.datasource.GetDataSource;
 import com.fashioncart.dto.Orders;
 
 public class OrdersDAO {
-	
-	private DataSource getDataSource() throws Exception {
-        Context ctx = new InitialContext();
-        return (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
-    }
+
 
 	public int saveOrders(Orders orders) {
 
@@ -28,7 +25,7 @@ public class OrdersDAO {
 				    RETURNING order_id
 				""";
 		
-			try (Connection conn = getDataSource().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+			try (Connection conn = GetDataSource.getDataSource().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 				ps.setDouble(1, orders.getTotalAmount());
 				ps.setTimestamp(2, orders.getOrderDate());
 				ps.setString(3, orders.getPaymentMode());

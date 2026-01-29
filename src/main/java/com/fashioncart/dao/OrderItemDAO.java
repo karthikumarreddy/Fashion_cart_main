@@ -7,19 +7,17 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.fashioncart.datasource.GetDataSource;
 import com.fashioncart.dto.Product;
 
 public class OrderItemDAO {
 	
-	private DataSource getDataSource() throws Exception {
-        Context ctx = new InitialContext();
-        return (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
-    }
+	
 
 	public void saveOrderItem(int orderId, Product product, int quantity) {
 
 		String sql = "INSERT INTO order_item(order_id,product_id, purchase_price, quantity) VALUES (?, ?, ?, ?)";
-			try (Connection c = getDataSource().getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+			try (Connection c = GetDataSource.getDataSource().getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
 
 				ps.setInt(1, orderId);
 				ps.setInt(2, Integer.parseInt(product.getId()));

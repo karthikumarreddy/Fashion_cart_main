@@ -9,18 +9,15 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.fashioncart.datasource.GetDataSource;
 import com.fashioncart.dto.User;
 
 public class UserDAO {
-	private DataSource getDataSource() throws Exception {
-        Context ctx = new InitialContext();
-        return (DataSource) ctx.lookup("java:comp/env/jdbc/fashion_db");
-    }
 	
 	public User findByUserName(String userName) throws SQLException, Exception {
 		String sql="select * from users where username=?";
 		
-		try(Connection c=getDataSource().getConnection();
+		try(Connection c=GetDataSource.getDataSource().getConnection();
 				PreparedStatement ps=c.prepareStatement(sql)){
 			
 			ps.setString(1, userName);
@@ -43,7 +40,7 @@ public class UserDAO {
 	
 	public String getPassword(String userName) throws SQLException, Exception {
 		String sql="select password from users where username=?";
-		try(Connection c=getDataSource().getConnection();
+		try(Connection c=GetDataSource.getDataSource().getConnection();
 				PreparedStatement ps=c.prepareStatement(sql)){
 			ps.setString(1, userName);			
 			ResultSet rs=ps.executeQuery();
@@ -63,7 +60,7 @@ public class UserDAO {
 	            VALUES (?, ?, ?)
 	        """;
 
-	        try (Connection conn = getDataSource().getConnection();
+	        try (Connection conn = GetDataSource.getDataSource().getConnection();
 	        				PreparedStatement ps = conn.prepareStatement(sql)) {
 	            ps.setString(1, user.getUserName());
 	            ps.setString(2, user.getEmail());
