@@ -27,6 +27,7 @@ public class SignupCommand implements Command {
 			String confirmPassword = req.getParameter("confrmPassword");
 			logger.debug("confirm password " + confirmPassword);
 			boolean flag = false;
+
 			if (userName == null || !ValidationServices.validateUserName(userName)) {
 				req.setAttribute("userNameMessage", "Invalid UserName Enter Again!");
 				flag = true;
@@ -45,12 +46,10 @@ public class SignupCommand implements Command {
 
 			if (flag) {
 				req.setAttribute("submitted", Boolean.TRUE);
-				System.out.println();
 				return false;
 			}
 
 			if (enterPassword.equals(confirmPassword)) {
-
 				confirmPassword = BCrypt.hashpw(confirmPassword, BCrypt.gensalt());
 				User user = new User(userName, email, confirmPassword);
 				UserDAO userDao = new UserDAO();

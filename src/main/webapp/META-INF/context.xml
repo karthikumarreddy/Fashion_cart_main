@@ -30,6 +30,5 @@
     	maxIdle="5"
     	minIdle="2"
     	maxWaitMillis="10000"
-    	/>
-    	
+    	/>	
 </Context>

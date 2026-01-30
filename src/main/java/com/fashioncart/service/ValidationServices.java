@@ -19,7 +19,6 @@ public class ValidationServices {
 		if (email != null) {
 			email = email.toLowerCase();
 			return email.matches(EMAIL_REGEX);
-
 		}
 		return false;
 	}

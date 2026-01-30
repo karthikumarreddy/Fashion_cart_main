@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="/fashioncart/cssFiles/delivery.css">
 </head>
 <body>
+	<jsp:include page="header.jsp"></jsp:include>
 	<h2>Enter your details</h2>
 	<div class="delivery">
 	<form action="<%=request.getContextPath()%>/controller" method="post">

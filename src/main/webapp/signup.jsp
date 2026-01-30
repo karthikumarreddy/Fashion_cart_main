@@ -17,19 +17,23 @@
     <form  onSubmit=" return validateForm()" action="<%=request.getContextPath()%>/controller" method="post">
     		
        <input type="hidden" name="command" value="signup">
-	   <div>
+	   <div style="display:flex;flex-direction:column;">
        UserName: <input id ="username"type="text" name="userName" placeholder="Username">
-       <p id="checkusername"></p> 
+       <p id="checkusername" class="display-error"></p>
        </div>
        
        <div>
        Email: <input id="email"type="email" name="email" placeholder="Enter your Email">
-       <p id="checkemail"></p>
+       <p id="checkemail" class="display-error"></p>
       </div>
-       <div>
+       <div class="password-wrapper">
       	 Password: <input id="password" type="password" name="enterPassword" placeholder="Password">
-      	 <textarea rows="4" cols="50">Password must be at least 8 characters long and include one UpperCase letter ,one LowerCase letter,one number,and one special character (@ # $ % ^ & + = !).</textarea>
-      	  <p id="checkpassword"></p>
+				<div class="tooltip">
+					Password must contain:<br> • At least 8 characters<br> •
+					One uppercase letter<br> • One number<br> • One special
+					character
+				</div>
+				<p id="checkpassword" class="display-error"></p>
       </div>
 		
 		<div>
@@ -57,9 +61,9 @@ function validateForm() {
     var username = document.getElementById("username").value.trim();
     var email = document.getElementById("email").value.trim();
 	var password=document.getElementById("password").value.trim();
-    let userError = document.getElementById("checkusername");
-    let emailError = document.getElementById("checkemail");
-    let passwordError=document.getElementById("checkpassword");
+   	var userError = document.getElementById("checkusername");
+    var emailError = document.getElementById("checkemail");
+    var passwordError=document.getElementById("checkpassword");
 
     // reset messages
     userError.innerHTML = "";
@@ -71,13 +75,13 @@ function validateForm() {
         userError.innerHTML = "Username is required";
         isValid = false;
     }
-
+    
     if (email === "") {
         emailError.innerHTML = "Email is required";
         isValid = false;
     }
     if(password===""){
-    		passwordError.innerHTML= "Password type wrong";
+    		passwordError.innerHTML= "Password is required";
 			isValid=false;
     }
 

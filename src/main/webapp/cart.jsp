@@ -11,9 +11,15 @@
 <title>My Cart</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/cssFiles/cart.css">
 </head>
+<style>
+	nav{
+	margin-top:-30px;
+	margin-bottom:10px;
+	}
+</style>
 <body>
 
-<h1 style="text-align:center;">Shopping Cart</h1>
+<jsp:include page="header.jsp"></jsp:include>
 
 <%
 List<CartItemView> cartList = (List<CartItemView>) request.getAttribute("cartList");

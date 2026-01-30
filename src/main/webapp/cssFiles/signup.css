@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 body {
     margin: 0;
     padding: 0;
@@ -27,16 +28,13 @@ body {
     letter-spacing: 1px;
 }
 
-
-
-
 /* Inputs */
 .signup-box input[type="text"],
 .signup-box input[type="email"],
 .signup-box input[type="password"] {
     width: 100%;
     padding: 12px;
-    margin-bottom: 15px;
+    margin-bottom: 6px; /* reduced to avoid tooltip gap */
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 14px;
@@ -47,6 +45,50 @@ body {
     outline: none;
     border-color: #667eea;
     box-shadow: 0 0 4px rgba(102, 126, 234, 0.6);
+}
+
+/* Error text */
+.display-error {
+    color: red;
+    font-size: 13px;
+    margin: 4px 0 10px;
+}
+
+/* Password wrapper */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+/* Tooltip (hidden by default) */
+.tooltip {
+    visibility: hidden;
+    opacity: 0;
+
+    width: 280px;
+    background-color: #333;
+    color: #fff;
+
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.4;
+
+    position: absolute;
+    top: 105%; /* small gap below input */
+    left: 0;
+    z-index: 999;
+
+    transition: opacity 0.3s ease;
+}
+
+/* Show tooltip on hover OR focus */
+.password-wrapper input:hover + .tooltip,
+.password-wrapper input:focus + .tooltip {
+    visibility: visible;
+    opacity: 1;
 }
 
 /* Button */
@@ -71,7 +113,7 @@ body {
     transform: scale(0.98);
 }
 
-/* Error message */
+/* Error message (server side) */
 .signup-box .error {
     margin-top: 15px;
     color: red;

@@ -8,8 +8,17 @@
 <title>Payment</title>
 	<link rel="stylesheet" href="/fashioncart/cssFiles/payment.css">
 </head>
-
+	<style>
+		nav{
+		margin-top:-80px;
+		margin-bottom:20px;
+		}
+	</style>
 <body>
+
+<jsp:include page="header.jsp"></jsp:include>
+
+<div class="paymentpage">
 
 <div class="container">
 <h2>Payment</h2>
@@ -36,5 +45,6 @@
 
 </div>
 	<jsp:include page="/footer.jsp"></jsp:include>
+	</div>
 </body>
 </html>
