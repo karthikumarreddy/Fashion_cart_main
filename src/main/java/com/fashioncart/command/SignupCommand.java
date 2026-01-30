@@ -44,6 +44,8 @@ public class SignupCommand implements Command {
 			}
 
 			if (flag) {
+				req.setAttribute("submitted", Boolean.TRUE);
+				System.out.println();
 				return false;
 			}
 

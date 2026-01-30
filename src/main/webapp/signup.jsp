@@ -14,26 +14,26 @@
 <div class="signup-box">
     <h2 style="text-align:center;">Create Account</h2>
 
-    <form  action="<%=request.getContextPath()%>/controller" method="post">
+    <form  onSubmit=" return validateForm()" action="<%=request.getContextPath()%>/controller" method="post">
     		
        <input type="hidden" name="command" value="signup">
 	   <div>
        UserName: <input id ="username"type="text" name="userName" placeholder="Username">
-       <p id="checkusername" class="checkFields"></p> 
-      <%=request.getAttribute("userNameMessage")!=null?request.getAttribute("userNameMessage"):"hishdkj" %>
+       <p id="checkusername"></p> 
        </div>
        
        <div>
        Email: <input id="email"type="email" name="email" placeholder="Enter your Email">
-       <p id="checkemail" class="checkFields"></p>
-        <%=request.getAttribute("EmailMessage")!=null?request.getAttribute("EmailMessage"):"" %>
-       </div>
+       <p id="checkemail"></p>
+      </div>
        <div>
-       Password: <input type="password" name="enterPassword" placeholder="Password">
-		</div>
+      	 Password: <input id="password" type="password" name="enterPassword" placeholder="Password">
+      	 <textarea rows="4" cols="50">Password must be at least 8 characters long and include one UpperCase letter ,one LowerCase letter,one number,and one special character (@ # $ % ^ & + = !).</textarea>
+      	  <p id="checkpassword"></p>
+      </div>
 		
 		<div>
-      Confirm Password: <input type="password" name="confirmPassword" placeholder="Password">
+      		Confirm Password: <input type="password" name="confirmPassword" placeholder="Password">
 		</div>
         <button type="submit">SignUp</button>
     </form>
@@ -56,9 +56,10 @@
 function validateForm() {
     var username = document.getElementById("username").value.trim();
     var email = document.getElementById("email").value.trim();
-
-    var userError = document.getElementById("checkusername");
-    var emailError = document.getElementById("checkemail");
+	var password=document.getElementById("password").value.trim();
+    let userError = document.getElementById("checkusername");
+    let emailError = document.getElementById("checkemail");
+    let passwordError=document.getElementById("checkpassword");
 
     // reset messages
     userError.innerHTML = "";
@@ -74,6 +75,10 @@ function validateForm() {
     if (email === "") {
         emailError.innerHTML = "Email is required";
         isValid = false;
+    }
+    if(password===""){
+    		passwordError.innerHTML= "Password type wrong";
+			isValid=false;
     }
 
     return isValid;
