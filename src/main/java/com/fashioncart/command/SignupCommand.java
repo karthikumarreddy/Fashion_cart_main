@@ -24,45 +24,37 @@ public class SignupCommand implements Command {
 			logger.debug("user email : " + email);
 			String enterPassword = req.getParameter("enterPassword");
 			logger.debug("user Entered password : " + enterPassword);
-			String confirmPassword = req.getParameter("confrmPassword");
+			String confirmPassword = req.getParameter("confirmPassword");
 			logger.debug("confirm password " + confirmPassword);
-			boolean flag = false;
 
-			if (userName == null || !ValidationServices.validateUserName(userName)) {
-				req.setAttribute("userNameMessage", "Invalid UserName Enter Again!");
-				flag = true;
-			}
-
-			if (email == null || !ValidationServices.validateEmail(email)) {
-				req.setAttribute("EmailMessage", "Invalid Email Enter Again!");
-				flag = true;
-			}
-			if (enterPassword == null || confirmPassword == null || !ValidationServices.validatePssword(enterPassword)) {
-
-				req.setAttribute("passwordMessage", "Password must be at least 8 characters long and include one uppercase letter, "
-								+ "one lowercase letter,one number, " + "and one special character (@ # $ % ^ & + = !).");
-				flag = true;
-			}
-
-			if (flag) {
-				req.setAttribute("submitted", Boolean.TRUE);
+			ValidationServices.validateUserName(userName);
+			System.out.println("1");
+			ValidationServices.validateEmail(email);
+			System.out.println("2");
+			ValidationServices.validatePssword(enterPassword);
+			System.out.println("3");
+			if (userName == null || email == null || enterPassword == null || confirmPassword == null) {
+				System.out.println("check");
 				return false;
+
 			}
+
+			System.out.println(4 + "  =  " + enterPassword.equals(confirmPassword));
 
 			if (enterPassword.equals(confirmPassword)) {
-				confirmPassword = BCrypt.hashpw(confirmPassword, BCrypt.gensalt());
-				User user = new User(userName, email, confirmPassword);
+				System.out.println(4 + "  =  " + enterPassword.equals(confirmPassword));
+				enterPassword = BCrypt.hashpw(enterPassword, BCrypt.gensalt());
+				User user = new User(userName, email, enterPassword);
 				UserDAO userDao = new UserDAO();
 				req.setAttribute("message", "Account Created Sucessfully");
 				return userDao.saveUser(user);
 			}
-		} catch (
-
-		Exception e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 
 		}
 		return false;
+
 	}
 
 }

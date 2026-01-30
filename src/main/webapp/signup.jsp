@@ -66,8 +66,8 @@ function validateForm() {
     var passwordError=document.getElementById("checkpassword");
 
     // reset messages
-    userError.innerHTML = "";
-    emailError.innerHTML = "";
+//    userError.innerHTML = "";
+  //  emailError.innerHTML = "";
 
     var isValid = true;
 
