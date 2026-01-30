@@ -47,8 +47,7 @@ public class IncreaseQtyCommand implements Command {
 			        );
 			        dto.setQuantity(item.getQuantity());
 
-			        totalAmount += dto.getPrice() * dto.getQuantity();
-			        
+			        totalAmount += dto.getPrice() * dto.getQuantity(); 
 			        // adding the productdto to cartDtolist
 			        cartDTOList.add(dto);
 			    }

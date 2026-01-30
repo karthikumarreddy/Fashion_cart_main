@@ -17,6 +17,9 @@ public class UserDAO {
 	
 	//to find the which user logging in 
 	public User findByUserName(String userName) throws SQLException, Exception {
+		if(userName == null) {
+			return null;
+		}
 		String sql="select * from users where username=?";
 		
 		try(Connection c=GetDataSource.getDataSource().getConnection();
@@ -39,23 +42,12 @@ public class UserDAO {
 		}
 		return null;
 	}
-	
-	public String getPassword(String userName) throws SQLException, Exception {
-		String sql="select password from users where username=?";
-		try(Connection c=GetDataSource.getDataSource().getConnection();
-				PreparedStatement ps=c.prepareStatement(sql)){
-			ps.setString(1, userName);			
-			ResultSet rs=ps.executeQuery();
-			if(rs.next()) {
-				return rs.getString("password");
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+
 	
 	 public boolean saveUser(User user) {
+		 if (user== null) {
+			 return false;
+		 }
 
 	        String sql = """
 	            INSERT INTO users (username, email, password)
