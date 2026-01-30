@@ -14,13 +14,9 @@ import com.fashioncart.dto.Product;
 /*
  *in this class four methods   
  *addtcart-adding the userId and product to the DB
- *getCartItems-
- *
- * 
+ *getCartItems-fetching 
  */
 public class CartDAO {
-	
-	
 	public void addToCart(int userId, int productId){
 
 	    String sql = """
@@ -142,8 +138,6 @@ public class CartDAO {
 
 	
 	public void decreaseQuantity(int userId, int productId) {
-
-		
 		
 	    String updateSql = """
 	        UPDATE cart_items

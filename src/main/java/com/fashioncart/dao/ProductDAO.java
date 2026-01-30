@@ -17,18 +17,16 @@ import com.fashioncart.dto.Product;
 
 public class ProductDAO {
 	
-	
-	
-	
 	/*getting the product from product table in db
 	 * and add each product in list 
 	 * and return list of product to ListProductsCommand
 	 */
-	public List<Product> getAllProductsList() {
+	public List<Product> getAllProductsList()  {
 		String sql = "select * from product";
 		List<Product> allProducts = new ArrayList<>();
 
-			try (Connection conn = GetDataSource.getDataSource().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+			try (Connection conn = GetDataSource.getDataSource().getConnection(); 
+					PreparedStatement ps = conn.prepareStatement(sql)) {
 				ResultSet rs = ps.executeQuery();
 
 				while (rs.next()) {
@@ -43,11 +41,6 @@ public class ProductDAO {
 			return allProducts;
 	} 
 		
-	
-	
-	
-	
-
 	public List<Product> getProductsByCategoryList(String category) {
 
 		List<Product> products = new ArrayList<>();

@@ -2,7 +2,6 @@
 <style>
 body {
     margin: 0;
- 	
     background: linear-gradient(135deg, #667eea, #764ba2);
     height: 100vh;
     display: flex;
@@ -88,7 +87,7 @@ h2{
 }
 
 /* Error message */
-p{
+p:nth-child(2){
     margin-top: 15px;
     text-align: center;
     font-weight: bold;
@@ -96,17 +95,19 @@ p{
 }
 
 </style>
-<h2>Login Page</h2><br>
+
+<p><%=request.getAttribute("message")==null? " null ":request.getAttribute("message")%></p>
+<h2>FashionCart</h2><br>
 <div id="login-page">
-	
+	<h2 style="color:black">Login Page</h2>
 <form action="<%=request.getContextPath()%>/controller" method="post">
     <input type="hidden" name="command" value="login">
 
-  	 Username: <input type="text" name="userName" placeholder="userName" required>
-   	 Password: <input type="password" name="password" placeholder="password" required>
+  	 Username:<input type="text" name="userName" placeholder="userName" required>
+   	 Password:<input type="password" name="password" placeholder="password" required>
    
     <button type="submit">Login</button>
-    <p>New user?<a href="<%=request.getContextPath()%>/controller?command=signup">Signup</a></p>
+    <p>New User?<a href="<%=request.getContextPath()%>/controller?command=signup">Create Account</a></p>
 </form>
 
 <p style="color:red;">

@@ -12,13 +12,6 @@ public class OrderItem {
     public OrderItem() {
     }
 
-    public OrderItem(int orderId, int productId, double price, int quantity) {
-        this.orderId = orderId;
-        this.productId = productId;
-        this.price = price;
-        this.quantity = quantity;
-    }
-
     public OrderItem(int orderItemId, int orderId, int productId, double price, int quantity) {
         this.orderItemId = orderItemId;
         this.orderId = orderId;

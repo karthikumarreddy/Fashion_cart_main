@@ -27,6 +27,11 @@ body {
     letter-spacing: 1px;
 }
 
+form {
+	display
+}
+
+
 /* Inputs */
 .signup-box input[type="text"],
 .signup-box input[type="email"],

@@ -8,6 +8,7 @@ public class CommandConfig {
 	private String commandClass;
 	private String successPage;
 	private String failurePage;
+	
 	public CommandConfig(String commandClass, String successPage, String failurePage) {
 		super();
 		this.commandClass = commandClass;

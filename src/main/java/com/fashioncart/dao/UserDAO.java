@@ -14,6 +14,8 @@ import com.fashioncart.dto.User;
 
 public class UserDAO {
 	
+	
+	//to find the which user logging in 
 	public User findByUserName(String userName) throws SQLException, Exception {
 		String sql="select * from users where username=?";
 		

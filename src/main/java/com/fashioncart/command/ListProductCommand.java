@@ -29,6 +29,7 @@ public class ListProductCommand implements Command {
         if (category == null || category.equalsIgnoreCase("ALL")) {
             products = productDAO.getAllProductsList();
         } else {
+        	
         	/*getting the product based on category from db 
         	 * and stored to an list
         	 */

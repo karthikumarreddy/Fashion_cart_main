@@ -14,19 +14,26 @@
 <div class="signup-box">
     <h2 style="text-align:center;">Create Account</h2>
 
-    <form action="<%=request.getContextPath()%>/controller" method="post">
-        <input type="hidden" name="command" value="signup">
-
-        <input type="text" name="userName"
-               placeholder="Username" required>
-
-        <input type="email" name="email"
-               placeholder="Email" required>
-
-        <input type="password" name="password"
-               placeholder="Password" required>
-
-        <button type="submit">Signup</button>
+    <form onsubmit="return validateForm()" action="<%=request.getContextPath()%>/controller" method="post">
+    		
+       <input type="hidden" name="command" value="signup">
+	   <div>
+       UserName: <input id ="username"type="text" name="userName" placeholder="Username">
+       <p id="checkusername" class="checkFields"></p>
+       </div>
+       
+       <div>
+       Email: <input id="email"type="email" name="email" pattern="[^ @]*@+gmail\.com"placeholder="Enter your Email">
+       <p id="checkemail" class="checkFields"></p>
+       </div>
+       <div>
+       Password: <input type="password" name="enterPassword" placeholder="Password">
+		</div>
+		
+		<div>
+      Confirm Password: <input type="password" name="confirmPassword" placeholder="Password">
+		</div>
+        <button type="submit">SignUp</button>
     </form>
 
     <p class="error">
@@ -42,4 +49,34 @@
 </div>
 
 </body>
+
+<script>
+function validateForm() {
+    var username = document.getElementById("username").value.trim();
+    var email = document.getElementById("email").value.trim();
+
+    var userError = document.getElementById("checkusername");
+    var emailError = document.getElementById("checkemail");
+
+    // reset messages
+    userError.innerHTML = "";
+    emailError.innerHTML = "";
+
+    var isValid = true;
+
+    if (username === "") {
+        userError.innerHTML = "Username is required";
+        isValid = false;
+    }
+
+    if (email === "") {
+        emailError.innerHTML = "Email is required";
+        isValid = false;
+    }
+
+    return isValid;
+}
+</script>
+
+
 </html>

@@ -47,8 +47,7 @@ public class DecreaseQtyCommand implements Command {
 		            item.getProduct().getPrice()
 		        );
 		        dto.setQuantity(item.getQuantity());
-
-		        totalAmount += dto.getPrice() * dto.getQuantity();
+		        totalAmount += dto.getPrice()*dto.getQuantity();
 		        
 		        // adding the productdto to cartDtolist
 		        cartDTOList.add(dto);
@@ -60,7 +59,6 @@ public class DecreaseQtyCommand implements Command {
 		    int cartCount = cartDao.getCartCount(user.getUserId());
 			session.setAttribute("cartCount",cartCount);
 			return true;
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
