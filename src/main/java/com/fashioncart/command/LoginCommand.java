@@ -19,37 +19,33 @@ private static final Logger logger=LogManager.getLogger(LoginCommand.class);
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 		try {
 			
-			//getting user input from login.jsp
-	
+			
+			HttpSession session = req.getSession();
 			String userName = req.getParameter("userName");
 			String password = req.getParameter("password");
 			logger.debug("user name = "+userName);
 			logger.debug("password = "+password);
-			if (userName == null || password.trim() == null) {
+			
+			if (userName == null || password.trim() == null || session == null) {
 				return false;
 			}
 			UserDAO userDao = new UserDAO();
 			
 			//getting user object from userDAO by username
 			User user = userDao.findByUserName(userName);
-			String pwd = userDao.getPassword(userName);
+			String pwd=user.getPassword();
 			
 			if(user.getUserName().equals(userName) && BCrypt.checkpw(password, pwd)) {
-				HttpSession session = req.getSession();
 				session.setAttribute("loggedUser", user);
-				
-				
-				/*getting cart count from cartDAO using userID 
-				 * and setting the count in session
-				 */
+
 				CartDAO cartDAO = new CartDAO();
 				int cartCount = cartDAO.getCartCount(user.getUserId());
 				session.setAttribute("cartCount", cartCount);
+				
 				return true;
 			}
 
 		}catch (Exception e) {
-			e.printStackTrace();
 			logger.error(e.getMessage());
 		}
 		return false;
