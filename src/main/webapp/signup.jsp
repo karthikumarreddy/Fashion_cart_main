@@ -14,17 +14,19 @@
 <div class="signup-box">
     <h2 style="text-align:center;">Create Account</h2>
 
-    <form onsubmit="return validateForm()" action="<%=request.getContextPath()%>/controller" method="post">
+    <form  action="<%=request.getContextPath()%>/controller" method="post">
     		
        <input type="hidden" name="command" value="signup">
 	   <div>
        UserName: <input id ="username"type="text" name="userName" placeholder="Username">
-       <p id="checkusername" class="checkFields"></p>
+       <p id="checkusername" class="checkFields"></p> 
+      <%=request.getAttribute("userNameMessage")!=null?request.getAttribute("userNameMessage"):"hishdkj" %>
        </div>
        
        <div>
-       Email: <input id="email"type="email" name="email" pattern="[^ @]*@+gmail\.com"placeholder="Enter your Email">
+       Email: <input id="email"type="email" name="email" placeholder="Enter your Email">
        <p id="checkemail" class="checkFields"></p>
+        <%=request.getAttribute("EmailMessage")!=null?request.getAttribute("EmailMessage"):"" %>
        </div>
        <div>
        Password: <input type="password" name="enterPassword" placeholder="Password">

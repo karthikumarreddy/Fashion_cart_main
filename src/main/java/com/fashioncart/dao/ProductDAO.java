@@ -10,47 +10,33 @@ import com.fashioncart.datasource.GetDataSource;
 import com.fashioncart.dto.Product;
 
 public class ProductDAO {
-<<<<<<< HEAD
-	
-	/*getting the product from product table in db
-	 * and add each product in list 
-	 * and return list of product to ListProductsCommand
-=======
 
 	/*
-	 * getting the product from product table in db and add each product in list and return list of product to ListProductsCommand
->>>>>>> branch 'master' of https://github.com/karthikumarreddy/Fashion_cart_main.git
+	 * getting the product from product table in db and add each product in list and return list of product to ListProductsCommand =======
+	 * 
+	 * /* getting the product from product table in db and add each product in list and return list of product to ListProductsCommand
 	 */
-	public List<Product> getAllProductsList()  {
+	public List<Product> getAllProductsList() {
 		String sql = "select * from product";
 		List<Product> allProducts = new ArrayList<>();
 
-<<<<<<< HEAD
-			try (Connection conn = GetDataSource.getDataSource().getConnection(); 
-					PreparedStatement ps = conn.prepareStatement(sql)) {
-				ResultSet rs = ps.executeQuery();
-=======
 		try (Connection conn = GetDataSource.getDataSource().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ResultSet rs = ps.executeQuery();
->>>>>>> branch 'master' of https://github.com/karthikumarreddy/Fashion_cart_main.git
 
 			while (rs.next()) {
 				Product p = new Product(rs.getString("product_id"), rs.getString("Product_name"), rs.getString("category"),
 								rs.getDouble("price"), rs.getString("image_path"), rs.getString("availability"));
 				allProducts.add(p);
 			}
-<<<<<<< HEAD
 			return allProducts;
-	} 
-		
-=======
-		} catch (Exception e) {
+		}
+
+		catch (Exception e) {
 			e.printStackTrace();
 		}
-		return allProducts;
+		return null;
 	}
 
->>>>>>> branch 'master' of https://github.com/karthikumarreddy/Fashion_cart_main.git
 	public List<Product> getProductsByCategoryList(String category) {
 
 		List<Product> products = new ArrayList<>();

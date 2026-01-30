@@ -26,11 +26,24 @@ public class SignupCommand implements Command {
 			logger.debug("user Entered password : " + enterPassword);
 			String confirmPassword = req.getParameter("confrmPassword");
 			logger.debug("confirm password " + confirmPassword);
+			boolean flag = false;
+			if (userName == null || !ValidationServices.validateUserName(userName)) {
+				req.setAttribute("userNameMessage", "Invalid UserName Enter Again!");
+				flag = true;
+			}
 
-			ValidationServices.validateUserName(userName);
-			ValidationServices.validateEmail(email);
-			ValidationServices.validatePssword(enterPassword);
-			if (userName == null || email == null || enterPassword == null || confirmPassword == null) {
+			if (email == null || !ValidationServices.validateEmail(email)) {
+				req.setAttribute("EmailMessage", "Invalid Email Enter Again!");
+				flag = true;
+			}
+			if (enterPassword == null || confirmPassword == null || !ValidationServices.validatePssword(enterPassword)) {
+
+				req.setAttribute("passwordMessage", "Password must be at least 8 characters long and include one uppercase letter, "
+								+ "one lowercase letter,one number, " + "and one special character (@ # $ % ^ & + = !).");
+				flag = true;
+			}
+
+			if (flag) {
 				return false;
 			}
 
