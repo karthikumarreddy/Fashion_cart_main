@@ -56,4 +56,24 @@ public class ProductDAO {
 		}
 		return products;
 	}
+
+	public Product getProductsById(int productId) {
+
+		String sql = "select * from product where product_id=?";
+		try (Connection conn = GetDataSource.getDataSource().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+			ps.setInt(1, productId);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Product p = new Product(rs.getString("product_id"), rs.getString("Product_name"), rs.getString("category"),
+								rs.getDouble("price"), rs.getString("image_path"), rs.getString("availability"));
+				return p;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

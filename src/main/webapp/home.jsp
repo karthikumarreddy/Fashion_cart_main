@@ -92,6 +92,9 @@
 		
 			
 			<%if(p.isAvailability().equalsIgnoreCase("IN_STOCK")){ %>
+			<a href="<%=request.getContextPath()%>/controller?command=buynow&id=<%=p.getId()%>">
+				<button>Buy Now</button>
+			</a>
 			<a href="<%=request.getContextPath()%>/controller?command=addToCart&id=<%=p.getId()%>">
 				<button>Add to Cart</button>	
 			</a>
