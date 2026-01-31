@@ -117,7 +117,7 @@ List<CartItemView> cartList = (List<CartItemView>) request.getAttribute("cartLis
     <form action="<%=request.getContextPath()%>/controller" method="post"
           style="display:inline;">
         <input type="hidden" name="command" value="showPayment">
-        <button type="submit">Buy Now</button>
+        <button type="submit">ChechOut</button>
     </form>
     
     <jsp:include page="/footer.jsp"></jsp:include>

@@ -5,11 +5,11 @@ paymentpage{
     padding: 0;
     display:flex;
     flex-direction:column;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #f9fafb, #e9ecf1);
-    display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f9fafb, #e9ecf1);
+	
 }
 
 /* Card container */
@@ -22,6 +22,7 @@ paymentpage{
     padding: 30px 32px;
     border-radius: 14px;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    margin-left:34%;
 }
 
 /* Headings */
