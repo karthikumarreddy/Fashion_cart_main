@@ -46,6 +46,11 @@ nav {
 
 				<button type="submit">Pay</button>
 			</form>
+			<br>
+			<form action="<%= request.getContextPath()%>/controller" method="post">
+			<input type="hidden" name="command" value="viewCart">
+			<button type="submit"><- Back</button>
+			</form>
 
 		</div>
 		<jsp:include page="/footer.jsp"></jsp:include>

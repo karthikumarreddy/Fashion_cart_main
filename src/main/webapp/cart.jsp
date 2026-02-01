@@ -112,6 +112,9 @@
 	</div>
 	
 	<div class="buttons">
+	
+	
+		</form>
 	     <form action="<%=request.getContextPath()%>/controller" method="post"
 	          style="display:inline;">
 	        <input type="hidden" name="command" value="listProducts">

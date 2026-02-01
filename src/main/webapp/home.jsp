@@ -103,6 +103,7 @@
         for (Product p : products) {
 %>
 
+<a href="<%=request.getContextPath()%>/controller?command=productPage&productId=<%=p.getId()%>" style="none">
     <div class="product-card">
         <img src="<%=request.getContextPath()%>/images/<%=p.getImagePath()%>">
         <h4><%=p.getName()%></h4>
@@ -112,7 +113,7 @@
                 ? "Available"
                 : "Currently UnAvailable" %>
         </p>
-
+      
         <% if (p.isAvailability().equalsIgnoreCase("IN_STOCK")) { %>
 
             <form action="<%=request.getContextPath()%>/controller" method="post">
@@ -139,6 +140,8 @@
 
         <% } %>
     </div>
+    </a>
+   
 
 <%
         }

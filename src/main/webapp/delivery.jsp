@@ -36,6 +36,12 @@
 	</div>
     <button type="submit">Submit Delivery Details</button>
 </form>
+
+<br>
+			<form action="<%= request.getContextPath()%>/controller" method="post">
+			<input type="hidden" name="command" value="showPayment">
+			<button type="submit"><- Back</button>
+			</form>
 	
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
