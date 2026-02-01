@@ -15,31 +15,22 @@ public class BuyNowCommand implements Command {
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 
 		HttpSession session = req.getSession(false);
-
 		User user = (User) session.getAttribute("loggedUser");
-
-		if (user == null) {
-			req.setAttribute("error", "Please login to Buy Product");
-			return false; // login.jsp
-		}
-		if (session == null) {
-			return false;
-		}
-
 		int productId = Integer.parseInt(req.getParameter("id"));
-		System.out.println("id " + productId);
+
+		if (user == null || session == null || productId == 0)
+			return false; // login.jsp
+
 		CartDAO cartDAO = new CartDAO();
 		cartDAO.addToCart(user.getUserId(), productId);
-		Product product = new ProductDAO().getProductsById(productId);
+		Product product = new ProductDAO().getProductById(productId);
+		if (product == null)
+			return false;
 
 		Double totalAmount = product.getPrice();
-		System.out.println("Total Amount in buy now Command: " + totalAmount);
 		session.setAttribute("totalAmount", totalAmount);
 
-		if (product != null) {
-			return true;
-		}
-		return false;
+		return true;
 	}
 
 }

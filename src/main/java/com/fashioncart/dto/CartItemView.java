@@ -7,6 +7,7 @@ public class CartItemView {
 	private String category;
 	private double price;
 	private int quantity;
+	private double subTotal;
 
 	public CartItemView(String id, String name, String category, double price) {
 		this.id = id;
@@ -37,7 +38,12 @@ public class CartItemView {
 		return quantity;
 	}
 
+	public double getSubTotal() {
+		return subTotal;
+	}
+
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+		this.subTotal = this.price * quantity;
 	}
 }

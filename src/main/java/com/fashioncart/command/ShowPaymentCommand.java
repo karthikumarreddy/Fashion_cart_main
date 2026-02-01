@@ -36,7 +36,7 @@ public class ShowPaymentCommand implements Command {
         if (user == null) {
         	return false; //cart.jsp
         }
-
+        
         CartDAO cartDAO = new CartDAO();
         List<CartItem> cartItems = cartDAO.getCartItems(user.getUserId());
 
