@@ -18,8 +18,10 @@ public class BuyNowCommand implements Command {
 		User user = (User) session.getAttribute("loggedUser");
 		int productId = Integer.parseInt(req.getParameter("id"));
 
-		if (user == null || session == null || productId == 0)
+		if (user == null || session == null || productId == 0) {
+			req.setAttribute("errorMessage", "Login required . Please Login to purchase this item.");
 			return false; // login.jsp
+		}
 
 		CartDAO cartDAO = new CartDAO();
 		cartDAO.addToCart(user.getUserId(), productId);

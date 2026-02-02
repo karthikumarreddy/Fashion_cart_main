@@ -23,7 +23,7 @@ public class AddToCartCommand implements Command {
 			logger.debug("user :" + user);
 
 			if (user == null) {
-
+				req.setAttribute("errorMessage", "Login required. Please Login to add items to your cart.");
 				return false; // login.jsp
 			}
 
@@ -35,6 +35,8 @@ public class AddToCartCommand implements Command {
 
 			int count = cartDAO.getCartCount(user.getUserId());
 			session.setAttribute("cartCount", count);
+			req.setAttribute("successMessage", "Item added to your cart.");
+
 			logger.debug("cart count : " + count);
 
 			return true; // cart.jsp

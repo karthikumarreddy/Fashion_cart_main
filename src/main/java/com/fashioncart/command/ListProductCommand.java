@@ -33,6 +33,7 @@ public class ListProductCommand implements Command {
 				return false;
 			}
 			session.setAttribute("productList", products);
+			session.setAttribute("category", category);
 			return true; // Home.jsp
 
 		} catch (Exception e) {

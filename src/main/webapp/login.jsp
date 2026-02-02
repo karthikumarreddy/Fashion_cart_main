@@ -96,7 +96,7 @@ p:nth-child(2){
 
 </style>
 
-<p><%=request.getAttribute("message")==null? " null ":request.getAttribute("message")%></p>
+<p><%=request.getAttribute("errorMessage")==null? " null ":request.getAttribute("errorMessage")%></p>
 <h2>FashionCart</h2><br>
 <div id="login-page">
 	<h2 style="color:black">Login Page</h2>

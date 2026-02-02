@@ -25,7 +25,7 @@ public class ViewCartCommand implements Command {
 			User user = (User) session.getAttribute("loggedUser");
 			if (session == null || user == null) {
 
-				System.out.println("1");
+				req.setAttribute("errorMessage", "Login required. Please Login to view your cart.");
 				return false;// home.jsp
 			}
 
