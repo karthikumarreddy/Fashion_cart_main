@@ -19,7 +19,7 @@
     <div id="logoname">
         <h2>FashionCart</h2>
     </div>
-
+	<div style="display:flex;gap:30px">
     <div class="dropdown">
         <a href="#" class="dropbtn" onclick="toggleDropdown(event)">Category ▾</a>
         <div class="dropdown-content" id="dropdownMenu">
@@ -89,8 +89,14 @@
                 )
             </button>
         </form>
+        
     </div>
-
+    <div style="padding-top:10px; font-size:bold;">
+    <%if(session.getAttribute("username")!=null) {%>
+      		 Welcome! <%=session.getAttribute("username") %>
+       <% }%>
+       </div>
+</div>
 </nav>
 
 <div id="products1" style="display:flex;gap:20px;margin-top:10px">

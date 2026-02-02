@@ -1,10 +1,7 @@
 package com.fashioncart.command;
 
-import java.util.List;
-
 import com.fashioncart.dao.CartDAO;
 import com.fashioncart.dao.ProductDAO;
-import com.fashioncart.dto.CartItem;
 import com.fashioncart.dto.Product;
 import com.fashioncart.dto.User;
 
@@ -26,7 +23,6 @@ public class BuyNowCommand implements Command {
 
 		CartDAO cartDAO = new CartDAO();
 		cartDAO.addToCart(user.getUserId(), productId);
-		List<CartItem> cartItems = cartDAO.getCartItems(user.getUserId());
 
 		Product product = new ProductDAO().getProductById(productId);
 		if (product == null)

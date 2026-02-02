@@ -8,7 +8,8 @@
 
 /* Body */
 body {
-    background-color:wrgb(128, 255, 255);    color:grey;
+    background-color:wrgb(128, 255, 255);   
+     color:grey;
 }
 
 .navbar {
@@ -22,15 +23,20 @@ body {
 
 /* Logo */
 #logoname h2 {
-    color:red;
+	margin: 0;
+    font-size: 24px;
+    letter-spacing: 1px;
+    color:#ffff;
    
-    font-weight: bold;
+    
 }
 
 /* Dropdown */
 .dropdown {
     position: relative;
     display: inline-block;
+    padding-top:10px;
+    font-size:bold;
 }
 
 .dropbtn {

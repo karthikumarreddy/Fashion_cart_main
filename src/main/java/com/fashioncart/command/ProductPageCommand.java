@@ -25,7 +25,6 @@ public class ProductPageCommand implements Command {
 			ProductDAO productDAO = new ProductDAO();
 			Product product = productDAO.getProductById(productId);
 			if (product == null) {
-
 				return false;
 			}
 			req.setAttribute("product", product);

@@ -20,7 +20,7 @@
 	<body>
 	
 	<jsp:include page="header.jsp"></jsp:include>
-	
+	<%=request.getAttribute("errorMessge")!=null?request.getAttribute("errorMessage"):"" %>
 	<%
 	List<CartItemView> cartList = (List<CartItemView>) request.getAttribute("cartList");
 	
