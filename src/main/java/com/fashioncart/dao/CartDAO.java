@@ -54,7 +54,7 @@ public class CartDAO {
 
 			while (rs.next()) {
 				Product p = new Product(rs.getString("product_id"), rs.getString("product_name"), rs.getString("category"),
-								rs.getDouble("price"), null, null, null);
+								rs.getDouble("price"), rs.getString("image_path"), null, null);
 
 				CartItem item = new CartItem();
 				item.setProduct(p);

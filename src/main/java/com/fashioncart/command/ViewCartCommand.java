@@ -22,8 +22,10 @@ public class ViewCartCommand implements Command {
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 		try {
 			HttpSession session = req.getSession(false);
+			if (session == null)
+				return false;
 			User user = (User) session.getAttribute("loggedUser");
-			if (session == null || user == null) {
+			if (user == null) {
 
 				req.setAttribute("errorMessage", "Login required. Please Login to view your cart.");
 				return false;// home.jsp
@@ -70,15 +72,12 @@ public class ViewCartCommand implements Command {
 
 			for (CartItem item : cartItems) {
 				CartItemView dto = new CartItemView(item.getProduct().getId(), item.getProduct().getName(), item.getProduct().getCategory(),
-								item.getProduct().getPrice());
+								item.getProduct().getPrice(), item.getProduct().getImagePath());
 				dto.setQuantity(item.getQuantity());
 
 				totalAmount += dto.getPrice() * dto.getQuantity();
 
 				cartDTOList.add(dto);
-			}
-			if (totalAmount <= 0) {
-				cartDAO.updateQuantity(user.getUserId(), productIdint, "remove");
 			}
 
 			req.setAttribute("cartList", cartDTOList);

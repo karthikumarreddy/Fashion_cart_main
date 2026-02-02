@@ -46,7 +46,7 @@
 	<table>
 	    <thead>
 	        <tr>
-	        	<th>Product</th>
+	       	 	<th>Product_image</th>
 	            <th>Product Name</th>
 	            <th>Category</th>
 	            <th>Price</th>
@@ -60,9 +60,15 @@
 				<%
 				for (CartItemView item : cartList) {
 						double subtotal = item.getSubTotal();
+						
+					if(item.getImagePath()==null){
+						System.out.println("imagePath : "+null);
+					}
+					
+						
 				%>
 				<tr>
-					<td><%=item.getImagePath() %>
+					<td><img src="<%=request.getContextPath()%>/images/<%=item.getImagePath()%>" height="100px" width="100px" alt="loading"></td>
 					<td><%=item.getName()%></td>
 					<td><%=item.getCategory()%></td>
 					<td>₹ <%=String.format("%.2f", item.getPrice())%></td>

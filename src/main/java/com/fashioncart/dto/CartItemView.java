@@ -10,11 +10,12 @@ public class CartItemView {
 	private int quantity;
 	private double subTotal;
 
-	public CartItemView(String id, String name, String category, double price) {
+	public CartItemView(String id, String name, String category, double price, String imagePath) {
 		this.id = id;
 		this.name = name;
 		this.category = category;
 		this.price = price;
+		this.imagePath = imagePath;
 		this.quantity = 1; // default
 	}
 
