@@ -1,195 +1,263 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
-<%@ page import="java.util.*" %>
-<%@ page import="com.fashioncart.dto.Product" %>
+<%@ page import="java.util.*"%>
+<%@ page import="com.fashioncart.dto.Product"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>FashionCart</title>
-<script src="https://jsuites.net/v4/jsuites.js"></script>
-<link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
 <link rel="stylesheet" href="/fashioncart/cssFiles/home.css">
 </head>
 
 <body>
 
-<nav class="navbar">
+	<nav class="navbar">
 
-    <div id="logoname">
-        <h2>FashionCart</h2>
-    </div>
-	<div style="display:flex;gap:30px">
-    <div class="dropdown">
-        <a href="#" class="dropbtn" onclick="toggleDropdown(event)">Category ▾</a>
-        <div class="dropdown-content" id="dropdownMenu">
+		<div id="logoname">
+			<h2>FashionCart</h2>
+		</div>
+		<div style="display: flex; gap: 30px">
+			<div class="dropdown">
+				<a href="#" class="dropbtn" onclick="toggleDropdown(event)">Category
+					▾</a>
+				<div class="dropdown-content" id="dropdownMenu">
 
-        <%
-            String category = (String) session.getAttribute("category");
-        %>
+					<%
+					String category = (String) session.getAttribute("category");
+					%>
 
-        <% if (category != null &&
-              (category.equalsIgnoreCase("mens")
-            || category.equalsIgnoreCase("women")
-            || category.equalsIgnoreCase("children"))) { %>
+					<%
+					if (category != null && (category.equalsIgnoreCase("mens") || category.equalsIgnoreCase("women")
+							|| category.equalsIgnoreCase("children"))) {
+					%>
 
-            <form action="<%=request.getContextPath()%>/controller" method="post">
-                <input type="hidden" name="command" value="listProducts">
-                <input type="hidden" name="category" value="All">
-                <button type="submit">All</button>
-            </form>
+					<form action="<%=request.getContextPath()%>/controller"
+						method="post">
+						<input type="hidden" name="command" value="listProducts">
+						<input type="hidden" name="category" value="All">
+						<button type="submit">All</button>
+					</form>
 
-        <% } %>
+					<%
+					}
+					%>
 
-            <form action="<%=request.getContextPath()%>/controller" method="post">
-                <input type="hidden" name="command" value="listProducts">
-                <input type="hidden" name="category" value="mens">
-                <button type="submit">Men</button>
-            </form>
+					<form action="<%=request.getContextPath()%>/controller"
+						method="post">
+						<input type="hidden" name="command" value="listProducts">
+						<input type="hidden" name="category" value="mens">
+						<button type="submit">Men</button>
+					</form>
 
-            <form action="<%=request.getContextPath()%>/controller" method="post">
-                <input type="hidden" name="command" value="listProducts">
-                <input type="hidden" name="category" value="women">
-                <button type="submit">Women</button>
-            </form>
+					<form action="<%=request.getContextPath()%>/controller"
+						method="post">
+						<input type="hidden" name="command" value="listProducts">
+						<input type="hidden" name="category" value="women">
+						<button type="submit">Women</button>
+					</form>
 
-            <form action="<%=request.getContextPath()%>/controller" method="post">
-                <input type="hidden" name="command" value="listProducts">
-                <input type="hidden" name="category" value="children">
-                <button type="submit">Children</button>
-            </form>
+					<form action="<%=request.getContextPath()%>/controller"
+						method="post">
+						<input type="hidden" name="command" value="listProducts">
+						<input type="hidden" name="category" value="children">
+						<button type="submit">Children</button>
+					</form>
 
-        </div>
-    </div>
+				</div>
+			</div>
 
-    <% if (session.getAttribute("loggedUser") == null) { %>
-        <div id="login-btn">
-            <form action="<%=request.getContextPath()%>/controller" method="post">
-                <input type="hidden" name="command" value="login">
-                <button type="submit">Login / SignUp</button>
-            </form>
-        </div>
-    <% } else { %>
-        <div id="logout-btn">
-            <form action="<%=request.getContextPath()%>/controller" method="post">
-                <input type="hidden" name="command" value="logout">
-                <button type="submit">Logout</button>
-            </form>
-        </div>
-    <% } %>
+			<%
+			if (session.getAttribute("loggedUser") == null) {
+			%>
+			<div id="login-btn">
+				<form action="<%=request.getContextPath()%>/controller"
+					method="post">
+					<input type="hidden" name="command" value="login">
+					<button type="submit">Login / SignUp</button>
+				</form>
+			</div>
+			<%
+			} else {
+			%>
+			<div id="logout-btn">
+				<form action="<%=request.getContextPath()%>/controller"
+					method="post">
+					<input type="hidden" name="command" value="logout">
+					<button type="submit">Logout</button>
+				</form>
+			</div>
+			<%
+			}
+			%>
 
-    <div id="viewcart">
-        <form action="<%=request.getContextPath()%>/controller" method="post">
-            <input type="hidden" name="command" value="viewCart">
-            <button type="submit">
-                View Cart (
-                <%= session.getAttribute("cartCount") != null
-                        ? session.getAttribute("cartCount")
-                        : "" %>
-                )
-            </button>
-        </form>
-        
-    </div>
-    <div style="padding-top:10px; font-size:bold;">
-    <%if(session.getAttribute("username")!=null) {%>
-      		 Welcome! <%=session.getAttribute("username") %>
-       <% }%>
-       </div>
-</div>
-</nav>
+			<div id="viewcart">
+				<form action="<%=request.getContextPath()%>/controller"
+					method="post">
+					<input type="hidden" name="command" value="viewCart">
+					<button type="submit">
+						View Cart -
+						<%=session.getAttribute("cartCount") != null ? session.getAttribute("cartCount") : "0"%>
+						
+					</button>
+				</form>
 
-<div id="products1" style="display:flex;gap:20px;margin-top:10px">
+			</div>
+			<div style="padding-top: 10px; font-size: bold;">
+				<%
+				if (session.getAttribute("username") != null) {
+				%>
+				Welcome!
+				<%=session.getAttribute("username")%>
+				<%
+				}
+				%>
+			</div>
+		</div>
+	</nav>
 
-<%
-    List<Product> products =
-        (List<Product>) session.getAttribute("productList");
+	<div id="products1" style="display: flex; gap: 20px; margin-top: 10px">
 
-    if (products != null) {
-        for (Product p : products) {
-%>
+		<%
+		List<Product> products = (List<Product>) request.getAttribute("productList");
 
-<a href="<%=request.getContextPath()%>/controller?command=productPage&productId=<%=p.getId()%>" style="none">
-    <div class="product-card">
-        <img src="<%=request.getContextPath()%>/images/<%=p.getImagePath()%>"></a>
-        <h4><%=p.getName()%></h4>
-        <p>₹<%=p.getPrice()%></p>
-        <p>
-            <%= p.isAvailability().equalsIgnoreCase("IN_STOCK")
-                ? "Available"
-                : "Currently UnAvailable" %>
-        </p>
-      
-        <% if (p.isAvailability().equalsIgnoreCase("IN_STOCK")) { %>
+		if (products != null) {
+			for (Product p : products) {
+		%>
 
-            <form action="<%=request.getContextPath()%>/controller" method="post">
-                <input type="hidden" name="command" value="buynow">
-                <input type="hidden" name="id" value="<%=p.getId()%>">
-                <button type="submit">Buy Now</button>
-            </form>
+		<a
+			href="<%=request.getContextPath()%>/controller?command=productPage&productId=<%=p.getId()%>"
+			style="">
+			<div class="product-card">
+				<img
+					src="<%=request.getContextPath()%>/images/<%=p.getImagePath()%>">
+		</a>
+		<h4><%=p.getName()%></h4>
+		<p>
+			₹<%=p.getPrice()%></p>
+		<p>
+			<%=p.isAvailability().equalsIgnoreCase("IN_STOCK") ? "Available" : "Currently UnAvailable"%>
+		</p>
 
-            <form action="<%=request.getContextPath()%>/controller" method="post">
-                <input type="hidden" name="command" value="addToCart">
-                <input type="hidden" name="id" value="<%=p.getId()%>">
-                <button type="submit" id="notifications">Add to Cart</button>
-            </form>
+		<%
+		if (p.isAvailability().equalsIgnoreCase("IN_STOCK")) {
+		%>
 
-        <% } else { %>
+		<form action="<%=request.getContextPath()%>/controller" method="post">
+			<input type="hidden" name="command" value="buynow"> <input
+				type="hidden" name="id" value="<%=p.getId()%>">
+			<button type="submit">Buy Now</button>
+		</form>
 
-            <button style="cursor:not-allowed;background-color:grey" disabled>
-                Buy Now
-            </button>
+		<form action="<%=request.getContextPath()%>/controller" method="post">
+			<input type="hidden" name="command" value="addToCart"> <input
+				type="hidden" name="id" value="<%=p.getId()%>">
+			<button type="submit">Add to Cart</button>
+		</form>
 
-            <button style="cursor:not-allowed;background-color:grey" disabled>
-                Add to Cart
-            </button>
+		<%
+		} else {
+		%>
 
-        <% } %>
-    </div>
-    
-<%
-        }
-    }
-%>
+		<button style="cursor: not-allowed; background-color: grey" disabled>
+			Buy Now</button>
 
-<jsp:include page="footer.jsp"></jsp:include>
+		<button style="cursor: not-allowed; background-color: grey" disabled>
+			Add to Cart</button>
+
+		<%
+		}
+		%>
+	</div>
+
+	<%
+	}
+	}
+	%>
+
+	<div class="pagination-container">
+
+		<%
+		Integer currentPage = (Integer) request.getAttribute("currentPage");
+		Integer totalPages = (Integer) request.getAttribute("totalPages");
+		String categoryParam = (String) request.getAttribute("category");
+
+		if (totalPages != null && totalPages > 1) {
+		%>
+
+		<%
+		if (currentPage > 1) {
+		%>
+		<a
+			href="<%=request.getContextPath()%>/controller?command=listProducts&category=<%=categoryParam%>&page=<%=currentPage - 1%>">
+			Prev </a>
+		<%
+		}
+		%>
+
+		<%
+		for (int i = 1; i <= totalPages; i++) {
+		%>
+		<%
+		if (i == currentPage) {
+		%>
+		<b><%=i%></b>
+		<%
+		} else {
+		%>
+		<a
+			href="<%=request.getContextPath()%>/controller?command=listProducts&category=<%=categoryParam%>&page=<%=i%>">
+			<%=i%>
+		</a>
+		<%
+		}
+		%>
+		<%
+		}
+		%>
+
+		<%
+		if (currentPage < totalPages) {
+		%>
+		<a
+			href="<%=request.getContextPath()%>/controller?command=listProducts&category=<%=categoryParam%>&page=<%=currentPage + 1%>">
+			Next </a>
+		<%
+		}
+		%>
+
+		<%
+		}
+		%>
+
+	</div>
+	</div>
 
 
+	<jsp:include page="footer.jsp"></jsp:include>
+	</div>
 
-<% if (request.getAttribute("successMessage") != null) { %>
-<script>
-    jSuites.notification({
-        name: 'Success',
-        message: '<%= request.getAttribute("successMessage") %>',
-        color: 'green',       // ✅ green toast
-        position: 'top-right', // optional
-        timeout: 3000          // auto-hide after 3 seconds
-    });
-</script>
-<% } %>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const dropdownMenu = document.getElementById("dropdownMenu");
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			const dropdownMenu = document.getElementById("dropdownMenu");
 
-    window.toggleDropdown = function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        dropdownMenu.classList.toggle("show");
-    };
+			window.toggleDropdown = function(event) {
+				event.preventDefault();
+				event.stopPropagation();
+				dropdownMenu.classList.toggle("show");
+			};
 
-    document.addEventListener("click", function () {
-        dropdownMenu.classList.remove("show");
-    });
+			document.addEventListener("click", function() {
+				dropdownMenu.classList.remove("show");
+			});
 
-    dropdownMenu.addEventListener("click", function (e) {
-        e.stopPropagation();
-    });
-});
-
-
-</script>
+			dropdownMenu.addEventListener("click", function(e) {
+				e.stopPropagation();
+			});
+		});
+	</script>
 
 </body>
 </html>
