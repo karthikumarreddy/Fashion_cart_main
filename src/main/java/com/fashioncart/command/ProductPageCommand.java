@@ -15,35 +15,37 @@ public class ProductPageCommand implements Command {
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
 		try {
 			HttpSession session = req.getSession(false);
-			if (session == null)
-				return false;
-
-			User user = (User) session.getAttribute("loggedUser");
-			if (user == null) {
+			if (session == null) {
 				return false;
 			}
-
-			String action = req.getParameter("add");
 			String productIdStr = req.getParameter("productId");
-
 			if (productIdStr == null)
 				return false;
-
 			int productId = Integer.parseInt(productIdStr);
-
-			if ("addcart".equals(action) && user != null) {
-				CartDAO cartDao = new CartDAO();
-				cartDao.addToCart(user.getUserId(), productId);
-			}
-
 			ProductDAO productDAO = new ProductDAO();
 			Product product = productDAO.getProductById(productId);
+			if (product == null) {
 
-			if (product == null)
 				return false;
-			CartDAO cartDao = new CartDAO();
+			}
 			req.setAttribute("product", product);
-			session.setAttribute("cartCount", cartDao.getCartCount(user.getUserId()));
+
+			User user = (User) session.getAttribute("loggedUser");
+
+			String action = req.getParameter("add");
+
+			if ("addcart".equals(action)) {
+				if (user == null) {
+					req.setAttribute("errorMessage", "please login to add the product in cart");
+					System.out.println("inside productpage user is null");
+					return false;
+				} else {
+					CartDAO cartDao = new CartDAO();
+					cartDao.addToCart(user.getUserId(), productId);
+					session.setAttribute("cartCount", cartDao.getCartCount(user.getUserId()));
+				}
+			}
+
 			return true;
 
 		} catch (Exception e) {

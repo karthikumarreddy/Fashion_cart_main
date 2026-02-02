@@ -105,7 +105,7 @@
 
 <a href="<%=request.getContextPath()%>/controller?command=productPage&productId=<%=p.getId()%>" style="none">
     <div class="product-card">
-        <img src="<%=request.getContextPath()%>/images/<%=p.getImagePath()%>">
+        <img src="<%=request.getContextPath()%>/images/<%=p.getImagePath()%>"></a>
         <h4><%=p.getName()%></h4>
         <p>₹<%=p.getPrice()%></p>
         <p>
@@ -140,7 +140,7 @@
 
         <% } %>
     </div>
-    </a>
+    
    
 
 <%
