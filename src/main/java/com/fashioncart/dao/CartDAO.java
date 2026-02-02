@@ -98,30 +98,62 @@ public class CartDAO {
 
 	public void updateQuantity(int userId, int productId, String action) {
 
-		String sql = "";
-		if (action.equals("inc")) {
-			sql = """
-							    UPDATE cart_items
-							    SET quantity = quantity + 1
-							    WHERE user_id = ? AND product_id = ?
-							""";
-		} else if (action.equals("dec")) {
-			sql = """
-							    UPDATE cart_items
-							    SET quantity = quantity - 1
-							    WHERE user_id = ? AND product_id = ? AND quantity > 0
-							""";
-		} else if (action.equals("remove")) {
-			sql = """
-							    DELETE FROM cart_items
-							    WHERE user_id = ? AND product_id = ?
-							""";
-		}
-		try (Connection conn = GetDataSource.getDataSource().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+		try (Connection conn = GetDataSource.getDataSource().getConnection()) {
 
-			ps.setInt(1, userId);
-			ps.setInt(2, productId);
-			ps.executeUpdate();
+			if ("inc".equals(action)) {
+
+				String sql = """
+								    UPDATE cart_items
+								    SET quantity = quantity + 1
+								    WHERE user_id = ? AND product_id = ?
+								""";
+
+				try (PreparedStatement ps = conn.prepareStatement(sql)) {
+					ps.setInt(1, userId);
+					ps.setInt(2, productId);
+					ps.executeUpdate();
+				}
+
+			} else if ("dec".equals(action)) {
+
+				// Decrease quantity
+				String decSql = """
+								    UPDATE cart_items
+								    SET quantity = quantity - 1
+								    WHERE user_id = ? AND product_id = ? AND quantity > 0
+								""";
+
+				try (PreparedStatement ps = conn.prepareStatement(decSql)) {
+					ps.setInt(1, userId);
+					ps.setInt(2, productId);
+					ps.executeUpdate();
+				}
+
+				// Remove if quantity becomes 0
+				String deleteSql = """
+								    DELETE FROM cart_items
+								    WHERE user_id = ? AND product_id = ? AND quantity <= 0
+								""";
+
+				try (PreparedStatement ps = conn.prepareStatement(deleteSql)) {
+					ps.setInt(1, userId);
+					ps.setInt(2, productId);
+					ps.executeUpdate();
+				}
+
+			} else if ("remove".equals(action)) {
+
+				String sql = """
+								    DELETE FROM cart_items
+								    WHERE user_id = ? AND product_id = ?
+								""";
+
+				try (PreparedStatement ps = conn.prepareStatement(sql)) {
+					ps.setInt(1, userId);
+					ps.setInt(2, productId);
+					ps.executeUpdate();
+				}
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
