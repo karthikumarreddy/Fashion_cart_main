@@ -16,11 +16,11 @@ import com.fashioncart.dto.Product;
  *getCartItems-fetching 
  */
 public class CartDAO {
-	public void addToCart(int userId, int productId) {
+	public void addToCart(int userId, int productId, String path) {
 
 		String sql = """
-						    INSERT INTO cart_items (user_id, product_id, quantity)
-						    VALUES (?, ?, 1)
+						    INSERT INTO cart_items (user_id, product_id, quantity,image_path)
+						    VALUES (?, ?, 1,?)
 						    ON CONFLICT (user_id, product_id)
 						    DO UPDATE SET quantity = cart_items.quantity + 1
 						""";
@@ -28,6 +28,7 @@ public class CartDAO {
 		try (Connection conn = GetDataSource.getDataSource().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setInt(1, userId);
 			ps.setInt(2, productId);
+			ps.setString(3, path);
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -37,7 +38,7 @@ public class CartDAO {
 	public List<CartItem> getCartItems(int userId) {
 
 		String sql = """
-						   SELECT ci.quantity,
+						   SELECT ci.quantity,ci.image_path,
 						         p.product_id, p.product_name, p.price,p.category
 						   FROM cart_items ci
 						   JOIN product p ON ci.product_id = p.product_id

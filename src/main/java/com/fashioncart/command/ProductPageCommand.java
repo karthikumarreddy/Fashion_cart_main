@@ -40,7 +40,8 @@ public class ProductPageCommand implements Command {
 					return false;
 				} else {
 					CartDAO cartDao = new CartDAO();
-					cartDao.addToCart(user.getUserId(), productId);
+					cartDao.addToCart(user.getUserId(), productId, product.getImagePath());
+					req.setAttribute("successMessahe", "Product added to cart sucessfully");
 					session.setAttribute("cartCount", cartDao.getCartCount(user.getUserId()));
 				}
 			}

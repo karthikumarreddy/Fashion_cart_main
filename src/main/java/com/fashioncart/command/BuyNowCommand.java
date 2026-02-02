@@ -23,13 +23,12 @@ public class BuyNowCommand implements Command {
 			return false; // login.jsp
 		}
 
-		CartDAO cartDAO = new CartDAO();
-		cartDAO.addToCart(user.getUserId(), productId);
-
 		Product product = new ProductDAO().getProductById(productId);
 		if (product == null)
 			return false;
 
+		CartDAO cartDAO = new CartDAO();
+		cartDAO.addToCart(user.getUserId(), productId, product.getImagePath());
 		Double totalAmount = product.getPrice();
 		session.setAttribute("totalAmount", totalAmount);
 

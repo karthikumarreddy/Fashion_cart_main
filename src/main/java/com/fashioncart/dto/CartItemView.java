@@ -3,6 +3,7 @@ package com.fashioncart.dto;
 public class CartItemView {
 
 	private String id;
+	private String imagePath;
 	private String name;
 	private String category;
 	private double price;
@@ -15,6 +16,14 @@ public class CartItemView {
 		this.category = category;
 		this.price = price;
 		this.quantity = 1; // default
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 	// getters & setters

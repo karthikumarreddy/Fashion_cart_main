@@ -46,6 +46,7 @@
 	<table>
 	    <thead>
 	        <tr>
+	        	<th>Product</th>
 	            <th>Product Name</th>
 	            <th>Category</th>
 	            <th>Price</th>
@@ -61,6 +62,7 @@
 						double subtotal = item.getSubTotal();
 				%>
 				<tr>
+					<td><%=item.getImagePath() %>
 					<td><%=item.getName()%></td>
 					<td><%=item.getCategory()%></td>
 					<td>₹ <%=String.format("%.2f", item.getPrice())%></td>

@@ -4,6 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.fashioncart.dao.CartDAO;
+import com.fashioncart.dao.ProductDAO;
+import com.fashioncart.dto.Product;
 import com.fashioncart.dto.User;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,9 +31,11 @@ public class AddToCartCommand implements Command {
 
 			int productId = Integer.parseInt(req.getParameter("id"));
 			logger.debug("Product_id :" + productId);
+			ProductDAO productDao = new ProductDAO();
 
+			Product product = productDao.getProductById(productId);
 			CartDAO cartDAO = new CartDAO();
-			cartDAO.addToCart(user.getUserId(), productId);
+			cartDAO.addToCart(user.getUserId(), productId, product.getImagePath());
 
 			int count = cartDAO.getCartCount(user.getUserId());
 			session.setAttribute("cartCount", count);
