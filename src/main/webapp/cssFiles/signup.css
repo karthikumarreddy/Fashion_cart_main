@@ -12,7 +12,7 @@ body {
     align-items: center;
 }
 nav{
-	margin-top:6%;
+	margin-top:0%;
 }
 /* Signup container */
 .signup-box {
@@ -38,7 +38,7 @@ nav{
 .signup-box input[type="password"] {
     width: 100%;
     padding: 12px;
-    margin-bottom: 6px; /* reduced to avoid tooltip gap */
+   
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 14px;
@@ -128,7 +128,7 @@ nav{
 
 /* Login link */
 .signup-box p {
-    margin-top: 18px;
+    margin-top: 5px;
     font-size: 14px;
 }
 

@@ -19,12 +19,14 @@
     		
        <input type="hidden" name="command" value="signup">
 	   <div style="display:flex;flex-direction:column;">
+	   <div>
        UserName*: <input id ="username"type="text" name="userName" placeholder="Username">
        <p id="checkusername" class="display-error"></p>
        </div>
+       </div>
        
        <div>
-       Email: <input id="email"type="email" name="email" placeholder="Enter your Email">
+       Email: <input id="email" type="text" name="email" placeholder="Enter your Email">
        <p id="checkemail" class="display-error"></p>
       </div>
        <div class="password-wrapper">
@@ -39,7 +41,7 @@
 		
 		<div>
       		Confirm Password: <input type="password" name="confirmPassword" placeholder="Password">
-		</div>
+		</div><br>
         <button type="submit">SignUp</button>
     </form>
 
@@ -59,36 +61,49 @@
 
 <script>
 function validateForm() {
+
     var username = document.getElementById("username").value.trim();
     var email = document.getElementById("email").value.trim();
-	var password=document.getElementById("password").value.trim();
-   	var userError = document.getElementById("checkusername");
-    var emailError = document.getElementById("checkemail");
-    var passwordError=document.getElementById("checkpassword");
+    var password = document.getElementById("password").value.trim();
 
-    // reset messages
-   userError.innerHTML = "";
-   emailError.innerHTML = "";
-   passwordError.innerHTML = "";
+    var userError = document.getElementById("checkusername");
+    var emailError = document.getElementById("checkemail");
+    var passwordError = document.getElementById("checkpassword");
+
+    const EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.com$/;
+    const PASSWORD_PATTERN = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,}$/;
+
+    userError.innerHTML = "";
+    emailError.innerHTML = "";
+    passwordError.innerHTML = "";
+
     var isValid = true;
 
     if (username === "") {
         userError.innerHTML = "Username is required";
         isValid = false;
     }
-    
+
     if (email === "") {
         emailError.innerHTML = "Email is required";
         isValid = false;
+    } else if (!EMAIL_REGEX.test(email)) {
+        emailError.innerHTML = "Email is invalid";
+        isValid = false;
     }
-    if(password===""){
-    		passwordError.innerHTML= "Password is required";
-			isValid=false;
+
+    if (password === "") {
+        passwordError.innerHTML = "Password is required";
+        isValid = false;
+    } else if (!PASSWORD_PATTERN.test(password)) {
+        passwordError.innerHTML = "Password format is invalid";
+        isValid = false;
     }
 
     return isValid;
 }
 </script>
+
 
 
 </html>
