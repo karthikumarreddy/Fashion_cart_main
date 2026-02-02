@@ -27,19 +27,15 @@ public class SignupCommand implements Command {
 			String confirmPassword = req.getParameter("confirmPassword");
 			logger.debug("confirm password " + confirmPassword);
 
-			ValidationServices.validateUserName(userName);
-			System.out.println("1");
-			ValidationServices.validateEmail(email);
-			System.out.println("2");
-			ValidationServices.validatePssword(enterPassword);
-			System.out.println("3");
+			if (!ValidationServices.validateUserName(userName) || !ValidationServices.validateEmail(email)
+							|| ValidationServices.validatePssword(enterPassword))
+				return false;
+
 			if (userName == null || email == null || enterPassword == null || confirmPassword == null) {
 				System.out.println("check");
 				return false;
 
 			}
-
-			System.out.println(4 + "  =  " + enterPassword.equals(confirmPassword));
 
 			if (enterPassword.equals(confirmPassword)) {
 				System.out.println(4 + "  =  " + enterPassword.equals(confirmPassword));
