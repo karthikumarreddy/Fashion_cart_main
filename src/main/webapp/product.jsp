@@ -28,9 +28,11 @@
 	</form>
 
 	<form action="<%=request.getContextPath()%>/controller" method="post">
-		<input type="hidden" name="command" value="addToCart"> <input
-			type="hidden" name="id" value="<%=product.getId()%>">
-		<button type="submit">Add to Cart</button>
-	</form>
+    <input type="hidden" name="command" value="productPage">
+    <input type="hidden" name="add" value="addcart">
+    <input type="hidden" name="productId" value="<%=product.getId()%>">
+    <button type="submit">Add to Cart</button>
+</form>
+	
 </body>
 </html>

@@ -38,6 +38,7 @@ public class LoginCommand implements Command {
 				CartDAO cartDAO = new CartDAO();
 				int cartCount = cartDAO.getCartCount(user.getUserId());
 				session.setAttribute("cartCount", cartCount);
+				session.setAttribute("username", user.getUserName());
 
 				return true;
 			}
