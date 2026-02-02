@@ -28,7 +28,7 @@ public class SignupCommand implements Command {
 			logger.debug("confirm password " + confirmPassword);
 
 			if (!ValidationServices.validateUserName(userName) || !ValidationServices.validateEmail(email)
-							|| ValidationServices.validatePssword(enterPassword))
+							|| !ValidationServices.validatePssword(enterPassword))
 				return false;
 
 			if (userName == null || email == null || enterPassword == null || confirmPassword == null) {
