@@ -18,12 +18,10 @@ import com.fashioncart.dto.Product;
 public class CartDAO {
 	public void addToCart(int userId, int productId, String path) {
 
-		String sql = """
-						    INSERT INTO cart_items (user_id, product_id, quantity,image_path)
-						    VALUES (?, ?, 1,?)
-						    ON CONFLICT (user_id, product_id)
-						    DO UPDATE SET quantity = cart_items.quantity + 1
-						""";
+		String sql = "    INSERT INTO cart_items (user_id, product_id, quantity,image_path)\r\n"
+						+ "						    VALUES (?, ?, 1,?)\r\n"
+						+ "						    ON CONFLICT (user_id, product_id)\r\n"
+						+ "						    DO UPDATE SET quantity = cart_items.quantity + 1";
 
 		try (Connection conn = GetDataSource.getDataSource().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setInt(1, userId);
@@ -37,14 +35,11 @@ public class CartDAO {
 
 	public List<CartItem> getCartItems(int userId) {
 
-		String sql = """
-						   SELECT ci.quantity,ci.image_path,
-						         p.product_id, p.product_name, p.price,p.category
-						   FROM cart_items ci
-						   JOIN product p ON ci.product_id = p.product_id
-						   WHERE ci.user_id = ?
-						   ORDER BY p.product_name;
-						""";
+		String sql = " SELECT ci.quantity,ci.image_path,\r\n"
+						+ "						         p.product_id, p.product_name, p.price,p.category\r\n"
+						+ "						   FROM cart_items ci\r\n"
+						+ "						   JOIN product p ON ci.product_id = p.product_id\r\n"
+						+ "						   WHERE ci.user_id = ?\r\n" + "						   ORDER BY p.product_name;";
 
 		List<CartItem> cartList = new ArrayList<>();
 
@@ -103,11 +98,8 @@ public class CartDAO {
 
 			if ("inc".equals(action)) {
 
-				String sql = """
-								    UPDATE cart_items
-								    SET quantity = quantity + 1
-								    WHERE user_id = ? AND product_id = ?
-								""";
+				String sql = " UPDATE cart_items SET quantity = quantity + 1\r\n"
+								+ "								    WHERE user_id = ? AND product_id = ?";
 
 				try (PreparedStatement ps = conn.prepareStatement(sql)) {
 					ps.setInt(1, userId);
@@ -118,11 +110,8 @@ public class CartDAO {
 			} else if ("dec".equals(action)) {
 
 				// Decrease quantity
-				String decSql = """
-								    UPDATE cart_items
-								    SET quantity = quantity - 1
-								    WHERE user_id = ? AND product_id = ? AND quantity > 0
-								""";
+				String decSql = " UPDATE cart_items	SET quantity = quantity - 1\r\n"
+								+ "								    WHERE user_id = ? AND product_id = ? AND quantity > 0";
 
 				try (PreparedStatement ps = conn.prepareStatement(decSql)) {
 					ps.setInt(1, userId);
@@ -131,10 +120,7 @@ public class CartDAO {
 				}
 
 				// Remove if quantity becomes 0
-				String deleteSql = """
-								    DELETE FROM cart_items
-								    WHERE user_id = ? AND product_id = ? AND quantity <= 0
-								""";
+				String deleteSql = "DELETE FROM cart_items WHERE user_id = ? AND product_id = ? AND quantity <= 0";
 
 				try (PreparedStatement ps = conn.prepareStatement(deleteSql)) {
 					ps.setInt(1, userId);
@@ -144,10 +130,7 @@ public class CartDAO {
 
 			} else if ("remove".equals(action)) {
 
-				String sql = """
-								    DELETE FROM cart_items
-								    WHERE user_id = ? AND product_id = ?
-								""";
+				String sql = " DELETE FROM cart_items WHERE user_id = ? AND product_id = ?";
 
 				try (PreparedStatement ps = conn.prepareStatement(sql)) {
 					ps.setInt(1, userId);
