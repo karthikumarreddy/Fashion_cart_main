@@ -1,124 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
-<style>
-body {
-    margin: 0;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    height: 100vh;
-    display: flex;
-    flex-direction:column;
-    justify-content: center;
-    align-items: center;
-}
-h2{
-	text-align: center;
-    margin-bottom: 25px;
-    color: white;
-    font-size: 26px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-/* Container */
-#login-page {
-    background: #fff;
-    padding: 30px 35px;
-    width: 380px;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
 
-/* Form */
-#login-page form {
-    display: flex;
-    flex-direction: column;
-     font-size: 14px;
-    color: #333;
-}
+<link rel="stylesheet" href="/fashioncart/cssFiles/login.css">
+</head>
 
-/* Inputs */
-#login-page input[type="text"],
-#login-page input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin: 6px 0 15px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-}
+<body>
 
-#login-page input:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 4px rgba(102, 126, 234, 0.6);
-}
+<jsp:include page="header.jsp"></jsp:include>
 
-/* Button */
-#login-page button {
-    margin-top: 10px;
-    padding: 12px;
-    background: #667eea;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-#login-page button:hover {
-    background: #5a67d8;
-}
-
-/* Signup text */
-#login-page p {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 14px;
-}
-
-#login-page a {
-    color: #667eea;
-    text-decoration: none;
-    font-weight: bold;
-    margin-left: 5px;
-}
-
-#login-page a:hover {
-    text-decoration: underline;
-}
-
-/* Error message */
-p:nth-child(2){
-    margin-top: 15px;
-    text-align: center;
-    font-weight: bold;
-    color:red;
-}
-
-</style>
-
-
-<h2>FashionCart</h2><br>
-
-<p style= "color:red"><%=request.getAttribute("errorMessage")==null? " ":request.getAttribute("errorMessage")%></p>
-<div id="login-page">
-	<h2 style="color:black">Login Page</h2>
-<form action="<%=request.getContextPath()%>/controller" method="post">
-    <input type="hidden" name="command" value="login">
-
-  	 Username:<input type="text" name="userName" placeholder="userName" required>
-   	 Password:<input type="password" name="password" placeholder="password" required>
-   
-    <button type="submit">Login</button>
-    <p>New User?<a href="<%=request.getContextPath()%>/controller?command=signup">Create Account</a></p>
-</form>
-
-<p style="color:red;">
-    <%= request.getAttribute("error") != null
-        ? request.getAttribute("error")
-        : "" %>
+<p class="error">
+    <%= request.getAttribute("errorMessage") == null
+        ? ""
+        : request.getAttribute("errorMessage") %>
 </p>
+
+<div id="login-page">
+    <h2>Login Page</h2>
+
+    <form action="<%=request.getContextPath()%>/controller" method="post">
+        <input type="hidden" name="command" value="login">
+
+        Username:
+        <input type="text" name="userName" placeholder="Username" required>
+
+        Password:
+        <input type="password" name="password" placeholder="Password" required>
+
+        <button type="submit">Login</button>
+
+        <p>
+            New User?
+            <a href="<%=request.getContextPath()%>/controller?command=signup">
+                Create Account
+            </a>
+        </p>
+    </form>
+
+    <p class="error">
+        <%= request.getAttribute("error") == null
+            ? ""
+            : request.getAttribute("error") %>
+    </p>
 </div>
 
-
-
-
+</body>
+</html>

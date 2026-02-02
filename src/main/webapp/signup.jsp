@@ -10,6 +10,7 @@
 </head>
 
 <body>
+<jsp:include page="header.jsp"></jsp:include>
 
 <div class="signup-box">
     <h2 style="text-align:center;">Create Account</h2>
@@ -18,7 +19,7 @@
     		
        <input type="hidden" name="command" value="signup">
 	   <div style="display:flex;flex-direction:column;">
-       UserName: <input id ="username"type="text" name="userName" placeholder="Username">
+       UserName*: <input id ="username"type="text" name="userName" placeholder="Username">
        <p id="checkusername" class="display-error"></p>
        </div>
        
@@ -66,9 +67,9 @@ function validateForm() {
     var passwordError=document.getElementById("checkpassword");
 
     // reset messages
-//    userError.innerHTML = "";
-  //  emailError.innerHTML = "";
-
+   userError.innerHTML = "";
+   emailError.innerHTML = "";
+   passwordError.innerHTML = "";
     var isValid = true;
 
     if (username === "") {
