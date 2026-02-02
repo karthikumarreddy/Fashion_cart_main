@@ -4,16 +4,21 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    height: 100vh;
+    min-height: 100vh;
+}
+.page-wrapper {
+    margin-top: 80px;   /* same height as navbar */
     display: flex;
-    flex-direction:column;
-    gap:20px;
     justify-content: center;
     align-items: center;
+    min-height: calc(100vh - 80px);
 }
-nav{
-	margin-top:0%;
+
+.display-error {
+    min-height: 16px;
 }
+
+
 /* Signup container */
 .signup-box {
 	
@@ -61,8 +66,6 @@ nav{
 /* Password wrapper */
 .password-wrapper {
     position: relative;
-    display: flex;
-    flex-direction: column;
     margin-bottom: 15px;
 }
 
@@ -70,21 +73,17 @@ nav{
 .tooltip {
     visibility: hidden;
     opacity: 0;
-
     width: 280px;
     background-color: #333;
     color: #fff;
-
     padding: 10px;
     border-radius: 6px;
     font-size: 13px;
     line-height: 1.4;
-
     position: absolute;
-    top: 105%; /* small gap below input */
+    top: 100%; /* small gap below input */
     left: 0;
     z-index: 999;
-
     transition: opacity 0.3s ease;
 }
 
@@ -140,4 +139,9 @@ nav{
 
 .signup-box a:hover {
     text-decoration: underline;
+}
+
+.required{
+	color:red;
+	font-weight:bold;
 }

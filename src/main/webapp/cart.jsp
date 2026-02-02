@@ -11,15 +11,11 @@
 	<title>My Cart</title>
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/cssFiles/cart.css">
 	</head>
-	<style>
-		nav{
-		margin-top:-30px;
-		margin-bottom:10px;
-		}
-	</style>
+	
 	<body>
 	
 	<jsp:include page="header.jsp"></jsp:include>
+	<div class="page-wrapper">
 	<%=request.getAttribute("errorMessge")!=null?request.getAttribute("errorMessage"):"" %>
 	<%
 	List<CartItemView> cartList = (List<CartItemView>) request.getAttribute("cartList");
@@ -126,7 +122,7 @@
 	     <form action="<%=request.getContextPath()%>/controller" method="post"
 	          style="display:inline;">
 	        <input type="hidden" name="command" value="listProducts">
-	        <button type="submit">continueShopping</button>
+	        <button type="submit">Continue Shopping</button>
 	    </form>
 	
 	    <form action="<%=request.getContextPath()%>/controller" method="post"
@@ -141,6 +137,6 @@
 	<%
 	    }
 	%>
-	
+	</div>
 	</body>
 	</html>

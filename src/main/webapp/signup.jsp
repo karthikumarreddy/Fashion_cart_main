@@ -12,6 +12,7 @@
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 
+<div class="page-wrapper">
 <div class="signup-box">
     <h2 style="text-align:center;">Create Account</h2>
 
@@ -20,17 +21,17 @@
        <input type="hidden" name="command" value="signup">
 	   <div style="display:flex;flex-direction:column;">
 	   <div>
-       UserName*: <input id ="username"type="text" name="userName" placeholder="Username">
+       UserName:<span class="required">*</span><input id ="username"type="text" name="userName" placeholder="Username">
        <p id="checkusername" class="display-error"></p>
        </div>
        </div>
        
        <div>
-       Email: <input id="email" type="text" name="email" placeholder="Enter your Email">
+       Email:<span class="required">*</span> <input id="email" type="email" name="email" placeholder="Enter your Email">
        <p id="checkemail" class="display-error"></p>
       </div>
        <div class="password-wrapper">
-      	 Password: <input id="password" type="password" name="enterPassword" placeholder="Password">
+      	 Password:<span class="required">*</span> <input id="password" type="password" name="enterPassword" placeholder="Password">
 				<div class="tooltip">
 					Password must contain:<br> • At least 8 characters<br> •
 					One uppercase letter<br> • One number<br> • One special
@@ -40,7 +41,7 @@
       </div>
 		
 		<div>
-      		Confirm Password: <input type="password" name="confirmPassword" placeholder="Password">
+      		Confirm Password:<span class="required">*</span> <input type="password" name="confirmPassword" placeholder="Password">
 		</div><br>
         <button type="submit">SignUp</button>
     </form>
@@ -56,7 +57,7 @@
         <a href="login.jsp">Login</a>
     </p>
 </div>
-
+</div>
 </body>
 
 <script>
