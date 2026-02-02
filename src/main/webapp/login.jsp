@@ -96,8 +96,10 @@ p:nth-child(2){
 
 </style>
 
-<p><%=request.getAttribute("errorMessage")==null? " null ":request.getAttribute("errorMessage")%></p>
+
 <h2>FashionCart</h2><br>
+
+<p style= "color:red"><%=request.getAttribute("errorMessage")==null? " ":request.getAttribute("errorMessage")%></p>
 <div id="login-page">
 	<h2 style="color:black">Login Page</h2>
 <form action="<%=request.getContextPath()%>/controller" method="post">

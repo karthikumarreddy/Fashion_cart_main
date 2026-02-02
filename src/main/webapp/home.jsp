@@ -9,6 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>FashionCart</title>
+<script src="https://jsuites.net/v4/jsuites.js"></script>
+<link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
 <link rel="stylesheet" href="/fashioncart/cssFiles/home.css">
 </head>
 
@@ -131,7 +133,7 @@
             <form action="<%=request.getContextPath()%>/controller" method="post">
                 <input type="hidden" name="command" value="addToCart">
                 <input type="hidden" name="id" value="<%=p.getId()%>">
-                <button type="submit">Add to Cart</button>
+                <button type="submit" id="notifications">Add to Cart</button>
             </form>
 
         <% } else { %>
@@ -147,16 +149,26 @@
         <% } %>
     </div>
     
-   
-
 <%
         }
     }
 %>
 
 <jsp:include page="footer.jsp"></jsp:include>
-</div>
 
+
+
+<% if (request.getAttribute("successMessage") != null) { %>
+<script>
+    jSuites.notification({
+        name: 'Success',
+        message: '<%= request.getAttribute("successMessage") %>',
+        color: 'green',       // ✅ green toast
+        position: 'top-right', // optional
+        timeout: 3000          // auto-hide after 3 seconds
+    });
+</script>
+<% } %>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const dropdownMenu = document.getElementById("dropdownMenu");
@@ -175,6 +187,8 @@ document.addEventListener("DOMContentLoaded", function () {
         e.stopPropagation();
     });
 });
+
+
 </script>
 
 </body>

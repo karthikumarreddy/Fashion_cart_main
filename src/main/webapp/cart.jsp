@@ -124,7 +124,7 @@
 	    <form action="<%=request.getContextPath()%>/controller" method="post"
 	          style="display:inline;">
 	        <input type="hidden" name="command" value="showPayment">
-	        <button type="submit">ChechOut</button>
+	        <button type="submit">CheckOut</button>
 	    </form>
 	    
 	    <jsp:include page="/footer.jsp"></jsp:include>
