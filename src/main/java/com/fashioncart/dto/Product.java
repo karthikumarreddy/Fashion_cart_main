@@ -7,12 +7,12 @@ public class Product {
 	private double price;
 	private String imagePath;
 	private String availability;
+	private String description;
 
-	
 	public Product() {
 	};
 
-	public Product(String id, String name, String category, double price, String imagePath, String availability) {
+	public Product(String id, String name, String category, double price, String imagePath, String availability, String description) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -20,6 +20,7 @@ public class Product {
 		this.price = price;
 		this.imagePath = imagePath;
 		this.availability = availability;
+		this.description = description;
 	}
 
 	public String getId() {
@@ -70,4 +71,11 @@ public class Product {
 		this.availability = availability;
 	}
 
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getDescription() {
+		return description;
+	}
 }

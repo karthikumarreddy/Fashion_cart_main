@@ -6,14 +6,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Product Details page</title>
+<link rel=stylesheet href="/fashioncart/cssFiles/product.css">
 </head>
 <body>
+	<jsp:include page="header.jsp"></jsp:include>
 	<%
 	Product product = (Product) request.getAttribute("product");
 	%>
-	<h1><%=product.getName()%></h1>
-
+	<div class="container">
+	<h1 style="padding-left:36.5%"><%=product.getName()%></h1>
+	<div id="img-des">
+	 <img src="<%=request.getContextPath()%>/images/<%=product.getImagePath()%>">
+	 <div class="product-description">
+	 	
+		<p><%=product.getDescription()%></p>	
+		<h3>Price: ₹<%=product.getPrice() %></h3>
+		<h4>Availbality:<%=product.isAvailability().equalsIgnoreCase("IN_Stock")?"Available":"Unavailable" %></h4>
+		</div>
+	</div>
 
 	<form action="<%=request.getContextPath()%>/controller" method="post"
 		style="display: inline;">
@@ -32,5 +43,6 @@
 			type="hidden" name="id" value="<%=product.getId()%>">
 		<button type="submit">Add to Cart</button>
 	</form>
+	</div>
 </body>
 </html>

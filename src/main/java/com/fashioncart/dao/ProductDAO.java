@@ -32,7 +32,8 @@ public class ProductDAO {
 
 			while (rs.next()) {
 				Product p = new Product(rs.getString("product_id"), rs.getString("product_name"), rs.getString("category"),
-								rs.getDouble("price"), rs.getString("image_path"), rs.getString("availability"));
+								rs.getDouble("price"), rs.getString("image_path"), rs.getString("availability"),
+								rs.getString("description"));
 				products.add(p);
 			}
 
@@ -57,7 +58,8 @@ public class ProductDAO {
 
 			if (rs.next()) {
 				return new Product(rs.getString("product_id"), rs.getString("product_name"), rs.getString("category"),
-								rs.getDouble("price"), rs.getString("image_path"), rs.getString("availability"));
+								rs.getDouble("price"), rs.getString("image_path"), rs.getString("availability"),
+								rs.getString("description"));
 			}
 
 		} catch (Exception e) {
