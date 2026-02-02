@@ -32,9 +32,10 @@ public class ViewCartCommand implements Command {
 			CartDAO cartDAO = new CartDAO();
 			String action = req.getParameter("action");
 			String productId = req.getParameter("productId");
+			int productIdint = 0;
 			if (action != null || productId != null) {
 
-				int productIdint = Integer.parseInt(req.getParameter("productId"));
+				productIdint = Integer.parseInt(req.getParameter("productId"));
 
 				switch (action) {
 
@@ -44,6 +45,7 @@ public class ViewCartCommand implements Command {
 				}
 				case "dec": {
 					cartDAO.updateQuantity(user.getUserId(), productIdint, action);
+
 					break;
 				}
 				case "remove": {
@@ -74,6 +76,9 @@ public class ViewCartCommand implements Command {
 				totalAmount += dto.getPrice() * dto.getQuantity();
 
 				cartDTOList.add(dto);
+			}
+			if (totalAmount <= 0) {
+				cartDAO.updateQuantity(user.getUserId(), productIdint, "remove");
 			}
 
 			req.setAttribute("cartList", cartDTOList);
