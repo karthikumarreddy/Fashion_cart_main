@@ -28,15 +28,19 @@ public class SignupCommand implements Command {
 			logger.debug("confirm password " + confirmPassword);
 
 			if (!ValidationServices.validateUserName(userName) || !ValidationServices.validateEmail(email)
-							|| !ValidationServices.validatePssword(enterPassword))
+							|| !ValidationServices.validatePssword(enterPassword)) {
+				System.out.println("Inside validate method");
+				System.out.println("username:  " + ValidationServices.validateUserName(userName));
+				System.out.println("email: " + ValidationServices.validateEmail(email));
+				System.out.println("Password: " + ValidationServices.validatePssword(enterPassword));
 				return false;
-
+			}
 			if (userName == null || email == null || enterPassword == null || confirmPassword == null) {
 				System.out.println("check");
 				return false;
 
 			}
-
+			System.out.println("outside confirm Password");
 			if (enterPassword.equals(confirmPassword)) {
 				System.out.println(4 + "  =  " + enterPassword.equals(confirmPassword));
 				enterPassword = BCrypt.hashpw(enterPassword, BCrypt.gensalt());
