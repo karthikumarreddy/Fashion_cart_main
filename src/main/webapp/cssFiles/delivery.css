@@ -1,17 +1,58 @@
-/* Page base */
-body {
+@charset "UTF-8";
+
+/* ===== RESET ===== */
+* {
     margin: 0;
     padding: 0;
-    min-height: 100vh;
+    box-sizing: border-box;
     font-family: "Segoe UI", Roboto, Arial, sans-serif;
-    background: linear-gradient(135deg, #f9fafb, #e9ecf1); 
-    display: flex;
-    flex-direction:column;
-    align-items: center;
-    justify-content: center;
 }
 
-/* Card */
+/* ===== BODY ===== */
+body {
+    background: linear-gradient(135deg, #f9fafb, #e9ecf1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+   
+}
+
+/* ===== NAVBAR ===== */
+nav.navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #111;
+    padding: 40px 40px; /* same height as cart/payment */
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    position: relative; /* scrollable with page */
+    z-index: 10;
+}
+
+
+
+/* Logout button */
+#logout-btn button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ff3f6c, #e7335d);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#logout-btn button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* ===== DELIVERY FORM CARD ===== */
 .delivery {
     background-color: #ffffff;
     width: 100%;
@@ -19,17 +60,15 @@ body {
     padding: 32px 36px;
     border-radius: 14px;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Title */
-h2 {
-    text-align: center;
-    font-size: 25px;
-    color: #222;
-    margin-bottom: 25px;
-}
 
-/* Inputs row */
+
+
+/* Inputs */
 .delivery-input {
     display: flex;
     flex-direction: column;
@@ -38,7 +77,6 @@ h2 {
     color: #444;
 }
 
-/* Input fields */
 .delivery-input input {
     padding: 12px 14px;
     border-radius: 8px;
@@ -47,30 +85,55 @@ h2 {
     transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Focus */
 .delivery-input input:focus {
-    border-color: #111; /* SAME DARK COLOR */
+    border-color: #111;
     box-shadow: 0 0 0 2px rgba(17, 17, 17, 0.08);
     outline: none;
 }
 
-/* Button */
+/* ===== BUTTONS ===== */
 button {
-    margin-top: 20px;
-    width: 100%;
-    padding: 13px;
-    border-radius: 10px;
+    padding: 12px 22px;
+    margin: 10px;
     border: none;
-    cursor: pointer;
-    background: linear-gradient(135deg, #111, #333); /* SAME BUTTON */
-    color: #fff;
+    color:white;
+    background:linear-gradient(135deg, #ff3f6c, #e7335d);
+    border-radius: 8px;
     font-size: 15px;
-    font-weight: 500;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-/* Hover */
 button:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+button.back-btn {
+    background: #eee;
+    color: #333;
+}
+
+button.back-btn:hover {
+    background: #ddd;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .delivery {
+        width: 95%;
+        padding: 25px 20px;
+    }
+    h2 {
+        font-size: 22px;
+    }
+    .delivery-input input {
+        font-size: 13px;
+        padding: 10px 12px;
+    }
+    button {
+        font-size: 14px;
+        padding: 12px;
+    }
 }

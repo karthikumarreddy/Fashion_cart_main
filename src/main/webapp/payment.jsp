@@ -9,9 +9,7 @@
 <link rel=stylesheet href="/fashioncart/cssFiles/payment.css">
 </head>
 <style>
-nav {
-	margin-bottom: 20px;
-}
+
 </style>
 <body>
 
@@ -20,7 +18,7 @@ nav {
 	<div class="paymentpage">
 
 		<div class="container">
-			<h2>Payment</h2>
+			<h2 style="color:black">Payment</h2>
 
 			<%
 			Double totalAmount = (Double) session.getAttribute("totalAmount");
