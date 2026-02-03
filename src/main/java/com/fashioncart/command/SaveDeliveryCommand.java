@@ -47,8 +47,8 @@ public class SaveDeliveryCommand implements Command {
 			logger.debug("mobile : " + mobile);
 
 			if (!ValidationServices.validateFullName(name) || !ValidationServices.validateAddress1(address1)
-							|| !ValidationServices.validateAddress2(address2) || !ValidationServices.validateCity(city)
-							|| !ValidationServices.validatePincode(pincode) || !ValidationServices.validateMoileNumber(mobile))
+							|| !ValidationServices.validateCity(city) || !ValidationServices.validatePincode(pincode)
+							|| !ValidationServices.validateMoileNumber(mobile))
 				return false;
 
 			// checking if any value is null
@@ -109,8 +109,7 @@ public class SaveDeliveryCommand implements Command {
 
 			return true; // thankyou.jsp
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getMessage());
+			logger.error("error in SaveDeliveryCommand : " + e.getMessage());
 			return false;
 		}
 	}

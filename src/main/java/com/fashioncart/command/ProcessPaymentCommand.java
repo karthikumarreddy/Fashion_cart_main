@@ -23,8 +23,7 @@ public class ProcessPaymentCommand implements Command {
 
 			return true; // delivery.jsp
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getMessage());
+			logger.error("error in ProcessPaymentCommand : " + e.getMessage());
 			return false;
 		}
 	}

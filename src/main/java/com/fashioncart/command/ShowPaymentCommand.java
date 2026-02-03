@@ -41,8 +41,7 @@ public class ShowPaymentCommand implements Command {
 
 			return true;// payment.jsp
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getMessage());
+			logger.error("error in ShoePaymentCommand : " + e.getMessage());
 			return false;
 		}
 	}

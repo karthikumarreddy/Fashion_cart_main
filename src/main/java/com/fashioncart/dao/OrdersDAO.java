@@ -4,10 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.fashioncart.datasource.GetDataSource;
 import com.fashioncart.dto.Orders;
 
 public class OrdersDAO {
+	private static final Logger logger = LogManager.getLogger(OrdersDAO.class);
 
 	public int saveOrders(Orders orders) {
 
@@ -28,7 +32,7 @@ public class OrdersDAO {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("error in OrdersDAO saveOrders() : " + e.getMessage());
 		}
 		return orderId;
 	}

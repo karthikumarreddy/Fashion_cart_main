@@ -50,7 +50,7 @@ public class SignupCommand implements Command {
 				return userDao.saveUser(user);
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error("error in SignupCommand : " + e.getMessage());
 
 		}
 		return false;

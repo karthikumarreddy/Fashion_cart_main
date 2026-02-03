@@ -44,7 +44,7 @@ public class LoginCommand implements Command {
 			}
 
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error("error in LoginCommand : " + e.getMessage());
 		}
 		return false;
 

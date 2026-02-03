@@ -1,5 +1,8 @@
 package com.fashioncart.command;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.fashioncart.dao.CartDAO;
 import com.fashioncart.dao.ProductDAO;
 import com.fashioncart.dto.Product;
@@ -10,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class ProductPageCommand implements Command {
+	private static final Logger logger = LogManager.getLogger(ProductPageCommand.class);
 
 	@Override
 	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
@@ -49,7 +53,7 @@ public class ProductPageCommand implements Command {
 			return true;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("error in ProductPageCommand : " + e.getMessage());
 			return false;
 		}
 	}

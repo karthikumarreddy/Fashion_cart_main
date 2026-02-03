@@ -44,8 +44,7 @@ public class AddToCartCommand implements Command {
 
 			return true; // cart.jsp
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getMessage());
+			logger.error("error in AddToCartCommand : " + e.getMessage());
 			return false;
 		}
 

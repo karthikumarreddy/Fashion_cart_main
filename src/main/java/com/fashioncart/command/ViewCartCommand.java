@@ -85,11 +85,8 @@ public class ViewCartCommand implements Command {
 			session.setAttribute("cartCount", cartDAO.getCartCount(user.getUserId()));
 
 			return true; // cart.jsp
-		} catch (
-
-		Exception e) {
-			e.printStackTrace();
-			logger.error(e.getMessage());
+		} catch (Exception e) {
+			logger.error("error in ViewCartCommand : " + e.getMessage());
 			return false; // home.jsp
 		}
 	}

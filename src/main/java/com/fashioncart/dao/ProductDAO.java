@@ -6,10 +6,14 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.fashioncart.datasource.GetDataSource;
 import com.fashioncart.dto.Product;
 
 public class ProductDAO {
+	private static final Logger logger = LogManager.getLogger(ProductDAO.class);
 
 	/**
 	 * Fetch products. If category is null or "ALL", fetch all products.
@@ -78,7 +82,7 @@ public class ProductDAO {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("error in ProductDAO getProductList() : " + e.getMessage());
 		}
 
 		return products; // never null
@@ -100,7 +104,8 @@ public class ProductDAO {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+
+			logger.error("error in ProductDAO getProductById() : " + e.getMessage());
 		}
 
 		return null;
@@ -125,7 +130,8 @@ public class ProductDAO {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("error in ProductDAO getTotalProductCount() : " + e.getMessage());
+
 		}
 
 		return 0;

@@ -59,7 +59,7 @@ public class ListProductCommand implements Command {
 			return true; // Home.jsp
 
 		} catch (Exception e) {
-			logger.error("Error in ListProductCommand", e);
+			logger.error("Error in ListProductCommand", e.getMessage());
 			return false;
 		}
 	}

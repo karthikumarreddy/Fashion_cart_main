@@ -1,6 +1,5 @@
 package com.fashioncart.command;
 
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,23 +8,22 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class LogoutCommand implements Command {
-	private static final Logger logger=LogManager.getLogger(LogoutCommand.class);
-    @Override
-    public boolean execute(HttpServletRequest req, HttpServletResponse res) {
-    	try {
+	private static final Logger logger = LogManager.getLogger(LogoutCommand.class);
 
-        HttpSession session = req.getSession(false);
+	@Override
+	public boolean execute(HttpServletRequest req, HttpServletResponse res) {
+		try {
 
-        if (session != null) {
-            session.invalidate();
-        }
+			HttpSession session = req.getSession(false);
 
-        return true; //login.jsp
-    }catch (Exception e) {
-		e.printStackTrace();
-		logger.error(e.getMessage());
-		return false;
+			if (session != null) {
+				session.invalidate();
+			}
+
+			return true; // login.jsp
+		} catch (Exception e) {
+			logger.error("error in LogoutCommand : " + e.getMessage());
+			return false;
+		}
 	}
-    }
 }
-

@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.fashioncart.datasource.GetDataSource;
 import com.fashioncart.dto.CartItem;
 import com.fashioncart.dto.Product;
@@ -16,6 +19,8 @@ import com.fashioncart.dto.Product;
  *getCartItems-fetching 
  */
 public class CartDAO {
+	private static final Logger logger = LogManager.getLogger(CartDAO.class);
+
 	public void addToCart(int userId, int productId, String path) {
 
 		String sql = """
@@ -31,7 +36,7 @@ public class CartDAO {
 			ps.setString(3, path);
 			ps.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("error in CatDAO addToCart() : " + e.getMessage());
 		}
 	}
 
@@ -63,7 +68,8 @@ public class CartDAO {
 				cartList.add(item);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("error in CatDAO getCartItems() : " + e.getMessage());
+
 		}
 		return cartList;
 	}
@@ -92,7 +98,8 @@ public class CartDAO {
 				return rs.getInt(1);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("error in CatDAO clearCart() : " + e.getMessage());
+
 		}
 		return 0;
 	}
@@ -157,7 +164,8 @@ public class CartDAO {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("error in CatDAO updateQuantity() : " + e.getMessage());
+
 		}
 	}
 

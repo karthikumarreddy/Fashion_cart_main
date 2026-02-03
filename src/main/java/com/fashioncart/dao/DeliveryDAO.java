@@ -3,10 +3,14 @@ package com.fashioncart.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.fashioncart.datasource.GetDataSource;
 import com.fashioncart.dto.Delivery;
 
 public class DeliveryDAO {
+	private static final Logger logger = LogManager.getLogger(DeliveryDAO.class);
 
 	public void saveDeliveryDetails(Delivery delivery) {
 
@@ -22,7 +26,7 @@ public class DeliveryDAO {
 			ps.setString(7, delivery.getMoile());
 			ps.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("error in DeliveryDao saveDeliveryDeails() : " + e.getMessage());
 		}
 	}
 }

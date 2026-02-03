@@ -5,10 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.fashioncart.datasource.GetDataSource;
 import com.fashioncart.dto.User;
 
 public class UserDAO {
+	private static final Logger logger = LogManager.getLogger(UserDAO.class);
 
 	// to find the which user logging in
 	public User findByUserName(String userName) throws SQLException, Exception {
@@ -31,7 +35,7 @@ public class UserDAO {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.debug("error in UserDAO findByUserame() : " + e.getMessage());
 		}
 		return null;
 	}
@@ -52,7 +56,7 @@ public class UserDAO {
 			return true;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.debug("error in UserDAO saveUser() : " + e.getMessage());
 		}
 		return false;
 	}
