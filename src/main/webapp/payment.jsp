@@ -44,13 +44,9 @@
 					
 					<button  type="submit">Pay</button>	
 				</form>	
-				
-				
-		
-			<form action="<%= request.getContextPath()%>/controller" method="post">
-			<input type="hidden" name="command" value="viewCart">
-			<button type="submit"><- Back</button>
-			</form>
+			
+			<button type="submit" onclick="history. back()"><- Back</button>
+			
 		</div>
 		</div>
 		<jsp:include page="/footer.jsp"></jsp:include>

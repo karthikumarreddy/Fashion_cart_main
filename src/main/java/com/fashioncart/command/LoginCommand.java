@@ -30,17 +30,27 @@ public class LoginCommand implements Command {
 
 			UserDAO userDao = new UserDAO();
 			User user = userDao.findByUserName(userName);
+
+			if (user == null) {
+				req.setAttribute("usernameError", "username is incorrect");
+				return false;
+			}
+
 			String pwd = user.getPassword();
 
-			if (user.getUserName().equals(userName) && BCrypt.checkpw(password, pwd)) {
-				session.setAttribute("loggedUser", user);
+			if (user.getUserName().equals(userName)) {
+				if (BCrypt.checkpw(password, pwd)) {
+					session.setAttribute("loggedUser", user);
+					CartDAO cartDAO = new CartDAO();
+					int cartCount = cartDAO.getCartCount(user.getUserId());
+					session.setAttribute("cartCount", cartCount);
+					session.setAttribute("username", user.getUserName());
+					return true;
+				} else {
+					req.setAttribute("passwordError", "password is incorrect!");
+					return false;
+				}
 
-				CartDAO cartDAO = new CartDAO();
-				int cartCount = cartDAO.getCartCount(user.getUserId());
-				session.setAttribute("cartCount", cartCount);
-				session.setAttribute("username", user.getUserName());
-
-				return true;
 			}
 
 		} catch (Exception e) {

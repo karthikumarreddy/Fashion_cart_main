@@ -10,7 +10,7 @@
     background: #111;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 15px 30px;
     color: #fff;
     z-index: 9999; /* very important */

@@ -1,17 +1,30 @@
 @charset "UTF-8";
+
+/* Reset body */
 body {
     margin: 0;
-    padding:0;
-
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow:hidden;
 }
 
+/* Page wrapper */
 .page-wrapper {
     padding-top: 70px;  
-    min-height: calc(100vh - 70px);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    margin-top: 10%;
 }
+
+/* Success message */
+.acc-success {
+    text-align: center;
+    color: green;
+    font-weight: bold;
+}
+
+/* Heading */
 h2 {
     text-align: center;
     margin-bottom: 25px;
@@ -21,27 +34,40 @@ h2 {
     letter-spacing: 1px;
 }
 
-/* Container */
+/* Login container */
 #login-page {
     background: #fff;
-    padding: 0px 35px;
-    margin-top:-10%;
+    padding: 0 35px;
+    margin-top: -10%;
     width: 380px;
     border-radius: 10px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-/* Form */
-#login-page form {
+/* Form styling */
+#signup-form {
     display: flex;
     flex-direction: column;
     font-size: 14px;
     color: #333;
 }
 
+/* Input wrapper */
+.login-input {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+/* Required field asterisk */
+.required {
+    color: red;
+    font-weight: bold;
+    margin-left: 2px;
+}
+
 /* Inputs */
-#login-page input[type="text"],
-#login-page input[type="password"] {
+#signup-form input[type="text"],
+#signup-form input[type="password"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -49,14 +75,10 @@ h2 {
     font-size: 14px;
 }
 
-#login-page input:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 4px rgba(102, 126, 234, 0.6);
-}
 
-/* Button */
-#login-page button {
+
+/* Login button */
+#signup-form button[type="submit"] {
     margin-top: 10px;
     padding: 12px;
     background: #667eea;
@@ -68,26 +90,8 @@ h2 {
     cursor: pointer;
 }
 
-#login-page button:hover {
+#signup-form button[type="submit"]:hover {
     background: #5a67d8;
-}
-
-/* Signup text */
-#login-page p {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 14px;
-}
-
-#login-page a {
-    color: #667eea;
-    text-decoration: none;
-    font-weight: bold;
-    margin-left: 5px;
-}
-
-#login-page a:hover {
-    text-decoration: underline;
 }
 
 /* Error messages */
@@ -98,12 +102,29 @@ h2 {
     margin-top: 10px;
 }
 
-.display-error{
-	color:red;
-	font-weight:bold;
-	
+.js-error {
+    color: red;
+    font-size: 13px;
+    font-weight: bold;
 }
-.required{
-	color:red;
-	font-weight:bold;
+
+/* “Create Account” link section */
+.signup-text {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.signup-text a {
+    text-decoration: none; /* Remove underline */
+    font-size: 14px;       /* Smaller font */
+    color: #667eea;        /* Optional: same color as login button */
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.signup-text a:hover,
+.signup-text a:focus {
+    text-decoration: underline;
 }

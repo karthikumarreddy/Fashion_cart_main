@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded",function(){
 	const confirmpassword=document.getElementById("confirm-password");
 	
 	const backendUsernameError="<%=request.getAttribute("usernameError")!=null ? request.getAttribute("usernameError"):""%>";
-	
+	const backendEmailError="<%=request.getAttribute("emailError")!=null ? request.getAttribute("emailError"):""%>";
 	const  USERNAME_REGEX = /^[a-zA-Z].{5,29}$/;
     const EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]+$/;
     const PASSWORD_PATTERN = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,}$/;
@@ -107,6 +107,10 @@ document.addEventListener("DOMContentLoaded",function(){
     if (backendUsernameError !== "") {
         showError(username, backendUsernameError);
     }
+    if (backendEmailError !== "") {
+        showError(email, backendEmailError);
+    }
+   
     form.addEventListener("submit", function (e) {
         let isValid = true;
 
@@ -135,7 +139,7 @@ document.addEventListener("DOMContentLoaded",function(){
         if (password.value.trim() === "") {
             showError(password, "Password is required");
             isValid = false;
-        } else if (!PASSWORD_PATTERN.test(passwordInput.value.trim())) {
+        } else if (!PASSWORD_PATTERN.test(password.value.trim())) {
             showError(
                 password,
                 "Password must be at least 8 characters with uppercase, lowercase & number"
@@ -146,7 +150,7 @@ document.addEventListener("DOMContentLoaded",function(){
         if (confirmpassword.value.trim() === "") {
             showError(confirmpassword, "Confirm password is required");
             isValid = false;
-        } else if (password.value !== confirmpassword.value) {
+        } else if (password.value.trim() !== confirmpassword.value.trim()) {
             showError(confirmpassword, "Passwords do not match");
             isValid = false;
         }
