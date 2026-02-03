@@ -93,11 +93,12 @@ nav.navbar {
 
 /* ===== BUTTONS ===== */
 button {
+	width:100%;
     padding: 12px 22px;
-    margin: 10px;
+    margin: 2px;
     border: none;
     color:white;
-    background:linear-gradient(135deg, #ff3f6c, #e7335d);
+    background:black;
     border-radius: 8px;
     font-size: 15px;
     font-weight: 600;

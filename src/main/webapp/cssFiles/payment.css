@@ -128,10 +128,12 @@ button {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    background: linear-gradient(135deg, #ff3f6c, #e7335d);
+    background:black;
     color: #fff;
     margin-top: 10px;
 }
+
+
 
 button:hover {
     transform: translateY(-2px);

@@ -26,8 +26,16 @@
 	    if (cartList == null || cartList.isEmpty()) {
 	%>
 	
+	
+	
 	    <h3 style="text-align:center;">Your cart is empty</h3>
 	    <div style="margin-left:42.5%">
+	    
+	    <%
+	    Integer currentPage = (Integer) request.getAttribute("currentPage");
+		Integer totalPages = (Integer) request.getAttribute("totalPages");
+		String categoryParam = (String) session.getAttribute("category");
+	    %>
 	    <form action="<%=request.getContextPath()%>/controller" method="post"
 	          style="display:inline;">
 	        <input type="hidden" name="command" value="listProducts">
