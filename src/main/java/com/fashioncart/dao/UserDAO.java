@@ -14,7 +14,42 @@ import com.fashioncart.dto.User;
 public class UserDAO {
 	private static final Logger logger = LogManager.getLogger(UserDAO.class);
 
-	// to find the which user logging in
+	public boolean isUsernameExist(String name) {
+		if (name == null)
+			return false;
+		String sql = "select 1 from users where username=?";
+
+		try (Connection c = GetDataSource.getDataSource().getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+			ps.setString(1, name);
+			ResultSet rs = ps.executeQuery();
+			return rs.next();
+
+		} catch (SQLException e) {
+			logger.error("error in UserDao isUsernameExist() : " + e.getMessage());
+		} catch (Exception e1) {
+			logger.error("error in UserDao isUsernameExist() : " + e1.getMessage());
+		}
+		return false;
+	}
+
+	public boolean isUserEmailExist(String email) {
+		if (email == null)
+			return false;
+		String sql = "select 1 from users where email=?";
+
+		try (Connection c = GetDataSource.getDataSource().getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+			ps.setString(1, email);
+			ResultSet rs = ps.executeQuery();
+			return rs.next();
+
+		} catch (SQLException e) {
+			logger.error("error in UserDao isUserEmailExist() : " + e.getMessage());
+		} catch (Exception e1) {
+			logger.error("error in UserDao isUserEmailExist() : " + e1.getMessage());
+		}
+		return false;
+	}// to find the which user logging in
+
 	public User findByUserName(String userName) throws SQLException, Exception {
 		if (userName == null) {
 			return null;

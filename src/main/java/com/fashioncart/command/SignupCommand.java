@@ -33,6 +33,7 @@ public class SignupCommand implements Command {
 			 * ValidationServices.validateEmail(email)); System.out.println("Password: " +
 			 * ValidationServices.validatePssword(enterPassword)); return false; }
 			 */
+			UserDAO userDao = new UserDAO();
 			if (!ValidationServices.validateUserName(userName)) {
 				req.setAttribute("errorMessage", "username is wrong");
 				return false;
@@ -47,8 +48,19 @@ public class SignupCommand implements Command {
 				req.setAttribute("errorMessage", "password is wrong");
 				return false;
 			}
+
+			if (userDao.isUsernameExist(userName)) {
+				req.setAttribute("useNameError", "Username already exist ");
+				return false;
+
+			}
+			if (userDao.isUserEmailExist(email)) {
+				req.setAttribute("emailError", "Email already registered ");
+				return false;
+			}
+
 			if (userName == null || email == null || enterPassword == null || confirmPassword == null) {
-				System.out.println("check");
+
 				return false;
 
 			}
@@ -57,7 +69,6 @@ public class SignupCommand implements Command {
 				System.out.println(4 + "  =  " + enterPassword.equals(confirmPassword));
 				enterPassword = BCrypt.hashpw(enterPassword, BCrypt.gensalt());
 				User user = new User(userName, email, enterPassword);
-				UserDAO userDao = new UserDAO();
 				req.setAttribute("SuccessFullMessage", "Account Created Sucessfully");
 				return userDao.saveUser(user);
 			}

@@ -103,3 +103,7 @@ h2 {
 	font-weight:bold;
 	
 }
+.required{
+	color:red;
+	font-weight:bold;
+}
