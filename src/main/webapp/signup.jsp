@@ -16,33 +16,36 @@
 <div class="signup-box">
     <h2 style="text-align:center;">Create Account</h2>
 
-    <form  onSubmit=" return validateForm()" action="<%=request.getContextPath()%>/controller" method="post">
+    <form id="signup-form" action="<%=request.getContextPath()%>/controller" method="post">
     		
        <input type="hidden" name="command" value="signup">
-	   <div style="display:flex;flex-direction:column;">
-	   <div>
-       UserName:<span class="required">*</span><input id ="username"type="text" name="userName" placeholder="Username" value="<%=request.getParameter("username")!=null?request.getParameter("username"):"" %>">
-       <p id="checkusername" class="display-error"></p>
+       
+       
+	  <div style="display:flex;flex-direction:column;">
+	  <div>
+       UserName:<span class="required">*</span>
+       <input id ="username"type="text" name="userName" placeholder="Username" value="<%=request.getParameter("username")!=null?request.getParameter("username"):"" %>">
        </div>
        </div>
        
        <div>
-       Email:<span class="required">*</span> <input id="email" type="text" name="email" placeholder="Enter your Email">
-       <p id="checkemail" class="display-error"></p>
+       Email:<span class="required">*</span> 
+       <input id="email" type="text" name="email" placeholder="Enter your Email">
       </div>
+      
        <div class="password-wrapper">
       	 Password:<span class="required">*</span> <input id="password" type="password" name="enterPassword" placeholder="Password">
 				<div class="tooltip">
 					Password must contain:<br> • At least 8 characters<br> •
 					One uppercase letter<br> • One number<br> • One special
 					character
-				</div>
-				<p id="checkpassword" class="display-error"></p>
+				</div>	
       </div>
 		
 		<div>
-      		Confirm Password:<span class="required">*</span> <input type="password" name="confirmPassword" placeholder="Password">
-		</div><br>
+      		Confirm Password:<span class="required">*</span> 
+      		<input id="confirm-password" type="password" name="confirmPassword" placeholder="Password">
+		</div>
         <button type="submit">SignUp</button>
     </form>
 
@@ -64,55 +67,97 @@
 
 <script>
 
-
-function validateForm() {
+document.addEventListener("DOMContentLoaded",function(){
 	
-    var username = document.getElementById("username").value.trim();
-    var email = document.getElementById("email").value.trim();
-    var password = document.getElementById("password").value.trim();
-
-    var userError = document.getElementById("checkusername");
-    var emailError = document.getElementById("checkemail");
-    var passwordError = document.getElementById("checkpassword");
+	const form=document.getElementById("signup-form");
+	const username=document.getElementById("username");
+	const email=document.getElementById("email");
+	const password = document.getElementById("password");
+	const confirmpassword=document.getElementById("confirm-password");
 	
-    const  USERNAME_REGEX = "^[a-zA-Z].{5,29}$";
+	const backendUsernameError="<%=request.getAttribute("usernameError")!=null ? request.getAttribute("usernameError"):""%>";
+	
+	const  USERNAME_REGEX = /^[a-zA-Z].{5,29}$/;
     const EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]+$/;
     const PASSWORD_PATTERN = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,}$/;
+    
+    
+    function showError(input, message) {
+        removeError(input);
 
-    userError.innerHTML = "";
-    emailError.innerHTML = "";
-    passwordError.innerHTML = "";
+        const error = document.createElement("p");
+        error.className = "js-error";
+        error.innerText = message;
 
-    var isValid = true;
-
-    if (username === "") {
-        userError.innerHTML = "Username is required";
-        isValid = false;
-    }else if(!USERNAME_REGEX.test(username)){
-    	 userError.innerHTML = "Username is invalid";
-         isValid = false;
+        input.classList.add("input-error");
+        input.parentElement.appendChild(error);
     }
 
-    if (email === "") {
-        emailError.innerHTML = "Email is required";
-        isValid = false;
-    } else if (!EMAIL_REGEX.test(email)) {
-        emailError.innerHTML = "Email is invalid";
-        isValid = false;
+    function removeError(input) {
+        input.classList.remove("input-error");
+        const error = input.parentElement.querySelector(".js-error");
+        if (error) error.remove();
     }
 
-    if (password === "") {
-        passwordError.innerHTML = "Password is required";
-        isValid = false;
-    } else if (!PASSWORD_PATTERN.test(password)) {
-        passwordError.innerHTML = "Password format is invalid";
-        isValid = false;
+    username.addEventListener("input", () => removeError(username));
+    email.addEventListener("input", () => removeError(email));
+    password.addEventListener("input", () => removeError(password));
+    confirmpassword.addEventListener("input", () => removeError(confirmpassword));
+    
+    if (backendUsernameError !== "") {
+        showError(username, backendUsernameError);
     }
+    form.addEventListener("submit", function (e) {
+        let isValid = true;
 
-    return isValid;
-}
+        // Username validation
+        if (username.value.trim() === "") {
+            showError(username, "Username is required");
+            isValid = false;
+        } else if (!USERNAME_REGEX.test(username.value.trim())) {
+            showError(
+                username,
+                "Username must start with a letter and be 5–29 characters"
+            );
+            isValid = false;
+        }
+
+        // Email validation
+        if (email.value.trim() === "") {
+            showError(email, "Email is required");
+            isValid = false;
+        } else if (!EMAIL_REGEX.test(email.value.trim())) {
+            showError(email, "Enter a valid email address");
+            isValid = false;
+        }
+
+        // Password validation
+        if (password.value.trim() === "") {
+            showError(password, "Password is required");
+            isValid = false;
+        } else if (!PASSWORD_PATTERN.test(passwordInput.value.trim())) {
+            showError(
+                password,
+                "Password must be at least 8 characters with uppercase, lowercase & number"
+            );
+            isValid = false;
+        }
+     // Confirm password validation
+        if (confirmpassword.value.trim() === "") {
+            showError(confirmpassword, "Confirm password is required");
+            isValid = false;
+        } else if (password.value !== confirmpassword.value) {
+            showError(confirmpassword, "Passwords do not match");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            e.preventDefault();
+        }
+    });
+
+});
+
 </script>
-
-
 
 </html>
