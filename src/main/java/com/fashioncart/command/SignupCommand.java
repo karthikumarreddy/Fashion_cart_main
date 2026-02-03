@@ -26,17 +26,41 @@ public class SignupCommand implements Command {
 			logger.debug("user Entered password : " + enterPassword);
 			String confirmPassword = req.getParameter("confirmPassword");
 			logger.debug("confirm password " + confirmPassword);
-
-			if (!ValidationServices.validateUserName(userName) || !ValidationServices.validateEmail(email)
-							|| !ValidationServices.validatePssword(enterPassword)) {
-				System.out.println("Inside validate method");
-				System.out.println("username:  " + ValidationServices.validateUserName(userName));
-				System.out.println("email: " + ValidationServices.validateEmail(email));
-				System.out.println("Password: " + ValidationServices.validatePssword(enterPassword));
+			/*
+			 * if (!ValidationServices.validateUserName(userName) || !ValidationServices.validateEmail(email) ||
+			 * !ValidationServices.validatePssword(enterPassword)) { System.out.println("Inside validate method");
+			 * System.out.println("username:  " + ValidationServices.validateUserName(userName)); System.out.println("email: " +
+			 * ValidationServices.validateEmail(email)); System.out.println("Password: " +
+			 * ValidationServices.validatePssword(enterPassword)); return false; }
+			 */
+			UserDAO userDao = new UserDAO();
+			if (!ValidationServices.validateUserName(userName)) {
+				req.setAttribute("errorMessage", "username is wrong");
 				return false;
 			}
+
+			if (!ValidationServices.validateEmail(email)) {
+				req.setAttribute("errorMessage", "email is wrong");
+				return false;
+			}
+
+			if (!ValidationServices.validatePssword(enterPassword)) {
+				req.setAttribute("errorMessage", "password is wrong");
+				return false;
+			}
+
+			if (userDao.isUsernameExist(userName)) {
+				req.setAttribute("useNameError", "Username already exist ");
+				return false;
+
+			}
+			if (userDao.isUserEmailExist(email)) {
+				req.setAttribute("emailError", "Email already registered ");
+				return false;
+			}
+
 			if (userName == null || email == null || enterPassword == null || confirmPassword == null) {
-				System.out.println("check");
+
 				return false;
 
 			}
@@ -45,9 +69,6 @@ public class SignupCommand implements Command {
 				System.out.println(4 + "  =  " + enterPassword.equals(confirmPassword));
 				enterPassword = BCrypt.hashpw(enterPassword, BCrypt.gensalt());
 				User user = new User(userName, email, enterPassword);
-				UserDAO userDao = new UserDAO();
-				System.out.println("user : " + user);
-
 				req.setAttribute("SuccessFullMessage", "Account Created Sucessfully");
 				return userDao.saveUser(user);
 			}

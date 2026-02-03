@@ -21,13 +21,13 @@
        <input type="hidden" name="command" value="signup">
 	   <div style="display:flex;flex-direction:column;">
 	   <div>
-       UserName:<span class="required">*</span><input id ="username"type="text" name="userName" placeholder="Username">
+       UserName:<span class="required">*</span><input id ="username"type="text" name="userName" placeholder="Username" value="<%=request.getParameter("username")!=null?request.getParameter("username"):"" %>">
        <p id="checkusername" class="display-error"></p>
        </div>
        </div>
        
        <div>
-       Email:<span class="required">*</span> <input id="email" type="email" name="email" placeholder="Enter your Email">
+       Email:<span class="required">*</span> <input id="email" type="text" name="email" placeholder="Enter your Email">
        <p id="checkemail" class="display-error"></p>
       </div>
        <div class="password-wrapper">
@@ -60,9 +60,13 @@
 </div>
 </body>
 
-<script>
-function validateForm() {
 
+
+<script>
+
+
+function validateForm() {
+	
     var username = document.getElementById("username").value.trim();
     var email = document.getElementById("email").value.trim();
     var password = document.getElementById("password").value.trim();
@@ -70,8 +74,9 @@ function validateForm() {
     var userError = document.getElementById("checkusername");
     var emailError = document.getElementById("checkemail");
     var passwordError = document.getElementById("checkpassword");
-
-    const EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.com$/;
+	
+    const  USERNAME_REGEX = "^[a-zA-Z].{5,29}$";
+    const EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]+$/;
     const PASSWORD_PATTERN = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,}$/;
 
     userError.innerHTML = "";
@@ -83,6 +88,9 @@ function validateForm() {
     if (username === "") {
         userError.innerHTML = "Username is required";
         isValid = false;
+    }else if(!USERNAME_REGEX.test(username)){
+    	 userError.innerHTML = "Username is invalid";
+         isValid = false;
     }
 
     if (email === "") {
