@@ -10,6 +10,7 @@ import com.fashioncart.dto.Product;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class ListProductCommand implements Command {
 
@@ -19,6 +20,9 @@ public class ListProductCommand implements Command {
 	public boolean execute(HttpServletRequest request, HttpServletResponse response) {
 
 		try {
+			HttpSession session = request.getSession();
+			if (session == null)
+				return false;
 			String category = request.getParameter("category");
 			logger.debug("category : " + category);
 
@@ -47,10 +51,10 @@ public class ListProductCommand implements Command {
 
 			int totalPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);
 
-			request.setAttribute("productList", products);
+			session.setAttribute("productList", products);
 			request.setAttribute("currentPage", page);
 			request.setAttribute("totalPages", totalPages);
-			request.setAttribute("category", category);
+			session.setAttribute("category", category);
 
 			return true; // Home.jsp
 

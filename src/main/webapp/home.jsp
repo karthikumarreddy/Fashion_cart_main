@@ -121,7 +121,7 @@
 	<div id="products1" style="display: flex; gap: 20px; margin-top: 10px">
 
 		<%
-		List<Product> products = (List<Product>) request.getAttribute("productList");
+		List<Product> products = (List<Product>) session.getAttribute("productList");
 
 		if (products != null) {
 			for (Product p : products) {
@@ -182,7 +182,7 @@
 		<%
 		Integer currentPage = (Integer) request.getAttribute("currentPage");
 		Integer totalPages = (Integer) request.getAttribute("totalPages");
-		String categoryParam = (String) request.getAttribute("category");
+		String categoryParam = (String) session.getAttribute("category");
 
 		if (totalPages != null && totalPages > 1) {
 		%>
