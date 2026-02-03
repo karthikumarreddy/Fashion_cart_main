@@ -14,7 +14,6 @@ import com.fashioncart.dto.CartItem;
 import com.fashioncart.dto.Delivery;
 import com.fashioncart.dto.Orders;
 import com.fashioncart.dto.User;
-import com.fashioncart.service.ValidationServices;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -46,10 +45,10 @@ public class SaveDeliveryCommand implements Command {
 			String mobile = req.getParameter("mobile");
 			logger.debug("mobile : " + mobile);
 
-			if (!ValidationServices.validateFullName(name) || !ValidationServices.validateAddress1(address1)
-							|| !ValidationServices.validateAddress2(address2) || !ValidationServices.validateCity(city)
-							|| !ValidationServices.validatePincode(pincode) || !ValidationServices.validateMoileNumber(mobile))
-				return false;
+			// if (!ValidationServices.validateFullName(name) || !ValidationServices.validateAddress1(address1)
+			// || !ValidationServices.validateAddress2(address2) || !ValidationServices.validateCity(city)
+			// || !ValidationServices.validatePincode(pincode) || !ValidationServices.validateMoileNumber(mobile))
+			// return false;
 
 			// checking if any value is null
 			if (session == null || name == null || city == null || mobile == null)

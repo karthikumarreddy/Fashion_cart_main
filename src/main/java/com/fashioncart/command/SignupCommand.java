@@ -46,7 +46,7 @@ public class SignupCommand implements Command {
 				enterPassword = BCrypt.hashpw(enterPassword, BCrypt.gensalt());
 				User user = new User(userName, email, enterPassword);
 				UserDAO userDao = new UserDAO();
-				req.setAttribute("message", "Account Created Sucessfully");
+				req.setAttribute("SuccessFullMessage", "Account Created Sucessfully");
 				return userDao.saveUser(user);
 			}
 		} catch (Exception e) {

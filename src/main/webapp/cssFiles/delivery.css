@@ -76,6 +76,10 @@ nav.navbar {
     font-size: 14px;
     color: #444;
 }
+.delivery-input p{
+	color:red;
+	font-weight:bold;
+}
 
 .delivery-input input {
     padding: 12px 14px;
@@ -118,6 +122,11 @@ button.back-btn {
 
 button.back-btn:hover {
     background: #ddd;
+}
+
+.required{
+	color:red;
+	font-weight:bold;
 }
 
 /* ===== RESPONSIVE ===== */
