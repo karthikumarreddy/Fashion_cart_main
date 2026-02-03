@@ -135,25 +135,22 @@
 					src="<%=request.getContextPath()%>/images/<%=p.getImagePath()%>">
 		</a>
 		<h4><%=p.getName()%></h4>
-		<p>
-			₹<%=p.getPrice()%></p>
-		<p>
-			<%=p.isAvailability().equalsIgnoreCase("IN_STOCK") ? "Available" : "Currently UnAvailable"%>
-		</p>
+		<p>₹<%=p.getPrice()%></p>
+		<p><%=p.isAvailability().equalsIgnoreCase("IN_STOCK") ? "Available" : "Currently UnAvailable"%></p>
 
 		<%
 		if (p.isAvailability().equalsIgnoreCase("IN_STOCK")) {
 		%>
 
 		<form action="<%=request.getContextPath()%>/controller" method="post">
-			<input type="hidden" name="command" value="buynow"> <input
-				type="hidden" name="id" value="<%=p.getId()%>">
+			<input type="hidden" name="command" value="buynow"> 
+			<input type="hidden" name="id" value="<%=p.getId()%>">
 			<button type="submit">Buy Now</button>
 		</form>
 
 		<form action="<%=request.getContextPath()%>/controller" method="post">
-			<input type="hidden" name="command" value="addToCart"> <input
-				type="hidden" name="id" value="<%=p.getId()%>">
+			<input type="hidden" name="command" value="addToCart"> 
+			<input type="hidden" name="id" value="<%=p.getId()%>">
 			<button type="submit">Add to Cart</button>
 		</form>
 
@@ -190,9 +187,14 @@
 		<%
 		if (currentPage > 1) {
 		%>
-		<a
-			href="<%=request.getContextPath()%>/controller?command=listProducts&category=<%=categoryParam%>&page=<%=currentPage - 1%>">
-			Prev </a>
+		
+		<form action="<%=request.getContextPath()%>/controller" method="post">
+			<input type="hidden" name="command" value="listProducts">
+			<input type ="hidden" name="category" value="<%=categoryParam%>">
+			<input type ="hidden" name="page" value="<%=currentPage-1%>">
+			<input type=submit value="Prev">
+		</form>
+		
 		<%
 		}
 		%>
@@ -201,16 +203,20 @@
 		for (int i = 1; i <= totalPages; i++) {
 		%>
 		<%
-		if (i == currentPage) {
+			if (i == currentPage) {
 		%>
-		<b><%=i%></b>
+			<b><%=i%></b>
 		<%
 		} else {
 		%>
-		<a
-			href="<%=request.getContextPath()%>/controller?command=listProducts&category=<%=categoryParam%>&page=<%=i%>">
-			<%=i%>
-		</a>
+		
+		<form action="<%=request.getContextPath()%>/controller" method="post">
+			<input type="hidden" name="command" value="listProducts">
+			<input type ="hidden" name="category" value="<%=categoryParam%>">
+			<input type ="hidden" name="page" value="<%=i%>">
+			<input type=submit value="<%=i%>">
+		</form>
+		
 		<%
 		}
 		%>
@@ -221,16 +227,20 @@
 		<%
 		if (currentPage < totalPages) {
 		%>
-		<a
-			href="<%=request.getContextPath()%>/controller?command=listProducts&category=<%=categoryParam%>&page=<%=currentPage + 1%>">
-			Next </a>
+		
+		<form action="<%=request.getContextPath()%>/controller" method="post">
+			<input type="hidden" name="command" value="listProducts">
+			<input type ="hidden" name="category" value="<%=categoryParam%>">
+			<input type ="hidden" name="page" value="<%=currentPage + 1%>">
+			<input type=submit value="Next">
+		</form>
+		
 		<%
+		}
 		}
 		%>
 
-		<%
-		}
-		%>
+		
 
 	</div>
 	</div>

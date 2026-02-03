@@ -28,7 +28,7 @@ public class ListProductCommand implements Command {
 
 			// Pagination params
 			int page = 1;
-			int recordsPerPage = 1;
+			int recordsPerPage = 4;
 
 			String pageParam = request.getParameter("page");
 			if (pageParam != null) {
