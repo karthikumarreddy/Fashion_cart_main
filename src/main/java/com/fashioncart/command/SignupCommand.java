@@ -26,13 +26,25 @@ public class SignupCommand implements Command {
 			logger.debug("user Entered password : " + enterPassword);
 			String confirmPassword = req.getParameter("confirmPassword");
 			logger.debug("confirm password " + confirmPassword);
+			/*
+			 * if (!ValidationServices.validateUserName(userName) || !ValidationServices.validateEmail(email) ||
+			 * !ValidationServices.validatePssword(enterPassword)) { System.out.println("Inside validate method");
+			 * System.out.println("username:  " + ValidationServices.validateUserName(userName)); System.out.println("email: " +
+			 * ValidationServices.validateEmail(email)); System.out.println("Password: " +
+			 * ValidationServices.validatePssword(enterPassword)); return false; }
+			 */
+			if (!ValidationServices.validateUserName(userName)) {
+				req.setAttribute("errorMessage", "username is wrong");
+				return false;
+			}
 
-			if (!ValidationServices.validateUserName(userName) || !ValidationServices.validateEmail(email)
-							|| !ValidationServices.validatePssword(enterPassword)) {
-				System.out.println("Inside validate method");
-				System.out.println("username:  " + ValidationServices.validateUserName(userName));
-				System.out.println("email: " + ValidationServices.validateEmail(email));
-				System.out.println("Password: " + ValidationServices.validatePssword(enterPassword));
+			if (!ValidationServices.validateEmail(email)) {
+				req.setAttribute("errorMessage", "email is wrong");
+				return false;
+			}
+
+			if (!ValidationServices.validatePssword(enterPassword)) {
+				req.setAttribute("errorMessage", "password is wrong");
 				return false;
 			}
 			if (userName == null || email == null || enterPassword == null || confirmPassword == null) {
