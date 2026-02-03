@@ -47,7 +47,7 @@ public class SignupCommand implements Command {
 				User user = new User(userName, email, enterPassword);
 				UserDAO userDao = new UserDAO();
 				System.out.println("user : " + user);
-				System.out.println(userDao.saveUser(user));
+
 				req.setAttribute("SuccessFullMessage", "Account Created Sucessfully");
 				return userDao.saveUser(user);
 			}
