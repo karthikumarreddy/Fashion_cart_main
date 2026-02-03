@@ -130,6 +130,7 @@
 	     <form action="<%=request.getContextPath()%>/controller" method="post"
 	          style="display:inline;">
 	        <input type="hidden" name="command" value="listProducts">
+	        <input type="hidden" name="category" value="<%=session.getAttribute("category")%>">
 	        <button type="submit">Continue Shopping</button>
 	    </form>
 	
