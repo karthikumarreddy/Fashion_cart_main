@@ -18,6 +18,10 @@
 h2{
 	color:white;
 }
+
+#logout-btn button{
+	background:linear-gradient(135deg, #ff3f6c, #e7335d);
+}
 </style>
 
 <nav class="navbar">

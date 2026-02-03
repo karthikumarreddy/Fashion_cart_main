@@ -27,9 +27,9 @@
 			}
 			%>
 
-			<h3>
-				Total Amount: ₹
-				<%=String.format("%.2f", totalAmount)%></h3>
+			<h3>Total Amount: ₹<%=String.format("%.2f", totalAmount)%></h3>
+			
+			
 			<form action="<%=request.getContextPath()%>/controller" method="post">
 				<input type="hidden" name="command" value="processPayment">
 
@@ -37,21 +37,23 @@
 
 				<label><input type="radio" name="paymentMode" value="CARD"
 					required> Credit Card</label><br> <label><input
-					type="radio" name="paymentMode" value="UPI"> UPI</label><br> <label><input
-					type="radio" name="paymentMode" value="COD"> Cash on
+					type="radio" name="paymentMode" value="UPI" required> UPI</label><br> 
+					<label>
+					<input type="radio" name="paymentMode" value="COD" required> Cash on
 					Delivery</label><br>
-				<br>
-
-				<button type="submit">Pay</button>
-			</form>
-			<br>
+					
+					<button  type="submit">Pay</button>	
+				</form>	
+				
+				
+		
 			<form action="<%= request.getContextPath()%>/controller" method="post">
 			<input type="hidden" name="command" value="viewCart">
 			<button type="submit"><- Back</button>
 			</form>
-
+		</div>
 		</div>
 		<jsp:include page="/footer.jsp"></jsp:include>
-	</div>
+	
 </body>
 </html>
