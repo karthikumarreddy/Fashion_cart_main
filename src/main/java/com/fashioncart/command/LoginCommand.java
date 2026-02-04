@@ -50,7 +50,6 @@ public class LoginCommand implements Command {
 					req.setAttribute("passwordError", "password is incorrect!");
 					return false;
 				}
-
 			}
 
 		} catch (Exception e) {
