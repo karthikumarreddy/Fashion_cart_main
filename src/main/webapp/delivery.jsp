@@ -12,7 +12,7 @@
 	<h2 style="color:black">Enter your details</h2>
 	<div class="delivery">
 	
-	<form  onsubmit="return validateForm()"action="<%=request.getContextPath()%>/controller" method="post">
+	<form id="delivery-form"  onsubmit="return validateForm()"action="<%=request.getContextPath()%>/controller" method="post">
 
     <input type="hidden" name="command" value="saveDelivery">
 	<div class="delivery-input">
@@ -77,6 +77,11 @@
 <script>
 
 function validateForm(){
+	
+	document.addEventListener("DOMContentLoaded",function()){
+		const form=document.getElementById("delivery-form");
+	}
+	
 	
 	var fullname=document.getElementById("fullname").value.trim();
 	var address1=document.getElementById("address1").value.trim();
