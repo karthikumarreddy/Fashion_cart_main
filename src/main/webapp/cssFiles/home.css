@@ -107,7 +107,7 @@ body {
     color: white;
     font-size: 14px;
     cursor: pointer;
-    transition: 0.3s;
+     
 }
 
 #logout-btn button:hover {
@@ -123,7 +123,7 @@ body {
     color: white;
     font-size: 14px;
     cursor: pointer;
-    transition: 0.3s;
+  
 }
 
 #viewcart button:hover {
