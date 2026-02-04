@@ -15,6 +15,7 @@ public class ProcessPaymentCommand implements Command {
 		try {
 			HttpSession session = req.getSession(false);
 			String paymentMode = req.getParameter("paymentMode");
+
 			logger.debug("payment mode : " + paymentMode);
 			if (session == null || paymentMode == null || paymentMode.isEmpty())
 				return false;// payment.jsp

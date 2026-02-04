@@ -46,11 +46,22 @@ public class SaveDeliveryCommand implements Command {
 			String mobile = req.getParameter("mobile");
 			logger.debug("mobile : " + mobile);
 
-			if (!ValidationServices.validateFullName(name) || !ValidationServices.validateAddress1(address1)
-							|| !ValidationServices.validateCity(city) || !ValidationServices.validatePincode(pincode)
-							|| !ValidationServices.validateMoileNumber(mobile))
+			if (!ValidationServices.validateFullName(name)) {
+				req.setAttribute("errorMessage", "Fullname is wrong");
 				return false;
-
+			}
+			if (!ValidationServices.validateAddress1(address1)) {
+				req.setAttribute("errorMessage", "Address must be in 5 characters");
+				return false;
+			}
+			if (!ValidationServices.validateCity(city)) {
+				req.setAttribute("errorMessage", "City must contain only alphabet and at least 4 characters ");
+				return false;
+			}
+			if (!ValidationServices.validateMoileNumber(mobile)) {
+				req.setAttribute("errorMessage", "Mobile must be 10 numbers");
+				return false;
+			}
 			// checking if any value is null
 			if (session == null || name == null || city == null || mobile == null)
 				return false;

@@ -7,8 +7,7 @@ public class ValidationServices {
 
 	static final String FULLNAME_REGEX = "^[a-zA-Z]+(?: [a-zA-Z]+)*$";
 	static final String ADDRESS1_REGEX = "^[a-zA-Z0-9 ,./#-]{5,100}$";
-	static final String ADDRESS2_REGEX = "^[a-zA-Z0-9 ,./#-]{0,100}$";
-	static final String CITY_REGEX = "^[a-zA-Z ]{2,50}$";
+	static final String CITY_REGEX = "^[a-zA-Z ]{4,50}$";
 	static final String PINCODE_REGEX = "^[1-9][0-9]{5}$";
 	static final String MOBILE_REGEX = "^[6-9][0-9]{9}$";
 
@@ -56,14 +55,6 @@ public class ValidationServices {
 
 		if (address1 != null) {
 			return address1.matches(ADDRESS1_REGEX);
-		}
-		return false;
-	}
-
-	public static boolean validateAddress2(String address2) {
-
-		if (address2 != null) {
-			return address2.matches(ADDRESS2_REGEX);
 		}
 		return false;
 	}
