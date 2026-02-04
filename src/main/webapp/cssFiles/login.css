@@ -116,9 +116,9 @@ h2 {
 }
 
 .signup-text a {
-    text-decoration: none; /* Remove underline */
-    font-size: 14px;       /* Smaller font */
-    color: #667eea;        /* Optional: same color as login button */
+    text-decoration: none;
+    font-size: 14px;       
+    color: #667eea;        
     font-weight: bold;
     cursor: pointer;
 }
@@ -128,3 +128,5 @@ h2 {
 .signup-text a:focus {
     text-decoration: underline;
 }
+
+

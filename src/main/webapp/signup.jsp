@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded",function(){
         } else if (!USERNAME_REGEX.test(username.value.trim())) {
             showError(
                 username,
-                "Username must start with a letter and be 5–29 characters"
+                "Username at least 5 characters"
             );
             isValid = false;
         }
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded",function(){
         } else if (!PASSWORD_PATTERN.test(password.value.trim())) {
             showError(
                 password,
-                "Password must be at least 8 characters with uppercase, lowercase & number"
+                "Password must be at least 8 characters with uppercase, lowercase & number & one special character"
             );
             isValid = false;
         }

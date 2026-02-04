@@ -88,7 +88,7 @@ body {
     padding: 8px 16px;
     border: none;
     border-radius: 6px;
-    background:red;
+    background:linear-gradient(135deg, #ff3f6c, #e7335d);
     color: white;
     font-size: 14px;
     cursor: pointer;
@@ -96,14 +96,14 @@ body {
 }
 
 #login-btn button:hover {
-    background:pink;
+    background:#e7335d;
 }
 
 #logout-btn button {
     padding: 8px 16px;
     border: none;
     border-radius: 6px;
-    background:red;
+    background:linear-gradient(135deg, #ff3f6c, #e7335d);
     color: white;
     font-size: 14px;
     cursor: pointer;
@@ -111,7 +111,7 @@ body {
 }
 
 #logout-btn button:hover {
-    background:pink;
+    background:#e7335d;
 }
 
 
@@ -119,7 +119,7 @@ body {
     padding: 8px 16px;
     border: none;
     border-radius: 6px;
-    background:red;
+    background:linear-gradient(135deg, #ff3f6c, #e7335d);
     color: white;
     font-size: 14px;
     cursor: pointer;
@@ -229,6 +229,31 @@ body {
     background: #ff3f6c;
     color: #fff;
 }
+
+#toast-container {
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    z-index: 1;
+}
+
+.toast {
+    background-color: green;
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transform: translateY(100%);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.toast.pop-up {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 
 
 /* ================= RESPONSIVE ================= */
