@@ -30,8 +30,8 @@
 					%>
 
 					<%
-					if (category != null && (category.equalsIgnoreCase("mens") || category.equalsIgnoreCase("women")
-							|| category.equalsIgnoreCase("children"))) {
+					if (category != null && (category.equalsIgnoreCase("Men") || category.equalsIgnoreCase("Women")
+							|| category.equalsIgnoreCase("Children"))) {
 					%>
 
 					<form action="<%=request.getContextPath()%>/controller"
@@ -48,21 +48,21 @@
 					<form action="<%=request.getContextPath()%>/controller"
 						method="post">
 						<input type="hidden" name="command" value="listProducts">
-						<input type="hidden" name="category" value="mens">
+						<input type="hidden" name="category" value="Men">
 						<button type="submit">Men</button>
 					</form>
 
 					<form action="<%=request.getContextPath()%>/controller"
 						method="post">
 						<input type="hidden" name="command" value="listProducts">
-						<input type="hidden" name="category" value="women">
+						<input type="hidden" name="category" value="Women">
 						<button type="submit">Women</button>
 					</form>
 
 					<form action="<%=request.getContextPath()%>/controller"
 						method="post">
 						<input type="hidden" name="command" value="listProducts">
-						<input type="hidden" name="category" value="children">
+						<input type="hidden" name="category" value="Children">
 						<button type="submit">Children</button>
 					</form>
 

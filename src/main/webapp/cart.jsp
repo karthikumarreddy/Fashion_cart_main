@@ -114,6 +114,7 @@
 
 					<td>₹ <%=String.format("%.2f", subtotal)%></td>
 
+
 					<!-- Remove button -->
 					<td>
 						<form action="<%=request.getContextPath()%>/controller"
