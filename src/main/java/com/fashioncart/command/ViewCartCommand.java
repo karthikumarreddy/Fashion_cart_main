@@ -30,11 +30,13 @@ public class ViewCartCommand implements Command {
 				req.setAttribute("errorMessage", "Login required. Please Login to view your cart.");
 				return false;// home.jsp
 			}
-
 			CartDAO cartDAO = new CartDAO();
+			String quantity = req.getParameter("enterQuantity");
 			String action = req.getParameter("action");
 			String productId = req.getParameter("productId");
+			int quantiInt = 0;
 			int productIdint = 0;
+
 			if (action != null || productId != null) {
 
 				productIdint = Integer.parseInt(req.getParameter("productId"));
@@ -42,16 +44,27 @@ public class ViewCartCommand implements Command {
 				switch (action) {
 
 				case "inc": {
-					cartDAO.updateQuantity(user.getUserId(), productIdint, action);
+					cartDAO.updateQuantity(user.getUserId(), productIdint, quantiInt, action);
 					break;
 				}
 				case "dec": {
-					cartDAO.updateQuantity(user.getUserId(), productIdint, action);
+					cartDAO.updateQuantity(user.getUserId(), productIdint, quantiInt, action);
 
 					break;
 				}
 				case "remove": {
-					cartDAO.updateQuantity(user.getUserId(), productIdint, action);
+					cartDAO.updateQuantity(user.getUserId(), productIdint, quantiInt, action);
+					if (quantity == "") {
+						cartDAO.updateQuantity(user.getUserId(), productIdint, quantiInt, action);
+					}
+					break;
+				}
+				case "updateQuantity": {
+
+					quantiInt = Integer.parseInt(quantity);
+					if (quantity != null) {
+						cartDAO.updateQuantity(user.getUserId(), productIdint, quantiInt, action);
+					}
 					break;
 				}
 

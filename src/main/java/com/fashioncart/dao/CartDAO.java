@@ -104,7 +104,7 @@ public class CartDAO {
 		return 0;
 	}
 
-	public void updateQuantity(int userId, int productId, String action) {
+	public void updateQuantity(int userId, int productId, int quantity, String action) {
 
 		try (Connection conn = GetDataSource.getDataSource().getConnection()) {
 
@@ -159,6 +159,16 @@ public class CartDAO {
 				try (PreparedStatement ps = conn.prepareStatement(sql)) {
 					ps.setInt(1, userId);
 					ps.setInt(2, productId);
+					ps.executeUpdate();
+				}
+			} else if ("updateQuantity".equals(action)) {
+
+				String sql = " UPDATE cart_items  SET quantity = ? WHERE user_id = ? AND product_id = ? ";
+				try (PreparedStatement ps = conn.prepareStatement(sql)) {
+					ps.setInt(1, quantity);
+					ps.setInt(2, userId);
+					ps.setInt(3, productId);
+
 					ps.executeUpdate();
 				}
 			}

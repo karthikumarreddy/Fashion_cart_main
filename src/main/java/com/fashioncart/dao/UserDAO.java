@@ -48,7 +48,7 @@ public class UserDAO {
 			logger.error("error in UserDao isUserEmailExist() : " + e1.getMessage());
 		}
 		return false;
-	}// to find the which user logging in
+	}
 
 	public User findByUserName(String userName) throws SQLException, Exception {
 		if (userName == null) {

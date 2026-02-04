@@ -18,52 +18,45 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/controller")
 public class FrontControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public FrontControllerServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public FrontControllerServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    		        throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    		    String action = request.getParameter("command");//getting the command from index.jsp/home.jsp
-    		    System.out.println("Action: " + action);
+		String action = request.getParameter("command");// getting the command from index.jsp/home.jsp
+		System.out.println("Action: " + action);
 
-    		    if (action == null) {
-    		        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Action is missing");
-    		        return;
-    		    }
+		if (action == null) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Action is missing");
+			return;
+		}
 
-    		    Command cmd = CommandFactory.getCommand(action);//creates the object for the command
+		Command cmd = CommandFactory.getCommand(action);// creates the object for the command
 
-    		    if (cmd == null) {
-    		        response.sendError(HttpServletResponse.SC_NOT_FOUND,
-    		                "No command found for action: " + action);
-    		        return;
-    		    }
+		if (cmd == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND, "No command found for action: " + action);
+			return;
+		}
 
-    		    boolean flag = cmd.execute(request, response);
-    		    System.out.println("Command executed, flag=" + flag);
+		boolean flag = cmd.execute(request, response);
+		System.out.println("Command executed, flag=" + flag);
 
-    		  
+		CommandConfig cmdConfig = CommandFactory.configMap.get(action);
+		String forwardPage = flag ? cmdConfig.getSuccessPage() : cmdConfig.getFailurePage();
 
-    		    CommandConfig cmdConfig = CommandFactory.configMap.get(action);
-    		    String forwardPage = flag
-    		            ? cmdConfig.getSuccessPage()
-    		            : cmdConfig.getFailurePage();
+		System.out.println("Forwardpage: " + forwardPage);
+		request.getRequestDispatcher(forwardPage).forward(request, response);
 
-    		    System.out.println("Forwardpage: "+forwardPage);
-    		    request.getRequestDispatcher(forwardPage)
-    		           .forward(request, response);
-
-    		}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

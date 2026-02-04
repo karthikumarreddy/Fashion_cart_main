@@ -34,7 +34,6 @@ public class LoginCommand implements Command {
 
 			if (user.getUserName().equals(userName) && BCrypt.checkpw(password, pwd)) {
 				session.setAttribute("loggedUser", user);
-
 				CartDAO cartDAO = new CartDAO();
 				int cartCount = cartDAO.getCartCount(user.getUserId());
 				session.setAttribute("cartCount", cartCount);

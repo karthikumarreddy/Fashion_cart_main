@@ -224,14 +224,14 @@
 		}
 		%>
 
-		<%
+		<% 
 		if (currentPage < totalPages) {
 		%>
 		
 		<form action="<%=request.getContextPath()%>/controller" method="post">
 			<input type="hidden" name="command" value="listProducts">
 			<input type ="hidden" name="category" value="<%=categoryParam%>">
-			<input type ="hidden" name="page" value="<%=currentPage + 1%>">
+			<input type ="hidden" name="page" value="<%=currentPage + 2%>">
 			<input type=submit value="Next">
 		</form>
 		
