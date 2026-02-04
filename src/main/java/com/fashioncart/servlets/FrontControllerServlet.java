@@ -43,7 +43,8 @@ public class FrontControllerServlet extends HttpServlet {
 		Command cmd = CommandFactory.getCommand(action);// creates the object for the command
 
 		if (cmd == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND, "No command found for action: " + action);
+			request.setAttribute("error", "Oops! Something went wrong. The requested page could not be found. Please try again later.");
+			request.getRequestDispatcher("/error.jsp").forward(request, response);
 			return;
 		}
 

@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>error page</h1>
+<jsp:include page="header.jsp"></jsp:include>
+
+
+<p><%=request.getAttribute("error")!=null?request.getAttribute("error"):"error page"%> </p>
 </body>
 </html>

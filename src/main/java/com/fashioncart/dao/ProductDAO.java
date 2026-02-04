@@ -15,43 +15,6 @@ import com.fashioncart.dto.Product;
 public class ProductDAO {
 	private static final Logger logger = LogManager.getLogger(ProductDAO.class);
 
-	/**
-	 * Fetch products. If category is null or "ALL", fetch all products.
-	 */
-	// public List<Product> getProductsList(String category) {
-	//
-	// List<Product> products = new ArrayList<>();
-	//
-	// boolean filterByCategory = (category != null && !category.equalsIgnoreCase("ALL"));
-	//
-	// String sql = filterByCategory ? "SELECT * FROM product WHERE category = ?" : "SELECT * FROM product";
-	//
-	// try (Connection conn = GetDataSource.getDataSource().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-	//
-	// if (filterByCategory) {
-	// ps.setString(1, category);
-	// }
-	//
-	// ResultSet rs = ps.executeQuery();
-	//
-	// while (rs.next()) {
-	// Product p = new Product(rs.getString("product_id"), rs.getString("product_name"), rs.getString("category"),
-	// rs.getDouble("price"), rs.getString("image_path"), rs.getString("availability"),
-	// rs.getString("description"));
-	// products.add(p);
-	// }
-	//
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	//
-	// return products; // ✅ never null
-	// }
-	//
-	// /**
-	// * Fetch single product by ID
-	// */
-
 	public List<Product> getProductsList(String category, int limit, int offset) {
 
 		List<Product> products = new ArrayList<>();
@@ -85,7 +48,7 @@ public class ProductDAO {
 			logger.error("error in ProductDAO getProductList() : " + e.getMessage());
 		}
 
-		return products; // never null
+		return products;
 	}
 
 	public Product getProductById(int productId) {
