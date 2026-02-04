@@ -9,7 +9,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include><br>
-	<h2 style="color:black">Enter your details</h2>
+	<h2 style="color:black">Enter your Details</h2>
 	<div class="delivery">
 	
 	<form id="delivery-form"action="<%=request.getContextPath()%>/controller" method="post">

@@ -136,7 +136,7 @@
 		</a>
 		<h4><%=p.getName()%></h4>
 		<p>₹<%=p.getPrice()%></p>
-		<p><%=p.isAvailability().equalsIgnoreCase("IN_STOCK") ? "Available" : "Currently UnAvailable"%></p>
+		<p><%=p.isAvailability().equalsIgnoreCase("IN_STOCK") ? "Available" : "Currently Unavailable"%></p>
 
 		<%
 		if (p.isAvailability().equalsIgnoreCase("IN_STOCK")) {
