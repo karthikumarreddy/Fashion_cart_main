@@ -92,7 +92,7 @@
 			<%
 			}
 			%>
-
+			
 			<div id="viewcart">
 				<form action="<%=request.getContextPath()%>/controller"
 					method="post">
@@ -119,7 +119,7 @@
 	</nav>
 
 	<div id="products1" style="display: flex; gap: 20px; margin-top: 10px">
-
+		 <div id="toast-container"></div>
 		<%
 		List<Product> products = (List<Product>) session.getAttribute("productList");
 
@@ -151,7 +151,7 @@
 		<form action="<%=request.getContextPath()%>/controller" method="post">
 			<input type="hidden" name="command" value="addToCart"> 
 			<input type="hidden" name="id" value="<%=p.getId()%>">
-			<button type="submit">Add to Cart</button>
+			<button type="button" onclick="addToCartWithToast(this)">Add to Cart</button>
 		</form>
 
 		<%
@@ -241,11 +241,11 @@
 		%>
 
 	</div>
-	</div>
+	
 
 
 	<jsp:include page="footer.jsp"></jsp:include>
-	</div>
+	
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
@@ -265,6 +265,36 @@
 				e.stopPropagation();
 			});
 		});
+		
+		function addToCartWithToast(button) {
+		    showToast();
+		    const form = button.closest("form");
+		    
+		    setTimeout(() => {
+		        form.submit();
+		    }, 500); //half seconds
+		}
+		function showToast() {
+		    const container = document.getElementById('toast-container');
+		    const toast = document.createElement('div');
+		    toast.classList.add('toast');
+		    toast.textContent = 'product added to cart...!';
+		    
+		    container.appendChild(toast);
+
+		    // Show the toast
+		    setTimeout(() => {
+		        toast.classList.add('pop-up');
+		    }, 10); 
+
+		    
+		    setTimeout(() => {
+		        toast.classList.remove('pop-up');
+		        toast.addEventListener('transitionend', () => {
+		            container.removeChild(toast);
+		        });
+		    }, 500);
+		}
 	</script>
 
 </body>

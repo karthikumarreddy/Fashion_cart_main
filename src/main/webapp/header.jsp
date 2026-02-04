@@ -6,14 +6,14 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 50px;
+    height: 80px;
     background: #111;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 15px 30px;
+    justify-content:space-around;
     color: #fff;
     z-index: 9999; /* very important */
+  	
 }
 h2{
 	color:white;

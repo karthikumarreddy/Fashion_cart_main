@@ -50,7 +50,7 @@ public class SignupCommand implements Command {
 			}
 
 			if (userDao.isUsernameExist(userName)) {
-				req.setAttribute("useNameError", "Username already exist ");
+				req.setAttribute("usernameError", "Username already exist ");
 				return false;
 
 			}

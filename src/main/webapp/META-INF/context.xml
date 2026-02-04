@@ -14,7 +14,7 @@
     -->
     
     <!-- Datasource configuration -->
-    <factory>value</factory>
+
     <Resource 
     	name="jdbc/fashion_db"
     	auth="Container"
