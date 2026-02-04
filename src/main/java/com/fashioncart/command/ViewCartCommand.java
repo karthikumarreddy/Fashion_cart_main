@@ -31,10 +31,10 @@ public class ViewCartCommand implements Command {
 				return false;// home.jsp
 			}
 			CartDAO cartDAO = new CartDAO();
-			String quantity = req.getParameter("enterQuantity");
+
 			String action = req.getParameter("action");
 			String productId = req.getParameter("productId");
-			int quantiInt = 0;
+			int quantity = 0;
 			int productIdint = 0;
 
 			if (action != null || productId != null) {
@@ -44,27 +44,40 @@ public class ViewCartCommand implements Command {
 				switch (action) {
 
 				case "inc": {
-					cartDAO.updateQuantity(user.getUserId(), productIdint, quantiInt, action);
+					cartDAO.updateQuantity(user.getUserId(), productIdint, quantity, action);
 					break;
 				}
 				case "dec": {
-					cartDAO.updateQuantity(user.getUserId(), productIdint, quantiInt, action);
+					cartDAO.updateQuantity(user.getUserId(), productIdint, quantity, action);
 
 					break;
 				}
 				case "remove": {
-					cartDAO.updateQuantity(user.getUserId(), productIdint, quantiInt, action);
-					if (quantity == "") {
-						cartDAO.updateQuantity(user.getUserId(), productIdint, quantiInt, action);
-					}
+					cartDAO.updateQuantity(user.getUserId(), productIdint, quantity, action);
+
 					break;
 				}
 				case "updateQuantity": {
+					String quantitystr = req.getParameter("enterQuantity");
 
-					quantiInt = Integer.parseInt(quantity);
-					if (quantity != null) {
-						cartDAO.updateQuantity(user.getUserId(), productIdint, quantiInt, action);
+					quantity = 1;
+
+					if (quantitystr != null && !quantitystr.trim().isEmpty()) {
+						try {
+							quantity = Integer.parseInt(quantitystr.trim());
+						} catch (NumberFormatException e) {
+							logger.error("Invalid quantity input: " + quantitystr + ". Resetting to 1.");
+							quantity = 1;
+						}
 					}
+					if (quantity < 1)
+						quantity = 1;
+					if (quantity > 100) {
+						req.setAttribute("quantityErrorMessage", "Quantity cannot be more than 100");
+						quantity = 100;
+					}
+
+					cartDAO.updateQuantity(user.getUserId(), productIdint, quantity, action);
 					break;
 				}
 
