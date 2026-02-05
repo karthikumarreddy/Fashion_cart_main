@@ -168,7 +168,6 @@ public class CartDAO {
 					ps.setInt(1, quantity);
 					ps.setInt(2, userId);
 					ps.setInt(3, productId);
-
 					ps.executeUpdate();
 				}
 			}

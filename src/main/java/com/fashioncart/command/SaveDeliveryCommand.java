@@ -45,24 +45,30 @@ public class SaveDeliveryCommand implements Command {
 
 			String mobile = req.getParameter("mobile");
 			logger.debug("mobile : " + mobile);
-
+			System.out.println("Fullname " + ValidationServices.validateFullName(name));
 			if (!ValidationServices.validateFullName(name)) {
+				System.out.println("Fullname " + ValidationServices.validateFullName(name));
 				req.setAttribute("fullnameError", "Fullname at least 5 characters");
 				return false;
 			}
+			System.out.println("Address1: " + ValidationServices.validateAddress1(address1));
 			if (!ValidationServices.validateAddress1(address1)) {
 				req.setAttribute("addressError", "Address must be in 5 characters");
 				return false;
 			}
+
+			System.out.println("City: " + ValidationServices.validateCity(city));
 			if (!ValidationServices.validateCity(city)) {
 				req.setAttribute("cityError", "City must contain only alphabet and at least 4 characters ");
 				return false;
 			}
 
+			System.out.println("Pincode " + ValidationServices.validatePincode(pincode));
 			if (!ValidationServices.validatePincode(pincode)) {
 				req.setAttribute("pincodeError", "pincode must contain only numbers and must be 6 numbers");
 				return false;
 			}
+			System.out.println("mobile :" + ValidationServices.validateMoileNumber(mobile));
 			if (!ValidationServices.validateMoileNumber(mobile)) {
 				req.setAttribute("mobilenumberError", "Mobile number must be 10 numbers");
 				return false;

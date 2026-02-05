@@ -49,18 +49,14 @@ public class ViewCartCommand implements Command {
 				}
 				case "dec": {
 					cartDAO.updateQuantity(user.getUserId(), productIdint, quantity, action);
-
 					break;
 				}
 				case "remove": {
 					cartDAO.updateQuantity(user.getUserId(), productIdint, quantity, action);
-
 					break;
 				}
 				case "updateQuantity": {
 					String quantitystr = req.getParameter("enterQuantity");
-
-					quantity = 1;
 
 					if (quantitystr != null && !quantitystr.trim().isEmpty()) {
 						try {

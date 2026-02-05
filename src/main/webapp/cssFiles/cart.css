@@ -20,10 +20,10 @@ nav.navbar {
     align-items: center;
     justify-content: space-between;
     background: #111;
-    padding: 40px 40px; /* height same as cart */
+    padding: 40px 40px; 
     color: #fff;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    position: relative; /* NOT fixed */
+    position: relative; 
     z-index: 10;
     transition: top 0.3s ease; /* for optional hide on scroll effect */
 }
@@ -123,6 +123,8 @@ td:nth-child(4) form button{
 
 /* Common button style */
 button {
+	background-color:black;
+	color:white;
     padding: 12px 22px;
     margin: 10px;
     border: none;

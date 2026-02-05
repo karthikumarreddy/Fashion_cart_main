@@ -83,7 +83,7 @@
 	
 		//REGEX
 		
-		const FULLNAME_REGEX = /^(?=.*[a-zA-Z])[a-zA-Z0-9]{5,30}$/;
+		const FULLNAME_REGEX =/^(?=.*[a-zA-Z])[a-zA-Z0-9 ]{5,30}$/;
 		const ADDRESS1_REGEX = /^[a-zA-Z0-9 ,./#-]{5,100}$/;
 		const CITY_REGEX = /^[a-zA-Z ]{4,50}$/;
 		const PINCODE_REGEX = /^[1-9][0-9]{5}$/;

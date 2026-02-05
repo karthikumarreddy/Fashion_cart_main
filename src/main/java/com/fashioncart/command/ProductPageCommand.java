@@ -45,7 +45,7 @@ public class ProductPageCommand implements Command {
 				} else {
 					CartDAO cartDao = new CartDAO();
 					cartDao.addToCart(user.getUserId(), productId, product.getImagePath());
-					req.setAttribute("successMessahe", "Product added to cart sucessfully");
+					req.setAttribute("successMessage", "Product added to cart sucessfully");
 					session.setAttribute("cartCount", cartDao.getCartCount(user.getUserId()));
 				}
 			}

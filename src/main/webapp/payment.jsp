@@ -45,7 +45,9 @@
 					<button  type="submit">Pay</button>	
 				</form>	
 			
-			<button type="submit" onclick="history. back()"> <-Back</button>
+
+			<button id="back-btn"type="submit" onclick="history. back()"><- Back</button>
+
 			
 		</div>
 		</div>

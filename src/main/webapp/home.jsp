@@ -177,8 +177,8 @@
 	<div class="pagination-container">
 
 		<%
-		Integer currentPage = (Integer) request.getAttribute("currentPage");
-		Integer totalPages = (Integer) request.getAttribute("totalPages");
+		Integer currentPage = (Integer) session.getAttribute("currentPage");
+		Integer totalPages = (Integer) session.getAttribute("totalPages");
 		String categoryParam = (String) session.getAttribute("category");
 
 		if (totalPages != null && totalPages > 1) {
@@ -266,6 +266,8 @@
 			});
 		});
 		
+		
+		//add to cart Toast notifications
 		function addToCartWithToast(button) {
 		    showToast();
 		    const form = button.closest("form");
@@ -274,6 +276,8 @@
 		        form.submit();
 		    }, 500); //half seconds
 		}
+		
+		
 		function showToast() {
 		    const container = document.getElementById('toast-container');
 		    const toast = document.createElement('div');

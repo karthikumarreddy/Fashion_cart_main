@@ -11,8 +11,8 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<p><%=request.getAttribute("errorMessage")!=null?request.getAttribute("errorMessage"):" " %></p>
-	
+	<p><%=request.getAttribute("errorMessage")!=null?request.getAttribute("errorMessage"):"" %></p>
+	<p style="color:green"><%=request.getAttribute("successMessage")!=null?request.getAttribute("successMessage"):"" %>
 	<%
 	Product product = (Product) request.getAttribute("product");
 	%>
