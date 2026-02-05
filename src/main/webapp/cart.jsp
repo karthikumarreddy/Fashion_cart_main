@@ -119,9 +119,9 @@
 					<td>
 						<form action="<%=request.getContextPath()%>/controller"
 							method="post">
-							<input type="hidden" name="command" value="viewCart"> <input
-								type="hidden" name="action" value="remove"> <input
-								type="hidden" name="productId" value="<%=item.getId()%>">
+							<input type="hidden" name="command" value="viewCart"> 
+							<input type="hidden" name="action" value="remove"> 
+							<input type="hidden" name="productId" value="<%=item.getId()%>">
 							<button type="submit">Remove</button>
 						</form>
 					</td>
@@ -131,18 +131,12 @@
 				%>
 			</tbody>
 		</table>
-
-
-
 		<div class="total">
 			<strong> Total Amount: ₹ <%=String.format("%.2f", totalAmount)%>
 			</strong>
 		</div>
 
 		<div class="buttons">
-
-
-			</form>
 			<form action="<%=request.getContextPath()%>/controller" method="post"
 				style="display: inline;">
 				<input type="hidden" name="command" value="listProducts"> <input
@@ -159,7 +153,6 @@
 
 			<jsp:include page="/footer.jsp"></jsp:include>
 		</div>
-
 		<%
 		}
 		%>

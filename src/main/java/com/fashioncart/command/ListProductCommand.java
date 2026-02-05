@@ -52,8 +52,8 @@ public class ListProductCommand implements Command {
 			int totalPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);
 
 			session.setAttribute("productList", products);
-			request.setAttribute("currentPage", page);
-			request.setAttribute("totalPages", totalPages);
+			session.setAttribute("currentPage", page);
+			session.setAttribute("totalPages", totalPages);
 			session.setAttribute("category", category);
 
 			return true; // Home.jsp

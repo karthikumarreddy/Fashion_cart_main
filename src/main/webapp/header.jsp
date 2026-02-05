@@ -6,14 +6,14 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 30px;
+    height: 40px;
     background: #111;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 15px 30px;
     color: #fff;
-    z-index: 9999; /* very important */
+    
 }
 h2{
 	color:white;
@@ -21,6 +21,7 @@ h2{
 
 #logout-btn button{
 	background:linear-gradient(135deg, #ff3f6c, #e7335d);
+	color:white;
 }
 </style>
 

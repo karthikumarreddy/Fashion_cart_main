@@ -39,7 +39,6 @@ public class AddToCartCommand implements Command {
 
 			int count = cartDAO.getCartCount(user.getUserId());
 			session.setAttribute("cartCount", count);
-			req.setAttribute("successMessage", "Item added to your cart.");
 			logger.debug("cart count : " + count);
 
 			return true; // cart.jsp

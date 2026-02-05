@@ -5,7 +5,7 @@ public class ValidationServices {
 	static final String EMAIL_REGEX = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-zA-Z]{2,}$";
 	static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";
 
-	static final String FULLNAME_REGEX = "^[a-zA-Z]+(?: [a-zA-Z]+)*$";
+	static final String FULLNAME_REGEX = "^(?=.*[a-zA-Z])[a-zA-Z0-9 ]{5,30}$";
 	static final String ADDRESS1_REGEX = "^[a-zA-Z0-9 ,./#-]{5,100}$";
 	static final String CITY_REGEX = "^[a-zA-Z ]{4,50}$";
 	static final String PINCODE_REGEX = "^[1-9][0-9]{5}$";

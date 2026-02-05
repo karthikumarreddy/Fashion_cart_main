@@ -9,7 +9,8 @@
 </head>
 <body>
 
-<h2>Thank you for your purchase!</h2>
+<jsp:include page="header.jsp"></jsp:include>
+<h2 id="thank-you">Thank you for your purchase!</h2>
 
 <p>Your order will be delivered soon.</p>
 <div class="order-details">

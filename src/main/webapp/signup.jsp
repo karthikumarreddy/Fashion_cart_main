@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded",function(){
             showError(confirmpassword, "Confirm password is required");
             isValid = false;
         } else if (password.value.trim() !== confirmpassword.value.trim()) {
-            showError(confirmpassword, "Passwords do not match");
+            showError(confirmpassword, "Password does not match");
             isValid = false;
         }
 

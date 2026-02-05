@@ -1,5 +1,7 @@
 @charset "UTF-8";
   /* Page reset */
+  
+  
 body {
     margin: 0;
     padding: 0;
@@ -13,11 +15,17 @@ body {
 }
 
 /* Main heading */
-h2 {
+#thank-you {
     font-size: 28px;
     color: #222;
     margin-bottom: 8px;
 }
+
+#logname h2{
+	color:white;
+	font-size:28px;
+}
+
 
 /* Subtitle text */
 p {
@@ -63,6 +71,18 @@ button {
     color: #fff;
     font-size: 15px;
     font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+#logout-btn button {
+    background: linear-gradient(135deg, #ff3f6c, #e7335d);
+	padding: 12px 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 

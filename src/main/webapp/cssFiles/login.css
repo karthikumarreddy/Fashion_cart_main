@@ -67,7 +67,7 @@ h2 {
 /* Inputs */
 #signup-form input[type="text"],
 #signup-form input[type="password"] {
-    width: 100%;
+    width: 94%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
